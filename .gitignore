@@ -1,0 +1,52 @@
+﻿# Moodle kökündeki her şeyi varsayılan olarak izleme.
+/*
+
+# Proje dosyaları.
+!/.gitignore
+!/README.md
+!/CHANGELOG.md
+!/CONTRIBUTING.md
+!/docs/
+!/scripts/
+
+# Qubexa local eklentileri.
+!/local/
+/local/*
+!/local/qubexa/
+!/local/qubexa/**
+!/local/qubexa_students/
+!/local/qubexa_students/**
+!/local/qubexa_groups/
+!/local/qubexa_groups/**
+!/local/qubexa_finance/
+!/local/qubexa_finance/**
+!/local/qubexa_promotion/
+!/local/qubexa_promotion/**
+
+# Qubexa aktivite eklentisi.
+!/mod/
+/mod/*
+!/mod/qubexaexam/
+!/mod/qubexaexam/**
+
+# Qubexa teması.
+!/theme/
+/theme/*
+!/theme/qubexa/
+!/theme/qubexa/**
+
+# Geçici ve yerel dosyalar.
+*.zip
+*.log
+*.tmp
+*.bak
+*.backup
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+node_modules/
+vendor/
+coverage/
+.phpunit.result.cache

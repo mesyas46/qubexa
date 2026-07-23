@@ -1,0 +1,10 @@
+<div class="qubexa-shell">
+<aside class="qubexa-sidebar">
+<div class="qubexa-brand"><div class="qubexa-mark">Q</div><div><strong>QUBEXA</strong><span>Öğretmenin Dijital Ofisi</span></div></div>
+<nav class="qubexa-nav" aria-label="Qubexa">{{#menuitems}}<a class="qubexa-nav-item {{#active}}is-active{{/active}}" href="{{url}}"><span class="qubexa-nav-icon">{{icon}}</span><span>{{label}}</span></a>{{/menuitems}}</nav>
+</aside>
+<main class="qubexa-main">
+<header class="qubexa-topbar"><div><span class="qubexa-date">{{date}}</span><h1>Merhaba {{firstname}} Hocam 👋</h1><p>Bugün yapman gereken her şey burada.</p></div><div class="qubexa-status"><span class="qubexa-status-dot"></span>Çalışma Alanı Hazır</div></header>
+<section class="qubexa-section"><div class="qubexa-section-head"><div><span class="qubexa-eyebrow">PROGRAM</span><h2>Bugünkü Programın</h2></div><a href="{{config.wwwroot}}/calendar/view.php">Takvimi Aç →</a></div><div class="qubexa-schedule">{{#scheduleitems}}<article class="qubexa-schedule-item"><time>{{time}}</time><div><h3>{{title}}</h3><p>{{meta}}</p></div><span class="qubexa-arrow">→</span></article>{{/scheduleitems}}</div></section>
+<section class="qubexa-section"><div class="qubexa-section-head"><div><span class="qubexa-eyebrow">KISAYOLLAR</span><h2>Hızlı İşlemler</h2></div></div><div class="qubexa-actions">{{#quickactions}}<a class="qubexa-action-card" href="{{url}}"><span class="qubexa-action-icon">{{icon}}</span><strong>{{title}}</strong><small>{{description}}</small></a>{{/quickactions}}</div></section>
+</main></div>

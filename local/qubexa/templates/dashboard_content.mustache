@@ -1,0 +1,16 @@
+<section class="qubexa-section qubexa-dashboard-welcome">
+    <h2>Merhaba {{firstname}} Hocam 👋</h2>
+    <p>Bugün yapman gereken her şey burada.</p>
+</section>
+<section class="qubexa-section">
+    <div class="qubexa-section-head"><div><span>PROGRAM</span><h2>Bugünkü Programın</h2></div></div>
+    <div class="qubexa-schedule">
+        {{#scheduleitems}}<article><time>{{time}}</time><div><h3>{{title}}</h3><p>{{meta}}</p></div><b>→</b></article>{{/scheduleitems}}
+    </div>
+</section>
+<section class="qubexa-section">
+    <div class="qubexa-section-head"><div><span>KISAYOLLAR</span><h2>Hızlı İşlemler</h2></div></div>
+    <div class="qubexa-actions">
+        {{#quickactions}}<a href="{{url}}"><i>{{icon}}</i><strong>{{title}}</strong><small>{{description}}</small></a>{{/quickactions}}
+    </div>
+</section>

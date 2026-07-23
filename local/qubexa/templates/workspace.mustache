@@ -1,0 +1,34 @@
+<div class="qubexa-frame">
+    <aside class="qubexa-sidebar">
+        <a class="qubexa-brand" href="{{dashboardurl}}">
+            <span class="qubexa-mark">Q</span>
+            <span><strong>QUBEXA</strong><small>Öğretmenin Dijital Ofisi</small></span>
+        </a>
+        <nav class="qubexa-nav" aria-label="Qubexa">
+            {{#menuitems}}
+                {{#section}}
+                {{/section}}
+                <a class="qubexa-nav-item {{#active}}is-active{{/active}}" href="{{url}}" data-key="{{key}}">
+                    <span class="qubexa-nav-icon icon-{{icon}}" aria-hidden="true"></span>
+                    <span>{{label}}</span>
+                </a>
+            {{/menuitems}}
+        </nav>
+        <div class="qubexa-sidebar-footer">
+            <span>{{firstname}} Hocam</span>
+            <a href="{{logouturl}}">Çıkış</a>
+        </div>
+    </aside>
+    <main class="qubexa-stage">
+        <header class="qubexa-appbar">
+            <button class="qubexa-mobile-menu" type="button" aria-label="Menüyü aç">☰</button>
+            <div>
+                <span class="qubexa-date">{{date}}</span>
+                <h1>{{pagetitle}}</h1>
+                {{#pagesubtitle}}<p>{{pagesubtitle}}</p>{{/pagesubtitle}}
+            </div>
+            <div class="qubexa-ready"><span></span> Çalışma Alanı Hazır</div>
+        </header>
+        <section class="qubexa-content">{{{content}}}</section>
+    </main>
+</div>
