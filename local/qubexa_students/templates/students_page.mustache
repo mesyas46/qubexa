@@ -1,0 +1,778 @@
+<div class="qubexa-students-shell">
+    <div class="qubexa-students-hero">
+        <div>
+            <p>{{studentsintro}}</p>
+        </div>
+
+        <a href="{{addstudenturl}}"
+           class="btn btn-primary qubexa-primary-action">
+            ＋ {{addstudentlabel}}
+        </a>
+    </div>
+
+    <div class="qubexa-toolbar">
+        <form method="get"
+              action="{{filteraction}}"
+              class="qubexa-filter-form">
+            <input type="hidden" name="page" value="students">
+
+            <input type="search"
+                   name="search"
+                   value="{{search}}"
+                   placeholder="{{searchplaceholder}}"
+                   class="form-control">
+
+            <select name="status" class="form-control">
+                <option value=""
+                        {{#statusallselected}}selected{{/statusallselected}}>
+                    {{allstatuseslabel}}
+                </option>
+                <option value="active"
+                        {{#statusactiveselected}}selected{{/statusactiveselected}}>
+                    {{activelabel}}
+                </option>
+                <option value="passive"
+                        {{#statuspassiveselected}}selected{{/statuspassiveselected}}>
+                    {{passivelabel}}
+                </option>
+            </select>
+
+            <button type="submit" class="btn btn-secondary">
+                {{filterlabel}}
+            </button>
+        </form>
+
+        <div class="qubexa-student-count">
+            {{studentcount}}
+        </div>
+    </div>
+
+    {{^hasstudents}}
+        <div class="qubexa-empty-state">
+            <div class="qubexa-empty-icon">👥</div>
+            <h2>{{nostudents}}</h2>
+            <p>{{nostudentsdesc}}</p>
+            <a href="{{addstudenturl}}" class="btn btn-primary">
+                {{addfirststudentlabel}}
+            </a>
+        </div>
+    {{/hasstudents}}
+
+    {{#hasstudents}}
+        <div class="table-responsive qubexa-table-wrap">
+            <table class="table qubexa-students-table">
+                <thead>
+                    <tr>
+                        <th>{{studentlabel}}</th>
+                        <th>{{gradelabel}}</th>
+                        <th>{{groupnamelabel}}</th>
+                        <th>{{phonelabel}}</th>
+                        <th>{{parentlabel}}</th>
+                        <th>{{statuslabel}}</th>
+                        <th>{{actionslabel}}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {{#students}}
+                        <tr>
+                            <td>
+                                <div class="qubexa-student-name">
+                                    <span class="qubexa-avatar">
+                                        {{initials}}
+                                    </span>
+
+                                    <button type="button"
+                                            class="qubexa-student-panel-trigger"
+                                            data-open-student-panel
+                                            data-student-id="{{id}}"
+                                            data-fullname="{{fullname}}"
+                                            data-initials="{{initials}}"
+                                            data-grade="{{gradevalue}}"
+                                            data-group="{{groupvalue}}"
+                                            data-phone="{{phonevalue}}"
+                                            data-parent="{{parentvalue}}"
+                                            data-status="{{status}}"
+                                            data-editurl="{{editurl}}"
+                                            aria-label="{{panelarialabel}}">
+                                        {{fullname}}
+                                    </button>
+                                </div>
+                            </td>
+                            <td>{{grade}}</td>
+                            <td>{{groupname}}</td>
+                            <td>{{phone}}</td>
+                            <td>{{parentname}}</td>
+                            <td>
+                                <span class="qubexa-status-badge
+                                    {{#isactive}}is-active{{/isactive}}
+                                    {{#ispassive}}is-passive{{/ispassive}}">
+                                    {{statuslabel}}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{editurl}}"
+                                   class="qubexa-action-link">
+                                    {{editlabel}}
+                                </a>
+
+                                <a href="{{deleteurl}}"
+                                   class="qubexa-action-link is-danger"
+                                   onclick="return confirm('{{confirmdelete}}');">
+                                    {{deletelabel}}
+                                </a>
+                            </td>
+                        </tr>
+                    {{/students}}
+                </tbody>
+            </table>
+        </div>
+    {{/hasstudents}}
+</div>
+
+<div class="qubexa-student-panel-overlay"
+     data-qubexa-student-overlay></div>
+
+<aside class="qubexa-student-panel"
+       data-qubexa-student-panel
+       data-notes-endpoint="{{notesendpoint}}"
+       data-exams-endpoint="{{examsendpoint}}"
+       data-lessons-endpoint="{{lessonsendpoint}}"
+       data-timeline-endpoint="{{timelineendpoint}}"
+       data-sesskey="{{sesskey}}"
+       aria-hidden="true"
+       aria-label="Öğrenci profili">
+
+    <header class="qubexa-student-panel-header">
+        <button type="button"
+                class="qubexa-panel-close"
+                data-close-student-panel
+                aria-label="Paneli kapat">
+            ×
+        </button>
+
+        <div class="qubexa-panel-avatar"
+             data-panel-initials></div>
+
+        <div class="qubexa-panel-identity">
+            <div class="qubexa-panel-name-row">
+                <h2 data-panel-fullname></h2>
+
+                <span class="qubexa-status-badge"
+                      data-panel-status></span>
+            </div>
+
+            <p>Öğrenci profili</p>
+        </div>
+    </header>
+
+    <nav class="qubexa-student-panel-tabs"
+         role="tablist"
+         aria-label="Öğrenci profili bölümleri">
+        <button type="button"
+                class="qubexa-panel-tab is-active"
+                data-student-tab="general"
+                role="tab"
+                aria-selected="true">
+            Genel
+        </button>
+
+        <button type="button"
+                class="qubexa-panel-tab"
+                data-student-tab="notes"
+                role="tab"
+                aria-selected="false">
+            Notlar
+        </button>
+
+        <button type="button"
+                class="qubexa-panel-tab"
+                data-student-tab="exams"
+                role="tab"
+                aria-selected="false">
+            Sınavlar
+        </button>
+
+        <button type="button"
+                class="qubexa-panel-tab"
+                data-student-tab="lessons"
+                role="tab"
+                aria-selected="false">
+            Dersler
+        </button>
+
+        <button type="button"
+                class="qubexa-panel-tab"
+                data-student-tab="payments"
+                role="tab"
+                aria-selected="false">
+            Ödemeler
+        </button>
+
+        <button type="button"
+                class="qubexa-panel-tab"
+                data-student-tab="progress"
+                role="tab"
+                aria-selected="false">
+            İlerleme
+        </button>
+
+        <button type="button"
+                class="qubexa-panel-tab"
+                data-student-tab="timeline"
+                role="tab"
+                aria-selected="false">
+            Timeline
+        </button>
+    </nav>
+
+    <main class="qubexa-student-panel-content">
+        <section class="qubexa-panel-tab-content is-active"
+                 data-student-tab-content="general"
+                 role="tabpanel">
+            <div class="qubexa-panel-information-grid">
+                <div class="qubexa-panel-info-card">
+                    <span>Sınıf</span>
+                    <strong data-panel-grade></strong>
+                </div>
+
+                <div class="qubexa-panel-info-card">
+                    <span>Ders Grubu</span>
+                    <strong data-panel-group></strong>
+                </div>
+
+                <div class="qubexa-panel-info-card">
+                    <span>Telefon</span>
+                    <strong data-panel-phone></strong>
+                </div>
+
+                <div class="qubexa-panel-info-card">
+                    <span>Veli</span>
+                    <strong data-panel-parent></strong>
+                </div>
+            </div>
+
+            <section class="qubexa-panel-section">
+                <div class="qubexa-panel-section-title">
+                    <span>ÖĞRENCİ DOSYASI</span>
+                    <h3>Öğrenci Takibi</h3>
+                </div>
+
+                <div class="qubexa-panel-feature-list">
+                    <button type="button"
+                            class="qubexa-panel-feature"
+                            data-open-student-tab="notes">
+                        <span>📝</span>
+                        <div>
+                            <strong>Öğretmen Notları</strong>
+                            <small>Aktif</small>
+                        </div>
+                    </button>
+
+                    <button type="button"
+                            class="qubexa-panel-feature"
+                            data-open-student-tab="exams">
+                        <span>📈</span>
+                        <div>
+                            <strong>Sınav Performansı</strong>
+                            <small>Aktif</small>
+                        </div>
+                    </button>
+
+                    <button type="button"
+                            class="qubexa-panel-feature"
+                            data-open-student-tab="lessons">
+                        <span>📅</span>
+                        <div>
+                            <strong>Ders Geçmişi</strong>
+                            <small>Yakında</small>
+                        </div>
+                    </button>
+
+                    <button type="button"
+                            class="qubexa-panel-feature"
+                            data-open-student-tab="payments">
+                        <span>₺</span>
+                        <div>
+                            <strong>Ödeme Durumu</strong>
+                            <small>Yakında</small>
+                        </div>
+                    </button>
+                </div>
+            </section>
+        </section>
+
+        <section class="qubexa-panel-tab-content"
+                 data-student-tab-content="notes"
+                 role="tabpanel"
+                 hidden>
+            <div class="qubexa-notes-section">
+                <div class="qubexa-module-heading">
+                    <span>ÖĞRENCİ DOSYASI</span>
+                    <h3>Öğretmen Notları</h3>
+                </div>
+
+                <form class="qubexa-note-form"
+                      data-student-note-form>
+                    <label for="qubexa-student-note">
+                        Yeni not
+                    </label>
+
+                    <textarea id="qubexa-student-note"
+                              name="note"
+                              rows="4"
+                              maxlength="5000"
+                              placeholder="Öğrenciyle ilgili bir gözlem veya görüşme notu yazın..."
+                              data-student-note-input
+                              required></textarea>
+
+                    <div class="qubexa-module-form-actions">
+                        <span data-student-note-status></span>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Notu Kaydet
+                        </button>
+                    </div>
+                </form>
+
+                <div class="qubexa-module-loading"
+                     data-student-notes-loading
+                     hidden>
+                    Notlar yükleniyor...
+                </div>
+
+                <div class="qubexa-module-empty"
+                     data-student-notes-empty
+                     hidden>
+                    Bu öğrenci için henüz not eklenmemiş.
+                </div>
+
+                <div class="qubexa-notes-list"
+                     data-student-notes-list></div>
+            </div>
+        </section>
+
+        <section class="qubexa-panel-tab-content"
+                 data-student-tab-content="exams"
+                 role="tabpanel"
+                 hidden>
+            <div class="qubexa-exams-section">
+                <div class="qubexa-module-heading">
+                    <span>ÖĞRENCİ DOSYASI</span>
+                    <h3>Sınav Performansı</h3>
+                </div>
+
+                <div class="qubexa-exam-summary-grid">
+                    <div class="qubexa-exam-summary-card">
+                        <span>Ortalama Net</span>
+                        <strong data-exam-average>0,00</strong>
+                    </div>
+
+                    <div class="qubexa-exam-summary-card">
+                        <span>En Yüksek Net</span>
+                        <strong data-exam-highest>0,00</strong>
+                    </div>
+
+                    <div class="qubexa-exam-summary-card">
+                        <span>Son Net</span>
+                        <strong data-exam-latest>0,00</strong>
+                    </div>
+                </div>
+
+                <form class="qubexa-exam-form"
+                      data-student-exam-form>
+                    <div class="qubexa-exam-form-grid">
+                        <label>
+                            <span>Sınav adı</span>
+                            <input type="text"
+                                   name="examname"
+                                   maxlength="255"
+                                   required>
+                        </label>
+
+                        <label>
+                            <span>Tarih</span>
+                            <input type="date"
+                                   name="examdate"
+                                   required>
+                        </label>
+
+                        <label>
+                            <span>Doğru</span>
+                            <input type="number"
+                                   name="correct"
+                                   min="0"
+                                   value="0"
+                                   required>
+                        </label>
+
+                        <label>
+                            <span>Yanlış</span>
+                            <input type="number"
+                                   name="wrong"
+                                   min="0"
+                                   value="0"
+                                   required>
+                        </label>
+
+                        <label>
+                            <span>Boş</span>
+                            <input type="number"
+                                   name="blank"
+                                   min="0"
+                                   value="0"
+                                   required>
+                        </label>
+                    </div>
+
+                    <label class="qubexa-exam-description">
+                        <span>Açıklama</span>
+                        <textarea name="description"
+                                  rows="3"
+                                  placeholder="İsteğe bağlı açıklama..."></textarea>
+                    </label>
+
+                    <div class="qubexa-module-form-actions">
+                        <span data-student-exam-status></span>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Sonucu Kaydet
+                        </button>
+                    </div>
+                </form>
+
+                <div class="qubexa-module-loading"
+                     data-student-exams-loading
+                     hidden>
+                    Sınav sonuçları yükleniyor...
+                </div>
+
+                <div class="qubexa-module-empty"
+                     data-student-exams-empty
+                     hidden>
+                    Bu öğrenci için henüz sınav sonucu eklenmemiş.
+                </div>
+
+                <div class="qubexa-exams-list"
+                     data-student-exams-list></div>
+            </div>
+        </section>
+
+        <section class="qubexa-panel-tab-content"
+                 data-student-tab-content="lessons"
+                 role="tabpanel"
+                 hidden>
+            <div class="qubexa-lessons-section">
+                <div class="qubexa-module-heading">
+                    <span>ÖĞRENCİ DOSYASI</span>
+                    <h3>Ders Geçmişi</h3>
+                </div>
+
+                <div class="qubexa-lesson-summary-grid">
+                    <div class="qubexa-lesson-summary-card">
+                        <span>Toplam Ders</span>
+                        <strong data-lesson-total>0</strong>
+                    </div>
+
+                    <div class="qubexa-lesson-summary-card">
+                        <span>Katılım</span>
+                        <strong data-lesson-attendance>0%</strong>
+                    </div>
+
+                    <div class="qubexa-lesson-summary-card">
+                        <span>Devamsızlık</span>
+                        <strong data-lesson-absent>0</strong>
+                    </div>
+
+                    <div class="qubexa-lesson-summary-card">
+                        <span>Bu Ay</span>
+                        <strong data-lesson-thismonth>0</strong>
+                    </div>
+
+                    <div class="qubexa-lesson-summary-card is-wide">
+                        <span>Son Ders</span>
+                        <strong data-lesson-latest>—</strong>
+                    </div>
+                </div>
+
+                <form class="qubexa-lesson-form"
+                      data-student-lesson-form>
+                    <div class="qubexa-lesson-form-grid">
+                        <label>
+                            <span>Ders tarihi</span>
+                            <input type="date"
+                                   name="lessondate"
+                                   required>
+                        </label>
+
+                        <label>
+                            <span>Katılım</span>
+                            <select name="status" required>
+                                <option value="attended">
+                                    Katıldı
+                                </option>
+                                <option value="late">
+                                    Geç geldi
+                                </option>
+                                <option value="absent">
+                                    Gelmedi
+                                </option>
+                                <option value="excused">
+                                    İzinli
+                                </option>
+                            </select>
+                        </label>
+
+                        <label>
+                            <span>Başlangıç</span>
+                            <input type="time"
+                                   name="starttime"
+                                   required>
+                        </label>
+
+                        <label>
+                            <span>Bitiş</span>
+                            <input type="time"
+                                   name="endtime"
+                                   required>
+                        </label>
+
+                        <label class="is-full">
+                            <span>Ders konusu</span>
+                            <input type="text"
+                                   name="topic"
+                                   maxlength="255"
+                                   placeholder="Örn. Tam sayılar"
+                                   required>
+                        </label>
+                    </div>
+
+                    <label class="qubexa-homework-toggle">
+                        <input type="checkbox"
+                               name="homeworkgiven"
+                               value="1"
+                               data-homework-toggle>
+                        <span class="qubexa-homework-switch"
+                              aria-hidden="true"></span>
+                        <span class="qubexa-homework-label">
+                            Ödev verildi
+                        </span>
+                    </label>
+
+                    <label data-homework-note-wrap hidden>
+                        <span>Ödev açıklaması</span>
+                        <textarea name="homeworknote"
+                                  rows="2"
+                                  placeholder="Verilen ödevi yazın..."></textarea>
+                    </label>
+
+                    <label>
+                        <span>Öğretmen notu</span>
+                        <textarea name="teachernote"
+                                  rows="3"
+                                  placeholder="Dersle ilgili kısa değerlendirme..."></textarea>
+                    </label>
+
+                    <label>
+                        <span>Bir sonraki ders</span>
+                        <textarea name="nextlesson"
+                                  rows="2"
+                                  placeholder="Bir sonraki derste yapılacaklar..."></textarea>
+                    </label>
+
+                    <div class="qubexa-module-form-actions">
+                        <span data-student-lesson-status></span>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Dersi Kaydet
+                        </button>
+                    </div>
+                </form>
+
+                <div class="qubexa-module-loading"
+                     data-student-lessons-loading
+                     hidden>
+                    Ders geçmişi yükleniyor...
+                </div>
+
+                <div class="qubexa-module-empty"
+                     data-student-lessons-empty
+                     hidden>
+                    Bu öğrenci için henüz ders kaydı eklenmemiş.
+                </div>
+
+                <div class="qubexa-lessons-list"
+                     data-student-lessons-list></div>
+            </div>
+        </section>
+
+        <section class="qubexa-panel-tab-content"
+                 data-student-tab-content="payments"
+                 role="tabpanel"
+                 hidden>
+            <div class="qubexa-panel-empty-section">
+                <div class="qubexa-panel-empty-icon">₺</div>
+                <h3>Ödeme Durumu</h3>
+                <p>
+                    Ders ücretleri ve ödeme geçmişi burada gösterilecek.
+                </p>
+                <span>Yakında</span>
+            </div>
+        </section>
+
+        <section class="qubexa-panel-tab-content"
+                 data-student-tab-content="progress"
+                 role="tabpanel"
+                 hidden>
+            <div class="qubexa-progress-section">
+                <div class="qubexa-module-heading">
+                    <span>ÖĞRENCİ DOSYASI</span>
+                    <h3>Genel İlerleme</h3>
+                </div>
+
+                <div class="qubexa-progress-summary-grid">
+                    <div class="qubexa-progress-summary-card">
+                        <span>Ortalama Net</span>
+                        <strong data-progress-average-net>0,00</strong>
+                    </div>
+
+                    <div class="qubexa-progress-summary-card">
+                        <span>Katılım</span>
+                        <strong data-progress-attendance>0%</strong>
+                    </div>
+
+                    <div class="qubexa-progress-summary-card">
+                        <span>Toplam Ders</span>
+                        <strong data-progress-total-lessons>0</strong>
+                    </div>
+
+                    <div class="qubexa-progress-summary-card">
+                        <span>Sınav Sayısı</span>
+                        <strong data-progress-exam-count>0</strong>
+                    </div>
+                </div>
+
+                <section class="qubexa-progress-chart-card">
+                    <div class="qubexa-progress-chart-heading">
+                        <div>
+                            <span>NET GELİŞİMİ</span>
+                            <h4>Son sınavlar</h4>
+                        </div>
+                    </div>
+
+                    <div class="qubexa-progress-chart"
+                         data-progress-chart>
+                        <div class="qubexa-progress-chart-empty">
+                            Grafik için en az bir sınav sonucu gereklidir.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="qubexa-progress-insights">
+                    <div class="qubexa-progress-insight">
+                        <span class="qubexa-progress-insight-icon">📈</span>
+                        <div>
+                            <strong data-progress-trend-title>
+                                Henüz yeterli veri yok
+                            </strong>
+                            <p data-progress-trend-text>
+                                Sınav ve ders kayıtları eklendikçe gelişim yorumu burada görünecek.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="qubexa-module-loading"
+                     data-student-progress-loading
+                     hidden>
+                    İlerleme verileri hazırlanıyor...
+                </div>
+
+                <div class="qubexa-module-form-actions">
+                    <span data-student-progress-status></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="qubexa-panel-tab-content"
+                 data-student-tab-content="timeline"
+                 role="tabpanel"
+                 hidden>
+            <div class="qubexa-timeline-section">
+                <div class="qubexa-module-heading">
+                    <span>ÖĞRENCİ HİKÂYESİ</span>
+                    <h3>Öğrenci Timeline</h3>
+                </div>
+
+                <div class="qubexa-timeline-toolbar">
+                    <div class="qubexa-timeline-filters"
+                         role="group"
+                         aria-label="Timeline filtreleri">
+                        <button type="button"
+                                class="is-active"
+                                data-timeline-filter="all">
+                            Tümü
+                        </button>
+
+                        <button type="button"
+                                data-timeline-filter="note">
+                            Notlar
+                        </button>
+
+                        <button type="button"
+                                data-timeline-filter="exam">
+                            Sınavlar
+                        </button>
+
+                        <button type="button"
+                                data-timeline-filter="lesson">
+                            Dersler
+                        </button>
+                    </div>
+
+                    <button type="button"
+                            class="qubexa-timeline-refresh"
+                            data-timeline-refresh>
+                        Yenile
+                    </button>
+                </div>
+
+                <div class="qubexa-module-loading"
+                     data-student-timeline-loading
+                     hidden>
+                    Timeline hazırlanıyor...
+                </div>
+
+                <div class="qubexa-module-empty"
+                     data-student-timeline-empty
+                     hidden>
+                    Bu öğrenci için henüz timeline olayı yok.
+                </div>
+
+                <div class="qubexa-timeline-list"
+                     data-student-timeline-list></div>
+
+                <div class="qubexa-module-form-actions">
+                    <span data-student-timeline-status></span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="qubexa-student-panel-footer">
+        <button type="button"
+                class="btn btn-secondary"
+                data-close-student-panel>
+            Kapat
+        </button>
+
+        <a href="#"
+           class="btn btn-primary"
+           data-panel-edit>
+            Öğrenciyi Düzenle
+        </a>
+    </footer>
+</aside>

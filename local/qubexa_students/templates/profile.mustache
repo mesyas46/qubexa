@@ -1,0 +1,121 @@
+<div class="qubexa-student-profile">
+
+    <div class="qubexa-profile-toolbar">
+        <a href="{{backurl}}" class="btn btn-secondary">
+            ← Öğrencilere Dön
+        </a>
+
+        <a href="{{editurl}}" class="btn btn-primary">
+            Öğrenciyi Düzenle
+        </a>
+    </div>
+
+    <section class="qubexa-profile-header">
+        <div class="qubexa-profile-avatar">
+            {{initials}}
+        </div>
+
+        <div class="qubexa-profile-identity">
+            <div class="qubexa-profile-title-row">
+                <h2>{{fullname}}</h2>
+
+                <span class="qubexa-status-badge
+                    {{#isactive}}is-active{{/isactive}}
+                    {{^isactive}}is-passive{{/isactive}}">
+                    {{statuslabel}}
+                </span>
+            </div>
+
+            <p>
+                {{#grade}}{{grade}}{{/grade}}
+                {{#groupname}} · {{groupname}}{{/groupname}}
+            </p>
+        </div>
+    </section>
+
+    <div class="qubexa-profile-grid">
+
+        <section class="qubexa-profile-card">
+            <span class="qubexa-profile-card-icon">🎓</span>
+            <div>
+                <span class="qubexa-profile-label">Sınıf</span>
+                <strong>
+                    {{#grade}}{{grade}}{{/grade}}
+                    {{^grade}}Belirtilmemiş{{/grade}}
+                </strong>
+            </div>
+        </section>
+
+        <section class="qubexa-profile-card">
+            <span class="qubexa-profile-card-icon">👥</span>
+            <div>
+                <span class="qubexa-profile-label">Ders Grubu</span>
+                <strong>
+                    {{#groupname}}{{groupname}}{{/groupname}}
+                    {{^groupname}}Belirtilmemiş{{/groupname}}
+                </strong>
+            </div>
+        </section>
+
+        <section class="qubexa-profile-card">
+            <span class="qubexa-profile-card-icon">📱</span>
+            <div>
+                <span class="qubexa-profile-label">Telefon</span>
+                <strong>
+                    {{#phone}}{{phone}}{{/phone}}
+                    {{^phone}}Belirtilmemiş{{/phone}}
+                </strong>
+            </div>
+        </section>
+
+        <section class="qubexa-profile-card">
+            <span class="qubexa-profile-card-icon">👨‍👩‍👦</span>
+            <div>
+                <span class="qubexa-profile-label">Veli</span>
+                <strong>
+                    {{#parentname}}{{parentname}}{{/parentname}}
+                    {{^parentname}}Belirtilmemiş{{/parentname}}
+                </strong>
+            </div>
+        </section>
+
+    </div>
+
+    <section class="qubexa-profile-section">
+        <span class="qubexa-profile-section-kicker">ÖĞRENCİ DOSYASI</span>
+        <h3>Öğrenci Takibi</h3>
+
+        <div class="qubexa-profile-coming-grid">
+
+            <article class="qubexa-coming-card">
+                <span>📝</span>
+                <h4>Öğretmen Notları</h4>
+                <p>Öğrenciyle ilgili özel notlar ve görüşme kayıtları.</p>
+                <small>Yakında</small>
+            </article>
+
+            <article class="qubexa-coming-card">
+                <span>📈</span>
+                <h4>Sınav Performansı</h4>
+                <p>Deneme sonuçları ve gelişim grafikleri.</p>
+                <small>Yakında</small>
+            </article>
+
+            <article class="qubexa-coming-card">
+                <span>📅</span>
+                <h4>Ders Geçmişi</h4>
+                <p>Katıldığı dersler ve devamsızlık kayıtları.</p>
+                <small>Yakında</small>
+            </article>
+
+            <article class="qubexa-coming-card">
+                <span>₺</span>
+                <h4>Ödeme Durumu</h4>
+                <p>Özel ders ücretleri ve ödeme geçmişi.</p>
+                <small>Yakında</small>
+            </article>
+
+        </div>
+    </section>
+
+</div>

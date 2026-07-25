@@ -1,1 +1,984 @@
 .qubexa-form-shell{padding:28px}.qubexa-form-shell h2{margin:0 0 6px;font-size:25px}.qubexa-form-shell>p{color:#667085;margin-bottom:22px}
+/* ===========================
+   Student Profile
+=========================== */
+
+.qubexa-student-profile{
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+}
+
+.qubexa-profile-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.qubexa-profile-header{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:25px;
+    background:#fff;
+    border-radius:18px;
+    border:1px solid #e5e7eb;
+}
+
+.qubexa-profile-avatar{
+    width:80px;
+    height:80px;
+    border-radius:18px;
+    background:#0f172a;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.qubexa-profile-title-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.qubexa-profile-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.qubexa-profile-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:20px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.qubexa-profile-card-icon{
+    font-size:26px;
+}
+
+.qubexa-profile-label{
+    display:block;
+    color:#6b7280;
+    font-size:13px;
+}
+
+.qubexa-profile-section{
+    background:#fff;
+    border-radius:18px;
+    border:1px solid #e5e7eb;
+    padding:25px;
+}
+
+.qubexa-profile-coming-grid{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.qubexa-coming-card{
+    border:1px dashed #d1d5db;
+    border-radius:15px;
+    padding:20px;
+    background:#fafafa;
+}
+
+.qubexa-coming-card h4{
+    margin:12px 0;
+}
+
+.qubexa-coming-card small{
+    display:inline-block;
+    margin-top:10px;
+    background:#111827;
+    color:#fff;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:11px;
+}
+.qubexa-student-profile-link {
+    color: #101828;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.qubexa-student-profile-link:hover,
+.qubexa-student-profile-link:focus {
+    color: #175cd3;
+    text-decoration: underline;
+}
+/* ===========================
+   Student Slide-over Panel
+=========================== */
+
+.qubexa-student-panel-trigger {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #101828;
+    font: inherit;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.qubexa-student-panel-trigger:hover,
+.qubexa-student-panel-trigger:focus {
+    color: #175cd3;
+    text-decoration: underline;
+}
+
+.qubexa-student-panel-overlay {
+    position: fixed;
+    z-index: 1040;
+    inset: 0;
+    visibility: hidden;
+    background: rgba(15, 23, 42, 0.46);
+    opacity: 0;
+    transition:
+        opacity 180ms ease,
+        visibility 180ms ease;
+}
+
+.qubexa-student-panel-overlay.is-visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.qubexa-student-panel {
+    position: fixed;
+    z-index: 1050;
+    top: 0;
+    right: 0;
+    display: flex;
+    width: min(520px, 100%);
+    height: 100vh;
+    flex-direction: column;
+    border-left: 1px solid #e4e7ec;
+    background: #fff;
+    box-shadow: -20px 0 45px rgba(16, 24, 40, 0.18);
+    transform: translateX(100%);
+    transition: transform 220ms ease;
+}
+
+.qubexa-student-panel.is-open {
+    transform: translateX(0);
+}
+
+.qubexa-panel-open {
+    overflow: hidden;
+}
+
+.qubexa-student-panel-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 30px 28px 24px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.qubexa-panel-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    background: #f2f4f7;
+    color: #344054;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.qubexa-panel-avatar {
+    display: flex;
+    width: 66px;
+    height: 66px;
+    flex: 0 0 66px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: #101828;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.qubexa-panel-identity {
+    min-width: 0;
+    flex: 1;
+}
+
+.qubexa-panel-name-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.qubexa-panel-name-row h2 {
+    margin: 0;
+    color: #101828;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.qubexa-panel-identity p {
+    margin: 5px 0 0;
+    color: #667085;
+}
+
+.qubexa-student-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 28px;
+}
+
+.qubexa-panel-information-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.qubexa-panel-info-card {
+    display: flex;
+    min-height: 90px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px;
+    border: 1px solid #eaecf0;
+    border-radius: 14px;
+    background: #f9fafb;
+}
+
+.qubexa-panel-info-card span {
+    color: #667085;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.qubexa-panel-info-card strong {
+    overflow-wrap: anywhere;
+    color: #101828;
+    font-size: 15px;
+}
+
+.qubexa-panel-section {
+    margin-top: 28px;
+}
+
+.qubexa-panel-section-title span {
+    color: #667085;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.qubexa-panel-section-title h3 {
+    margin: 5px 0 16px;
+    color: #101828;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.qubexa-panel-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.qubexa-panel-feature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    border: 1px solid #eaecf0;
+    border-radius: 14px;
+}
+
+.qubexa-panel-feature > span {
+    display: flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #f2f4f7;
+    font-size: 19px;
+}
+
+.qubexa-panel-feature div {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.qubexa-panel-feature strong {
+    color: #101828;
+    font-size: 14px;
+}
+
+.qubexa-panel-feature small {
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #f2f4f7;
+    color: #667085;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.qubexa-student-panel-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 18px 28px;
+    border-top: 1px solid #eaecf0;
+    background: #fff;
+}
+
+@media (max-width: 560px) {
+    .qubexa-student-panel {
+        width: 100%;
+    }
+
+    .qubexa-panel-information-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===========================
+   Student Slide-over Panel
+=========================== */
+
+.qubexa-student-panel-trigger {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #101828;
+    font: inherit;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.qubexa-student-panel-trigger:hover,
+.qubexa-student-panel-trigger:focus {
+    color: #175cd3;
+    text-decoration: underline;
+}
+
+.qubexa-student-panel-overlay {
+    position: fixed;
+    z-index: 1040;
+    inset: 0;
+    visibility: hidden;
+    background: rgba(15, 23, 42, 0.46);
+    opacity: 0;
+    transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.qubexa-student-panel-overlay.is-visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.qubexa-student-panel {
+    position: fixed;
+    z-index: 1050;
+    top: 0;
+    right: 0;
+    display: flex;
+    width: min(520px, 100%);
+    height: 100vh;
+    flex-direction: column;
+    border-left: 1px solid #e4e7ec;
+    background: #fff;
+    box-shadow: -20px 0 45px rgba(16, 24, 40, 0.18);
+    transform: translateX(100%);
+    transition: transform 220ms ease;
+}
+
+.qubexa-student-panel.is-open {
+    transform: translateX(0);
+}
+
+body.qubexa-panel-open {
+    overflow: hidden;
+}
+
+.qubexa-student-panel-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 30px 28px 24px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.qubexa-panel-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    background: #f2f4f7;
+    color: #344054;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.qubexa-panel-close:hover {
+    background: #e4e7ec;
+}
+
+.qubexa-panel-avatar {
+    display: flex;
+    width: 66px;
+    height: 66px;
+    flex: 0 0 66px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: #101828;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.qubexa-panel-identity {
+    min-width: 0;
+    flex: 1;
+}
+
+.qubexa-panel-name-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.qubexa-panel-name-row h2 {
+    margin: 0;
+    color: #101828;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.qubexa-panel-identity p {
+    margin: 5px 0 0;
+    color: #667085;
+}
+
+.qubexa-student-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 28px;
+}
+
+.qubexa-panel-information-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.qubexa-panel-info-card {
+    display: flex;
+    min-height: 90px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px;
+    border: 1px solid #eaecf0;
+    border-radius: 14px;
+    background: #f9fafb;
+}
+
+.qubexa-panel-info-card span {
+    color: #667085;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.qubexa-panel-info-card strong {
+    overflow-wrap: anywhere;
+    color: #101828;
+    font-size: 15px;
+}
+
+.qubexa-panel-section {
+    margin-top: 28px;
+}
+
+.qubexa-panel-section-title span {
+    color: #667085;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.qubexa-panel-section-title h3 {
+    margin: 5px 0 16px;
+    color: #101828;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.qubexa-panel-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.qubexa-panel-feature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    border: 1px solid #eaecf0;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.qubexa-panel-feature > span {
+    display: flex;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #f2f4f7;
+    font-size: 19px;
+}
+
+.qubexa-panel-feature div {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.qubexa-panel-feature strong {
+    color: #101828;
+    font-size: 14px;
+}
+
+.qubexa-panel-feature small {
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #f2f4f7;
+    color: #667085;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.qubexa-student-panel-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 18px 28px;
+    border-top: 1px solid #eaecf0;
+    background: #fff;
+}
+
+@media (max-width: 560px) {
+    .qubexa-student-panel {
+        width: 100%;
+    }
+
+    .qubexa-panel-information-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ===========================
+   Student Panel Tabs
+=========================== */
+
+.qubexa-student-panel-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 12px 20px 0;
+    overflow-x: auto;
+    border-bottom: 1px solid #eaecf0;
+    background: #fff;
+    scrollbar-width: none;
+}
+
+.qubexa-student-panel-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.qubexa-panel-tab {
+    position: relative;
+    flex: 0 0 auto;
+    padding: 12px 13px 13px;
+    border: 0;
+    background: transparent;
+    color: #667085;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.qubexa-panel-tab::after {
+    position: absolute;
+    right: 10px;
+    bottom: -1px;
+    left: 10px;
+    height: 2px;
+    border-radius: 999px;
+    background: transparent;
+    content: "";
+}
+
+.qubexa-panel-tab:hover,
+.qubexa-panel-tab:focus {
+    color: #101828;
+}
+
+.qubexa-panel-tab.is-active {
+    color: #175cd3;
+}
+
+.qubexa-panel-tab.is-active::after {
+    background: #175cd3;
+}
+
+.qubexa-panel-tab-content {
+    display: none;
+}
+
+.qubexa-panel-tab-content.is-active {
+    display: block;
+}
+
+.qubexa-panel-tab-content[hidden] {
+    display: none;
+}
+
+.qubexa-panel-empty-section {
+    display: flex;
+    min-height: 360px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 25px;
+    text-align: center;
+}
+
+.qubexa-panel-empty-icon {
+    display: flex;
+    width: 68px;
+    height: 68px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    border-radius: 20px;
+    background: #f2f4f7;
+    font-size: 29px;
+}
+
+.qubexa-panel-empty-section h3 {
+    margin: 0 0 8px;
+    color: #101828;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.qubexa-panel-empty-section p {
+    max-width: 360px;
+    margin: 0;
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.qubexa-panel-empty-section > span {
+    display: inline-flex;
+    margin-top: 18px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #f2f4f7;
+    color: #667085;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+button.qubexa-panel-feature {
+    width: 100%;
+    border: 1px solid #eaecf0;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+}
+
+button.qubexa-panel-feature:hover,
+button.qubexa-panel-feature:focus {
+    border-color: #b2ccff;
+    background: #f9fbff;
+}
+
+@media (max-width: 560px) {
+    .qubexa-student-panel-tabs {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .qubexa-panel-tab {
+        padding-right: 10px;
+        padding-left: 10px;
+        font-size: 12px;
+    }
+}
+/* Student Notes */
+.qubexa-notes-section{display:flex;flex-direction:column;gap:18px}.qubexa-notes-heading span{color:#667085;font-size:10px;font-weight:800;letter-spacing:1px}.qubexa-notes-heading h3{margin:5px 0 0;color:#101828;font-size:21px;font-weight:800}.qubexa-note-form{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid #eaecf0;border-radius:14px;background:#f9fafb}.qubexa-note-form label{color:#344054;font-size:13px;font-weight:700}.qubexa-note-form textarea{width:100%;min-height:110px;padding:12px 13px;resize:vertical;border:1px solid #d0d5dd;border-radius:10px;background:#fff;color:#101828;font:inherit;line-height:1.5}.qubexa-note-form textarea:focus{border-color:#84adff;outline:3px solid rgba(46,144,250,.12)}.qubexa-note-form-actions{display:flex;align-items:center;justify-content:space-between;gap:12px}.qubexa-note-form-actions>span{color:#027a48;font-size:12px;font-weight:700}.qubexa-note-form-actions>span.is-error{color:#b42318}.qubexa-notes-loading,.qubexa-notes-empty{padding:22px;border:1px dashed #d0d5dd;border-radius:12px;color:#667085;text-align:center}.qubexa-notes-list{display:flex;flex-direction:column;gap:12px}.qubexa-note-item{padding:15px;border:1px solid #eaecf0;border-radius:13px;background:#fff}.qubexa-note-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}.qubexa-note-meta time{color:#667085;font-size:11px;font-weight:700}.qubexa-note-delete{padding:3px 7px;border:0;border-radius:7px;background:#fef3f2;color:#b42318;font-size:11px;font-weight:700;cursor:pointer}.qubexa-note-delete:hover{background:#fee4e2}.qubexa-note-item p{margin:0;color:#344054;font-size:14px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+/* ===========================
+   Student Exams
+=========================== */
+
+.qubexa-exams-section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.qubexa-exams-heading span {
+    color: #667085;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.qubexa-exams-heading h3 {
+    margin: 5px 0 0;
+    color: #101828;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.qubexa-exam-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.qubexa-exam-summary-card {
+    display: flex;
+    min-height: 82px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    padding: 14px;
+    border: 1px solid #eaecf0;
+    border-radius: 13px;
+    background: #f9fafb;
+}
+
+.qubexa-exam-summary-card span {
+    color: #667085;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.qubexa-exam-summary-card strong {
+    color: #101828;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.qubexa-exam-form {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    padding: 16px;
+    border: 1px solid #eaecf0;
+    border-radius: 14px;
+    background: #f9fafb;
+}
+
+.qubexa-exam-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+}
+
+.qubexa-exam-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.qubexa-exam-form label > span {
+    color: #344054;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.qubexa-exam-form input,
+.qubexa-exam-form textarea {
+    width: 100%;
+    padding: 10px 11px;
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+    background: #fff;
+    color: #101828;
+    font: inherit;
+}
+
+.qubexa-exam-form input:focus,
+.qubexa-exam-form textarea:focus {
+    border-color: #84adff;
+    outline: 3px solid rgba(46, 144, 250, 0.12);
+}
+
+.qubexa-exam-description textarea {
+    resize: vertical;
+}
+
+.qubexa-exam-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.qubexa-exam-form-actions > span {
+    color: #027a48;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.qubexa-exam-form-actions > span.is-error {
+    color: #b42318;
+}
+
+.qubexa-exams-loading,
+.qubexa-exams-empty {
+    padding: 22px;
+    border: 1px dashed #d0d5dd;
+    border-radius: 12px;
+    color: #667085;
+    text-align: center;
+}
+
+.qubexa-exams-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.qubexa-exam-item {
+    padding: 15px;
+    border: 1px solid #eaecf0;
+    border-radius: 13px;
+    background: #fff;
+}
+
+.qubexa-exam-item-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.qubexa-exam-item-header time {
+    color: #667085;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.qubexa-exam-item-header h4 {
+    margin: 4px 0 0;
+    color: #101828;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.qubexa-exam-delete {
+    padding: 3px 7px;
+    border: 0;
+    border-radius: 7px;
+    background: #fef3f2;
+    color: #b42318;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.qubexa-exam-result-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.qubexa-exam-result-grid span {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 9px;
+    border-radius: 9px;
+    background: #f9fafb;
+    color: #667085;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.qubexa-exam-result-grid strong {
+    color: #101828;
+    font-size: 14px;
+}
+
+.qubexa-exam-result-grid .is-net {
+    background: #eff8ff;
+    color: #175cd3;
+}
+
+.qubexa-exam-result-grid .is-net strong {
+    color: #175cd3;
+}
+
+.qubexa-exam-description-text {
+    margin: 12px 0 0;
+    color: #667085;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 560px) {
+    .qubexa-exam-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .qubexa-exam-form-grid {
+        grid-template-columns: 1fr;
+    }
+}

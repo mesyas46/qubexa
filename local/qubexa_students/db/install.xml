@@ -1,18 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/qubexa_students/db" VERSION="2026072300" COMMENT="XMLDB file for local_qubexa_students" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
-<TABLES><TABLE NAME="local_qubexa_students" COMMENT="Private student records owned by a teacher"><FIELDS>
-<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-<FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
-<FIELD NAME="firstname" TYPE="char" LENGTH="100" NOTNULL="true"/>
-<FIELD NAME="lastname" TYPE="char" LENGTH="100" NOTNULL="true"/>
-<FIELD NAME="phone" TYPE="char" LENGTH="30" NOTNULL="false"/>
-<FIELD NAME="email" TYPE="char" LENGTH="255" NOTNULL="false"/>
-<FIELD NAME="parentname" TYPE="char" LENGTH="200" NOTNULL="false"/>
-<FIELD NAME="parentphone" TYPE="char" LENGTH="30" NOTNULL="false"/>
-<FIELD NAME="grade" TYPE="char" LENGTH="50" NOTNULL="false"/>
-<FIELD NAME="groupname" TYPE="char" LENGTH="100" NOTNULL="false"/>
-<FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="active"/>
-<FIELD NAME="notes" TYPE="text" NOTNULL="false"/>
-<FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
-<FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
-</FIELDS><KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/><KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/></KEYS><INDEXES><INDEX NAME="userid_status_ix" UNIQUE="false" FIELDS="userid,status"/><INDEX NAME="userid_name_ix" UNIQUE="false" FIELDS="userid,lastname,firstname"/></INDEXES></TABLE></TABLES></XMLDB>
+<XMLDB PATH="local/qubexa_students/db"
+       VERSION="2026072303"
+       COMMENT="XMLDB file for local_qubexa_students"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <TABLE NAME="local_qubexa_students"
+               COMMENT="Private student records owned by a teacher">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="firstname" TYPE="char" LENGTH="100" NOTNULL="true"/>
+                <FIELD NAME="lastname" TYPE="char" LENGTH="100" NOTNULL="true"/>
+                <FIELD NAME="phone" TYPE="char" LENGTH="30" NOTNULL="false"/>
+                <FIELD NAME="email" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                <FIELD NAME="parentname" TYPE="char" LENGTH="200" NOTNULL="false"/>
+                <FIELD NAME="parentphone" TYPE="char" LENGTH="30" NOTNULL="false"/>
+                <FIELD NAME="grade" TYPE="char" LENGTH="50" NOTNULL="false"/>
+                <FIELD NAME="groupname" TYPE="char" LENGTH="100" NOTNULL="false"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="active"/>
+                <FIELD NAME="notes" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="userid_status_ix" UNIQUE="false" FIELDS="userid,status"/>
+                <INDEX NAME="userid_name_ix" UNIQUE="false" FIELDS="userid,lastname,firstname"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="local_qubexa_student_notes"
+               COMMENT="Timestamped private teacher notes for students">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="studentid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="note" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="studentid_fk" TYPE="foreign" FIELDS="studentid"
+                     REFTABLE="local_qubexa_students" REFFIELDS="id"/>
+                <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid"
+                     REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="student_time_ix" UNIQUE="false" FIELDS="studentid,timecreated"/>
+                <INDEX NAME="userid_student_ix" UNIQUE="false" FIELDS="userid,studentid"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
