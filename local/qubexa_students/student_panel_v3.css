@@ -1,0 +1,58 @@
+/* Qubexa Student Panel v3 */
+
+.qubexa-student-panel-tabs {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            var(--qubexa-panel-tab-count, 1),
+            minmax(62px, 1fr)
+        );
+    gap: 0;
+    padding: 10px 8px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+}
+
+.qubexa-panel-tab {
+    min-width: 0;
+    padding: 11px 3px 12px;
+    overflow: hidden;
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qubexa-panel-tab::after {
+    right: 5px;
+    left: 5px;
+}
+
+.qubexa-panel-tab[hidden] {
+    display: none !important;
+}
+
+.qubexa-panel-tab:focus-visible {
+    border-radius: 8px 8px 0 0;
+    outline: 2px solid #84adff;
+    outline-offset: -2px;
+}
+
+.qubexa-panel-tab-content.is-active:not([hidden]) {
+    display: block;
+}
+
+@media (max-width: 560px) {
+    .qubexa-student-panel-tabs {
+        grid-template-columns:
+            repeat(
+                var(--qubexa-panel-tab-count, 1),
+                minmax(64px, 1fr)
+            );
+    }
+
+    .qubexa-panel-tab {
+        font-size: 10px;
+    }
+}

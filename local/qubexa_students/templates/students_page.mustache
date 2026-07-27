@@ -139,6 +139,7 @@
        data-exams-endpoint="{{examsendpoint}}"
        data-lessons-endpoint="{{lessonsendpoint}}"
        data-timeline-endpoint="{{timelineendpoint}}"
+       data-payments-endpoint="{{paymentsendpoint}}"
        data-sesskey="{{sesskey}}"
        aria-hidden="true"
        aria-label="Öğrenci profili">
@@ -168,68 +169,27 @@
 
     <nav class="qubexa-student-panel-tabs"
          role="tablist"
-         aria-label="Öğrenci profili bölümleri">
-        <button type="button"
-                class="qubexa-panel-tab is-active"
-                data-student-tab="general"
-                role="tab"
-                aria-selected="true">
-            Genel
-        </button>
-
-        <button type="button"
-                class="qubexa-panel-tab"
-                data-student-tab="notes"
-                role="tab"
-                aria-selected="false">
-            Notlar
-        </button>
-
-        <button type="button"
-                class="qubexa-panel-tab"
-                data-student-tab="exams"
-                role="tab"
-                aria-selected="false">
-            Sınavlar
-        </button>
-
-        <button type="button"
-                class="qubexa-panel-tab"
-                data-student-tab="lessons"
-                role="tab"
-                aria-selected="false">
-            Dersler
-        </button>
-
-        <button type="button"
-                class="qubexa-panel-tab"
-                data-student-tab="payments"
-                role="tab"
-                aria-selected="false">
-            Ödemeler
-        </button>
-
-        <button type="button"
-                class="qubexa-panel-tab"
-                data-student-tab="progress"
-                role="tab"
-                aria-selected="false">
-            İlerleme
-        </button>
-
-        <button type="button"
-                class="qubexa-panel-tab"
-                data-student-tab="timeline"
-                role="tab"
-                aria-selected="false">
-            Timeline
-        </button>
+         aria-label="Öğrenci profili bölümleri"
+         data-panel-tab-count="{{paneltabcount}}">
+        {{#paneltabs}}
+            <button type="button"
+                    id="{{tabid}}"
+                    class="qubexa-panel-tab {{#active}}is-active{{/active}}"
+                    data-student-tab="{{key}}"
+                    role="tab"
+                    aria-controls="{{panelid}}"
+                    aria-selected="{{selected}}">
+                {{label}}
+            </button>
+        {{/paneltabs}}
     </nav>
 
     <main class="qubexa-student-panel-content">
         <section class="qubexa-panel-tab-content is-active"
+                 id="qubexa-student-panel-general"
                  data-student-tab-content="general"
-                 role="tabpanel">
+                 role="tabpanel"
+                 aria-labelledby="qubexa-student-tab-general">
             <div class="qubexa-panel-information-grid">
                 <div class="qubexa-panel-info-card">
                     <span>Sınıf</span>
@@ -303,8 +263,10 @@
         </section>
 
         <section class="qubexa-panel-tab-content"
+                 id="qubexa-student-panel-notes"
                  data-student-tab-content="notes"
                  role="tabpanel"
+                 aria-labelledby="qubexa-student-tab-notes"
                  hidden>
             <div class="qubexa-notes-section">
                 <div class="qubexa-module-heading">
@@ -354,8 +316,10 @@
         </section>
 
         <section class="qubexa-panel-tab-content"
+                 id="qubexa-student-panel-exams"
                  data-student-tab-content="exams"
                  role="tabpanel"
+                 aria-labelledby="qubexa-student-tab-exams"
                  hidden>
             <div class="qubexa-exams-section">
                 <div class="qubexa-module-heading">
@@ -461,8 +425,10 @@
         </section>
 
         <section class="qubexa-panel-tab-content"
+                 id="qubexa-student-panel-lessons"
                  data-student-tab-content="lessons"
                  role="tabpanel"
+                 aria-labelledby="qubexa-student-tab-lessons"
                  hidden>
             <div class="qubexa-lessons-section">
                 <div class="qubexa-module-heading">
@@ -610,22 +576,40 @@
         </section>
 
         <section class="qubexa-panel-tab-content"
+                 id="qubexa-student-panel-payments"
                  data-student-tab-content="payments"
                  role="tabpanel"
+                 aria-labelledby="qubexa-student-tab-payments"
                  hidden>
-            <div class="qubexa-panel-empty-section">
-                <div class="qubexa-panel-empty-icon">₺</div>
-                <h3>Ödeme Durumu</h3>
-                <p>
-                    Ders ücretleri ve ödeme geçmişi burada gösterilecek.
-                </p>
-                <span>Yakında</span>
+            <div class="qubexa-payments-section">
+                <div class="qubexa-module-heading"><span>ÖĞRENCİ DOSYASI</span><h3>Ödeme Takibi</h3></div>
+                <div class="qubexa-payment-summary-grid">
+                    <div class="qubexa-payment-summary-card"><span>Toplam Ödenen</span><strong data-payment-paid>0,00 ₺</strong></div>
+                    <div class="qubexa-payment-summary-card"><span>Bekleyen</span><strong data-payment-pending>0,00 ₺</strong></div>
+                    <div class="qubexa-payment-summary-card"><span>Gecikmiş</span><strong data-payment-overdue>0,00 ₺</strong></div>
+                    <div class="qubexa-payment-summary-card"><span>Toplam Alacak</span><strong data-payment-receivable>0,00 ₺</strong></div>
+                </div>
+                <form class="qubexa-payment-form" data-student-payment-form>
+                    <div class="qubexa-payment-form-grid">
+                        <label><span>Ödeme tarihi</span><input type="date" name="paymentdate" required></label>
+                        <label><span>Tutar</span><input type="number" name="amount" min="0.01" step="0.01" required></label>
+                        <label><span>Durum</span><select name="status"><option value="paid">Ödendi</option><option value="pending">Bekliyor</option><option value="overdue">Gecikmiş</option><option value="cancelled">İptal</option></select></label>
+                        <label><span>Ödeme yöntemi</span><select name="method"><option value="cash">Nakit</option><option value="bank">Banka</option><option value="card">Kart</option><option value="other">Diğer</option></select></label>
+                    </div>
+                    <label><span>Açıklama</span><textarea name="description" rows="3" placeholder="İsteğe bağlı açıklama..."></textarea></label>
+                    <div class="qubexa-module-form-actions"><span data-student-payment-status></span><button type="submit" class="btn btn-primary">Ödemeyi Kaydet</button></div>
+                </form>
+                <div class="qubexa-module-loading" data-student-payments-loading hidden>Ödemeler yükleniyor...</div>
+                <div class="qubexa-module-empty" data-student-payments-empty hidden>Bu öğrenci için henüz ödeme kaydı yok.</div>
+                <div class="qubexa-payments-list" data-student-payments-list></div>
             </div>
         </section>
 
         <section class="qubexa-panel-tab-content"
+                 id="qubexa-student-panel-progress"
                  data-student-tab-content="progress"
                  role="tabpanel"
+                 aria-labelledby="qubexa-student-tab-progress"
                  hidden>
             <div class="qubexa-progress-section">
                 <div class="qubexa-module-heading">
@@ -698,8 +682,10 @@
         </section>
 
         <section class="qubexa-panel-tab-content"
+                 id="qubexa-student-panel-timeline"
                  data-student-tab-content="timeline"
                  role="tabpanel"
+                 aria-labelledby="qubexa-student-tab-timeline"
                  hidden>
             <div class="qubexa-timeline-section">
                 <div class="qubexa-module-heading">

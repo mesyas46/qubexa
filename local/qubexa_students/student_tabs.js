@@ -6,15 +6,82 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const panel = api.panel;
-    const buttons = panel.querySelectorAll(
-        '[data-student-tab]'
-    );
-    const contents = panel.querySelectorAll(
-        '[data-student-tab-content]'
+    const tabsContainer = panel.querySelector(
+        '.qubexa-student-panel-tabs'
     );
 
-    const show = function (name) {
-        buttons.forEach(function (button) {
+    if (!tabsContainer) {
+        return;
+    }
+
+    const buttons = Array.from(
+        tabsContainer.querySelectorAll('[data-student-tab]')
+    );
+    const contents = Array.from(
+        panel.querySelectorAll('[data-student-tab-content]')
+    );
+
+    const contentByName = new Map();
+
+    contents.forEach(function (content) {
+        const name = content.dataset.studentTabContent;
+
+        if (name) {
+            contentByName.set(name, content);
+        }
+    });
+
+    const validButtons = buttons.filter(function (button) {
+        const name = button.dataset.studentTab;
+        const valid = Boolean(
+            name && contentByName.has(name)
+        );
+
+        if (!valid) {
+            button.hidden = true;
+            button.disabled = true;
+            button.setAttribute('aria-hidden', 'true');
+        }
+
+        return valid;
+    });
+
+    const validNames = new Set(
+        validButtons.map(function (button) {
+            return button.dataset.studentTab;
+        })
+    );
+
+    contents.forEach(function (content) {
+        if (
+            !validNames.has(
+                content.dataset.studentTabContent
+            )
+        ) {
+            content.hidden = true;
+            content.classList.remove('is-active');
+        }
+    });
+
+    tabsContainer.style.setProperty(
+        '--qubexa-panel-tab-count',
+        String(Math.max(validButtons.length, 1))
+    );
+
+    const fallback = validButtons.length
+        ? validButtons[0].dataset.studentTab
+        : '';
+
+    const show = function (requestedName) {
+        const name = validNames.has(requestedName)
+            ? requestedName
+            : fallback;
+
+        if (!name) {
+            return;
+        }
+
+        validButtons.forEach(function (button) {
             const active =
                 button.dataset.studentTab === name;
 
@@ -22,6 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
             button.setAttribute(
                 'aria-selected',
                 active ? 'true' : 'false'
+            );
+            button.setAttribute(
+                'tabindex',
+                active ? '0' : '-1'
             );
         });
 
@@ -48,7 +119,11 @@ document.addEventListener('DOMContentLoaded', function () {
             '[data-student-tab]'
         );
 
-        if (tabButton && panel.contains(tabButton)) {
+        if (
+            tabButton &&
+            tabsContainer.contains(tabButton) &&
+            !tabButton.disabled
+        ) {
             show(tabButton.dataset.studentTab);
             return;
         }
@@ -65,17 +140,68 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    tabsContainer.addEventListener(
+        'keydown',
+        function (event) {
+            const allowed = [
+                'ArrowLeft',
+                'ArrowRight',
+                'Home',
+                'End'
+            ];
+
+            if (!allowed.includes(event.key)) {
+                return;
+            }
+
+            const currentIndex = validButtons.indexOf(
+                document.activeElement
+            );
+
+            if (currentIndex < 0) {
+                return;
+            }
+
+            event.preventDefault();
+
+            let nextIndex = currentIndex;
+
+            if (event.key === 'ArrowRight') {
+                nextIndex =
+                    (currentIndex + 1) % validButtons.length;
+            } else if (event.key === 'ArrowLeft') {
+                nextIndex =
+                    (
+                        currentIndex -
+                        1 +
+                        validButtons.length
+                    ) % validButtons.length;
+            } else if (event.key === 'Home') {
+                nextIndex = 0;
+            } else if (event.key === 'End') {
+                nextIndex = validButtons.length - 1;
+            }
+
+            validButtons[nextIndex].focus();
+            show(
+                validButtons[nextIndex].dataset.studentTab
+            );
+        }
+    );
+
     document.addEventListener(
         'qubexa:student-panel-opened',
         function () {
-            show('general');
+            show(fallback);
         }
     );
 
     document.addEventListener(
         'qubexa:student-panel-closed',
         function () {
-            show('general');
+            show(fallback);
         }
     );
+
+    show(fallback);
 });

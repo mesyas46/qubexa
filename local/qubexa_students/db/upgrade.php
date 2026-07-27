@@ -457,5 +457,28 @@ function xmldb_local_qubexa_students_upgrade(int $oldversion): bool {
         );
     }
 
+
+    if ($oldversion < 2026072306) {
+        $table = new xmldb_table('local_qubexa_student_payments');
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('studentid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('paymentdate', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('amount', XMLDB_TYPE_NUMBER, '12,2', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('status', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, 'paid');
+        $table->add_field('method', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, 'cash');
+        $table->add_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+        $table->add_key('studentid_fk', XMLDB_KEY_FOREIGN, ['studentid'], 'local_qubexa_students', ['id']);
+        $table->add_key('userid_fk', XMLDB_KEY_FOREIGN, ['userid'], 'user', ['id']);
+        $table->add_index('student_date_ix', XMLDB_INDEX_NOTUNIQUE, ['studentid', 'paymentdate']);
+        $table->add_index('userid_student_ix', XMLDB_INDEX_NOTUNIQUE, ['userid', 'studentid']);
+        $table->add_index('student_status_ix', XMLDB_INDEX_NOTUNIQUE, ['studentid', 'status']);
+        if (!$dbman->table_exists($table)) { $dbman->create_table($table); }
+        upgrade_plugin_savepoint(true, 2026072306, 'local', 'qubexa_students');
+    }
+
     return true;
 }
