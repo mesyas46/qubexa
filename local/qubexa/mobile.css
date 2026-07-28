@@ -1,0 +1,195 @@
+.qubexa-sidebar-overlay,
+.qubexa-sidebar-close {
+    display: none;
+}
+
+.qubexa-appbar-title {
+    min-width: 0;
+    flex: 1;
+}
+
+@media (max-width: 1000px) {
+    body.qubexa-menu-open {
+        overflow: hidden;
+    }
+
+    .qubexa-frame {
+        display: block;
+        min-height: 100vh;
+    }
+
+    .qubexa-sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: min(86vw, 310px);
+        height: 100vh;
+        padding: 20px 16px;
+        transform: translateX(-105%);
+        transition: transform 220ms ease;
+        box-shadow: 18px 0 45px rgba(16, 24, 40, 0.24);
+        z-index: 1002;
+    }
+
+    .qubexa-frame.is-sidebar-open .qubexa-sidebar {
+        transform: translateX(0);
+    }
+
+    .qubexa-sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        display: block;
+        visibility: hidden;
+        background: rgba(16, 24, 40, 0.52);
+        opacity: 0;
+        transition:
+            opacity 220ms ease,
+            visibility 220ms ease;
+        z-index: 1001;
+    }
+
+    .qubexa-frame.is-sidebar-open .qubexa-sidebar-overlay {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .qubexa-sidebar-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .qubexa-brand {
+        flex: 1;
+        padding-bottom: 22px;
+    }
+
+    .qubexa-sidebar-close {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        place-items: center;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.07);
+        color: #ffffff;
+        font-size: 27px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .qubexa-nav {
+        display: grid;
+        gap: 5px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .qubexa-nav-item {
+        flex: none;
+    }
+
+    .qubexa-sidebar-footer {
+        display: flex;
+    }
+
+    .qubexa-stage {
+        min-height: 100vh;
+        padding: 24px clamp(16px, 4vw, 32px) 48px;
+    }
+
+    .qubexa-appbar {
+        display: grid;
+        grid-template-columns: 46px minmax(0, 1fr) auto;
+        align-items: flex-start;
+        gap: 13px;
+        margin-bottom: 24px;
+    }
+
+    .qubexa-mobile-menu {
+        display: inline-flex;
+        width: 46px;
+        height: 46px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 0;
+        border: 1px solid var(--qx-line);
+        border-radius: 13px;
+        background: #ffffff;
+        box-shadow: 0 5px 16px rgba(16, 24, 40, 0.06);
+        cursor: pointer;
+    }
+
+    .qubexa-mobile-menu span {
+        display: block;
+        width: 19px;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--qx-ink);
+    }
+
+    .qubexa-appbar h1 {
+        margin-top: 2px;
+        font-size: clamp(26px, 7vw, 36px);
+    }
+
+    .qubexa-ready {
+        align-self: center;
+    }
+}
+
+@media (max-width: 720px) {
+    .qubexa-appbar {
+        grid-template-columns: 46px minmax(0, 1fr);
+    }
+
+    .qubexa-ready {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .qubexa-stage {
+        padding: 18px 12px 36px;
+    }
+
+    .qubexa-appbar {
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .qubexa-mobile-menu {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+    }
+
+    .qubexa-appbar h1 {
+        font-size: 26px;
+    }
+
+    .qubexa-appbar p {
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .qubexa-ready {
+        padding: 7px 10px;
+        font-size: 11px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .qubexa-sidebar,
+    .qubexa-sidebar-overlay {
+        transition: none;
+    }
+}

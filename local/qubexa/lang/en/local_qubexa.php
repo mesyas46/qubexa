@@ -22,7 +22,7 @@ $string['samplelesson3']='Topic: Basic Concepts';
 $string['brandname']='Brand name';
 $string['brandnamedesc']='Brand name displayed in the workspace.';
 $string['qubexa:view']='View Qubexa workspace';
-
+$string['Knowledge']='Knowledge Center';
 $string['dashboard'] = 'Home';
 $string['dashboardsubtitle'] = 'Today’s plan and quick actions.';
 $string['studentssubtitle'] = 'Manage student, parent, and lesson group information.';
@@ -62,3 +62,10 @@ $string['dashboardactivitynote'] = 'Student note updated';
 $string['dashboardactivityexam'] = 'Exam result added';
 $string['dashboardactivitylesson'] = 'Lesson record created';
 $string['dashboardactivitypayment'] = 'Payment activity recorded';
+
+$string['brandtagline'] = 'The Teacher Digital Office';
+$string['openmenu'] = 'Open menu';
+$string['closemenu'] = 'Close menu';
+$string['workspaceavailable'] = 'Workspace Ready';
+$string['logout'] = 'Log out';
+$string['knowledge'] = 'Knowledge Center';

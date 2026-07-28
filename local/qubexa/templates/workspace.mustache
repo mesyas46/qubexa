@@ -1,34 +1,90 @@
-<div class="qubexa-frame">
-    <aside class="qubexa-sidebar">
-        <a class="qubexa-brand" href="{{dashboardurl}}">
-            <span class="qubexa-mark">Q</span>
-            <span><strong>QUBEXA</strong><small>Öğretmenin Dijital Ofisi</small></span>
-        </a>
+<div class="qubexa-frame" data-qubexa-frame>
+    <div
+        class="qubexa-sidebar-overlay"
+        data-qubexa-overlay
+        aria-hidden="true">
+    </div>
+
+    <aside
+        id="qubexa-sidebar"
+        class="qubexa-sidebar"
+        data-qubexa-sidebar
+        aria-label="Qubexa">
+
+        <div class="qubexa-sidebar-header">
+            <a class="qubexa-brand" href="{{dashboardurl}}">
+                <span class="qubexa-mark">Q</span>
+
+                <span>
+                    <strong>QUBEXA</strong>
+                    <small>{{brandtagline}}</small>
+                </span>
+            </a>
+
+            <button
+                class="qubexa-sidebar-close"
+                type="button"
+                data-qubexa-close
+                aria-label="{{closemenulabel}}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         <nav class="qubexa-nav" aria-label="Qubexa">
             {{#menuitems}}
-                {{#section}}
-                {{/section}}
-                <a class="qubexa-nav-item {{#active}}is-active{{/active}}" href="{{url}}" data-key="{{key}}">
-                    <span class="qubexa-nav-icon icon-{{icon}}" aria-hidden="true"></span>
+                <a
+                    class="qubexa-nav-item {{#active}}is-active{{/active}}"
+                    href="{{url}}"
+                    data-key="{{key}}">
+
+                    <span
+                        class="qubexa-nav-icon icon-{{icon}}"
+                        aria-hidden="true">
+                    </span>
+
                     <span>{{label}}</span>
                 </a>
             {{/menuitems}}
         </nav>
+
         <div class="qubexa-sidebar-footer">
             <span>{{firstname}} Hocam</span>
-            <a href="{{logouturl}}">Çıkış</a>
+            <a href="{{logouturl}}">{{logoutlabel}}</a>
         </div>
     </aside>
+
     <main class="qubexa-stage">
         <header class="qubexa-appbar">
-            <button class="qubexa-mobile-menu" type="button" aria-label="Menüyü aç">☰</button>
-            <div>
+            <button
+                class="qubexa-mobile-menu"
+                type="button"
+                data-qubexa-open
+                aria-controls="qubexa-sidebar"
+                aria-expanded="false"
+                aria-label="{{openmenulabel}}">
+
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+
+            <div class="qubexa-appbar-title">
                 <span class="qubexa-date">{{date}}</span>
                 <h1>{{pagetitle}}</h1>
-                {{#pagesubtitle}}<p>{{pagesubtitle}}</p>{{/pagesubtitle}}
+
+                {{#pagesubtitle}}
+                    <p>{{pagesubtitle}}</p>
+                {{/pagesubtitle}}
             </div>
-            <div class="qubexa-ready"><span></span> Çalışma Alanı Hazır</div>
+
+            <div class="qubexa-ready">
+                <span></span>
+                {{workspaceavailable}}
+            </div>
         </header>
-        <section class="qubexa-content">{{{content}}}</section>
+
+        <section class="qubexa-content">
+            {{{content}}}
+        </section>
     </main>
 </div>
