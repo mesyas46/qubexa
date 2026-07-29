@@ -76,7 +76,7 @@
                 <tbody>
                     {{#students}}
                         <tr>
-                            <td>
+                            <td data-label="{{studentlabel}}">
                                 <div class="qubexa-student-name">
                                     <span class="qubexa-avatar">
                                         {{initials}}
@@ -99,18 +99,18 @@
                                     </button>
                                 </div>
                             </td>
-                            <td>{{grade}}</td>
-                            <td>{{groupname}}</td>
-                            <td>{{phone}}</td>
-                            <td>{{parentname}}</td>
-                            <td>
+                            <td data-label="{{gradelabel}}">{{grade}}</td>
+                            <td data-label="{{groupnamelabel}}">{{groupname}}</td>
+                            <td data-label="{{phonelabel}}">{{phone}}</td>
+                            <td data-label="{{parentlabel}}">{{parentname}}</td>
+                            <td data-label="{{statuslabel}}">
                                 <span class="qubexa-status-badge
                                     {{#isactive}}is-active{{/isactive}}
                                     {{#ispassive}}is-passive{{/ispassive}}">
                                     {{statuslabel}}
                                 </span>
                             </td>
-                            <td>
+                            <td data-label="{{actionslabel}}">
                                 <a href="{{editurl}}"
                                    class="qubexa-action-link">
                                     {{editlabel}}

@@ -12,3 +12,433 @@
 .qubexa-students-shell,.qubexa-form-shell{max-width:none!important;margin:0!important;padding:0!important}.qubexa-students-hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:22px}.qubexa-students-hero h1{display:none}.qubexa-students-hero .qubexa-eyebrow{display:none}.qubexa-students-hero p{margin:0;color:var(--qx-muted)}.qubexa-primary-action{border-radius:11px;padding:10px 16px;font-weight:700}.qubexa-toolbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:16px}.qubexa-filter-form{display:grid;grid-template-columns:minmax(260px,1fr) 170px auto;gap:9px;flex:1}.qubexa-student-count{font-weight:700;color:var(--qx-muted);white-space:nowrap}.qubexa-table-wrap,.qubexa-empty-state,.qubexa-form-shell{background:#fff;border:1px solid var(--qx-line);border-radius:17px;box-shadow:0 10px 30px rgba(16,24,40,.05)}.qubexa-students-table{margin:0}.qubexa-students-table th{border-top:0;color:var(--qx-muted);font-size:11px;letter-spacing:.07em}.qubexa-students-table td,.qubexa-students-table th{padding:16px}.qubexa-student-name{display:flex;align-items:center;gap:10px}.qubexa-avatar{display:grid;place-items:center;width:37px;height:37px;border-radius:11px;background:#f2f4f7;font-size:11px;font-weight:800}.qubexa-status-badge{padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800}.qubexa-status-badge.is-active{background:#ecfdf3;color:#027a48}.qubexa-status-badge.is-passive{background:#fef3f2;color:#b42318}.qubexa-action-link{font-weight:700}.qubexa-action-link.is-danger{color:#b42318;margin-left:9px}.qubexa-empty-state{padding:65px 25px;text-align:center}
 @media(max-width:1000px){.qubexa-frame{grid-template-columns:1fr}.qubexa-sidebar{position:relative;height:auto}.qubexa-nav{display:flex;overflow-x:auto}.qubexa-nav-item{flex:0 0 auto}.qubexa-sidebar-footer{display:none}.qubexa-actions{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){.qubexa-stage{padding:24px 14px 40px}.qubexa-appbar{display:block}.qubexa-ready{display:inline-flex;margin-top:14px}.qubexa-actions{grid-template-columns:1fr}.qubexa-toolbar{display:block}.qubexa-filter-form{grid-template-columns:1fr;margin-bottom:10px}.qubexa-schedule article{grid-template-columns:65px 1fr}.qubexa-schedule b{display:none}}
+/* Sprint 9.3 — Responsive Framework */
+
+:root {
+    --qx-sidebar-width: 272px;
+    --qx-content-max: 1440px;
+    --qx-content-gap: 24px;
+    --qx-mobile-bar-height: 64px;
+
+    --qx-breakpoint-tablet: 1000px;
+    --qx-breakpoint-mobile: 650px;
+    --qx-breakpoint-small: 480px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.qubexa-app {
+    min-width: 320px;
+}
+
+.qubexa-main {
+    min-width: 0;
+}
+
+.qubexa-content {
+    width: 100%;
+    max-width: var(--qx-content-max);
+    margin-inline: auto;
+}
+/* Sprint 9.3 — Ana responsive yerleşim */
+
+.qubexa-frame {
+    grid-template-columns:
+        var(--qx-sidebar-width)
+        minmax(0, 1fr);
+}
+
+.qubexa-stage {
+    width: 100%;
+    min-width: 0;
+    padding:
+        clamp(24px, 3vw, 42px)
+        clamp(20px, 4vw, 60px)
+        60px;
+}
+
+.qubexa-content {
+    width: 100%;
+    max-width: var(--qx-content-max);
+    margin-inline: auto;
+}
+
+@media (max-width: 1000px) {
+    .qubexa-frame {
+        display: block;
+    }
+
+    .qubexa-stage {
+        padding: 24px 20px 48px;
+    }
+}
+/* Sprint 9.3 — Telefon içerik ölçüleri */
+
+@media (max-width: 650px) {
+    .qubexa-stage {
+        padding: 18px 14px 36px;
+    }
+
+    .qubexa-content,
+    .qubexa-section,
+    .qubexa-toolbar {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .qubexa-appbar {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .qubexa-appbar h1 {
+        font-size: clamp(25px, 8vw, 32px);
+        overflow-wrap: anywhere;
+    }
+
+    .qubexa-appbar p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .qubexa-ready {
+        max-width: 100%;
+        white-space: normal;
+    }
+}/* Sprint 9.3 — Responsive kart sistemi */
+
+.qubexa-actions {
+    grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+}
+
+.qubexa-actions > * {
+    min-width: 0;
+}
+
+.qubexa-actions a {
+    width: 100%;
+    min-height: 145px;
+}
+
+@media (max-width: 650px) {
+    .qubexa-actions {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .qubexa-actions a {
+        min-height: 125px;
+        padding: 17px;
+    }
+
+    .qubexa-actions i {
+        margin-bottom: 14px;
+    }
+
+    .qubexa-schedule article {
+        grid-template-columns: 58px minmax(0, 1fr);
+        gap: 12px;
+        padding: 15px;
+    }
+}
+/* Sprint 9.3 — Responsive araç çubuğu */
+
+@media (max-width: 850px) {
+    .qubexa-students-hero {
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .qubexa-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .qubexa-filter-form {
+        width: 100%;
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(140px, 180px)
+            auto;
+    }
+
+    .qubexa-student-count {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 650px) {
+    .qubexa-students-hero {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .qubexa-primary-action {
+        width: 100%;
+        text-align: center;
+    }
+
+    .qubexa-filter-form {
+        grid-template-columns: 1fr;
+    }
+
+    .qubexa-filter-form .form-control,
+    .qubexa-filter-form .btn {
+        width: 100%;
+    }
+}
+/* Sprint 9.3 — Responsive öğrenci paneli */
+
+.qubexa-student-panel {
+    width: min(560px, 100vw);
+    max-width: 100%;
+}
+
+@media (max-width: 650px) {
+    .qubexa-student-panel {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .qubexa-student-panel-header {
+        gap: 12px;
+        padding: 18px 16px;
+    }
+
+    .qubexa-panel-avatar {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+    }
+
+    .qubexa-panel-name-row h2 {
+        font-size: 20px;
+    }
+
+    .qubexa-student-panel-content {
+        padding: 18px 16px;
+    }
+
+    .qubexa-panel-information-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Sprint 9.3 — Responsive formlar */
+
+.qubexa-form-shell {
+    width: 100%;
+    max-width: 100%;
+    padding: clamp(18px, 3vw, 30px);
+}
+
+.qubexa-form-shell input,
+.qubexa-form-shell select,
+.qubexa-form-shell textarea {
+    max-width: 100%;
+}
+
+@media (max-width: 650px) {
+    .qubexa-form-shell {
+        padding: 18px 14px;
+    }
+
+    .qubexa-form-shell .fitem.row {
+        display: block;
+        margin-inline: 0;
+    }
+
+    .qubexa-form-shell .col-form-label,
+    .qubexa-form-shell .felement {
+        width: 100%;
+        max-width: 100%;
+        padding-inline: 0;
+    }
+
+    .qubexa-form-shell .btn {
+        max-width: 100%;
+    }
+}
+/* Sprint 9.3 — Küçük telefon desteği */
+
+@media (max-width: 480px) {
+    .qubexa-stage {
+        padding: 16px 10px 32px;
+    }
+
+    .qubexa-section {
+        margin-bottom: 24px;
+    }
+
+    .qubexa-appbar h1 {
+        font-size: 25px;
+    }
+
+    .qubexa-dashboard-welcome h2 {
+        font-size: 21px;
+    }
+
+    .qubexa-section-head h2 {
+        font-size: 19px;
+    }
+
+    .qubexa-placeholder,
+    .qubexa-empty-state {
+        padding: 38px 16px;
+    }
+
+    .qubexa-primary-action,
+    .qubexa-filter-form .btn {
+        min-height: 44px;
+    }
+}
+/* Sprint 9.3 — İçerik taşma güvenliği */
+
+.qubexa-content img,
+.qubexa-content video,
+.qubexa-content canvas,
+.qubexa-content svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.qubexa-content pre {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.qubexa-content h1,
+.qubexa-content h2,
+.qubexa-content h3,
+.qubexa-panel-identity,
+.qubexa-panel-feature {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.qubexa-student-name,
+.qubexa-panel-feature div {
+    min-width: 0;
+}
+/* Sprint 9.3 — Dokunmatik ekran desteği */
+
+.qubexa-app button,
+.qubexa-app .btn,
+.qubexa-app a {
+    touch-action: manipulation;
+}
+
+.qubexa-app button:focus-visible,
+.qubexa-app .btn:focus-visible,
+.qubexa-app a:focus-visible {
+    outline: 3px solid rgba(23, 105, 194, 0.35);
+    outline-offset: 3px;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .qubexa-nav-item,
+    .qubexa-primary-action,
+    .qubexa-filter-form .btn,
+    .qubexa-mobile-menu,
+    .qubexa-panel-close {
+        min-height: 44px;
+    }
+}
+/* Sprint 9.3 — Mobil ekran yüksekliği */
+
+.qubexa-frame {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+@media (max-width: 1000px) {
+    .qubexa-sidebar {
+        height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding-bottom:
+            calc(20px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+@media (max-width: 650px) {
+    .qubexa-student-panel {
+        height: 100vh;
+        height: 100dvh;
+        padding-bottom:
+            env(safe-area-inset-bottom, 0px);
+    }
+}
+/* Sprint 9.3 — Mobil yan menü düzeni */
+
+@media (max-width: 1000px) {
+    .qubexa-sidebar .qubexa-nav {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 5px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .qubexa-sidebar .qubexa-nav-item {
+        width: 100%;
+        min-width: 0;
+        flex: none;
+    }
+
+    .qubexa-sidebar-footer {
+        flex-shrink: 0;
+    }
+}/* Sprint 9.3 — Mobil katman sıralaması */
+
+@media (max-width: 1000px) {
+    .qubexa-sidebar-overlay {
+        z-index: 1190;
+    }
+
+    .qubexa-sidebar {
+        z-index: 1200;
+    }
+
+    .qubexa-frame.is-sidebar-open .qubexa-mobile-menu {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.qubexa-student-panel-overlay {
+    z-index: 1290;
+}
+
+.qubexa-student-panel {
+    z-index: 1300;
+}
+/* Sprint 9.3 — Genel yatay taşma koruması */
+
+body.qubexa-app {
+    width: 100%;
+    overflow-x: clip;
+}
+
+.qubexa-frame,
+.qubexa-stage,
+.qubexa-content {
+    max-width: 100%;
+}
+
+.qubexa-content > *,
+.qubexa-stage > * {
+    min-width: 0;
+}
+
+@supports not (overflow: clip) {
+    body.qubexa-app {
+        overflow-x: hidden;
+    }
+}
