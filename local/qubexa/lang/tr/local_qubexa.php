@@ -68,3 +68,4 @@ $string['openmenu'] = 'Menüyü aç';
 $string['closemenu'] = 'Menüyü kapat';
 $string['workspaceavailable'] = 'Çalışma Alanı Hazır';
 $string['logout'] = 'Çıkış';
+$string['launchingqubexa'] = 'Qubexa açılıyor';

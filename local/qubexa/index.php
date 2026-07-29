@@ -26,6 +26,14 @@ $PAGE->add_body_class('qubexa-app');
 $PAGE->requires->css(
     new moodle_url('/local/qubexa/mobile.css')
 );
+$PAGE->requires->css(
+    new moodle_url('/local/qubexa/launcher.css')
+);
+
+$PAGE->requires->js(
+    new moodle_url('/local/qubexa/launcher.js'),
+    true
+);
 
 $PAGE->requires->js(
     new moodle_url('/local/qubexa/mobile_menu.js'),
@@ -66,25 +74,22 @@ switch ($page) {
         break;
 
     case 'calendar':
-        $content = $OUTPUT->render_from_template(
-            'local_qubexa/placeholder',
-            [
-                'icon' => 'CAL',
-                'title' => $title,
-                'message' => get_string(
-                    'calendarintegration',
-                    'local_qubexa'
-                ),
-                'actionurl' => (
-                    new moodle_url('/calendar/view.php')
-                )->out(false),
-                'actionlabel' => get_string(
-                    'openmoodlecalendar',
-                    'local_qubexa'
-                ),
-            ]
+    if (!\core_component::get_component_directory(
+        'local_qubexa_calendar'
+    )) {
+        $content = \local_qubexa\workspace::placeholder(
+            $page
         );
-        break;
+    } else {
+        require_once(
+            $CFG->dirroot .
+            '/local/qubexa_calendar/lib.php'
+        );
+
+        $content =
+            local_qubexa_calendar_render_workspace_page();
+    }
+    break;
 
     default:
         $content = \local_qubexa\workspace::placeholder($page);

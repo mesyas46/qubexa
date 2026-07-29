@@ -7,15 +7,88 @@
         var openButton = document.querySelector('[data-qubexa-open]');
         var closeButton = document.querySelector('[data-qubexa-close]');
         var overlay = document.querySelector('[data-qubexa-overlay]');
+        var appbar = document.querySelector('.qubexa-appbar');
 
-        if (!frame || !sidebar || !openButton || !overlay) {
+        if (!frame || !sidebar || !openButton || !overlay || !appbar) {
             return;
         }
 
         var mobileBreakpoint = 1000;
+        var originalParent = openButton.parentNode;
+        var originalNextSibling = openButton.nextSibling;
 
         function isMobile() {
             return window.innerWidth <= mobileBreakpoint;
+        }
+
+        function applyFloatingButtonStyles() {
+            openButton.style.setProperty('position', 'fixed', 'important');
+            openButton.style.setProperty('top', '12px', 'important');
+            openButton.style.setProperty('left', '12px', 'important');
+            openButton.style.setProperty('right', 'auto', 'important');
+            openButton.style.setProperty('bottom', 'auto', 'important');
+            openButton.style.setProperty('margin', '0', 'important');
+            openButton.style.setProperty('transform', 'none', 'important');
+            openButton.style.setProperty('z-index', '7000', 'important');
+            openButton.style.setProperty('display', 'inline-flex', 'important');
+        }
+
+        function clearFloatingButtonStyles() {
+            [
+                'position',
+                'top',
+                'left',
+                'right',
+                'bottom',
+                'margin',
+                'transform',
+                'z-index',
+                'display'
+            ].forEach(function(property) {
+                openButton.style.removeProperty(property);
+            });
+        }
+
+        function moveButtonToViewport() {
+            if (!isMobile()) {
+                return;
+            }
+
+            if (openButton.parentNode !== document.body) {
+                document.body.appendChild(openButton);
+            }
+
+            openButton.classList.add('qubexa-mobile-menu--floating');
+            appbar.classList.add('has-floating-menu');
+
+            applyFloatingButtonStyles();
+        }
+
+        function restoreButtonToAppbar() {
+            if (isMobile()) {
+                return;
+            }
+
+            clearFloatingButtonStyles();
+
+            openButton.classList.remove('qubexa-mobile-menu--floating');
+            appbar.classList.remove('has-floating-menu');
+
+            if (openButton.parentNode === originalParent) {
+                return;
+            }
+
+            if (
+                originalNextSibling &&
+                originalNextSibling.parentNode === originalParent
+            ) {
+                originalParent.insertBefore(
+                    openButton,
+                    originalNextSibling
+                );
+            } else {
+                originalParent.appendChild(openButton);
+            }
         }
 
         function openMenu() {
@@ -28,14 +101,6 @@
 
             openButton.setAttribute('aria-expanded', 'true');
             overlay.setAttribute('aria-hidden', 'false');
-
-            var firstLink = sidebar.querySelector('.qubexa-nav-item');
-
-            if (firstLink) {
-                window.setTimeout(function() {
-                    firstLink.focus();
-                }, 180);
-            }
         }
 
         function closeMenu(restoreFocus) {
@@ -45,8 +110,17 @@
             openButton.setAttribute('aria-expanded', 'false');
             overlay.setAttribute('aria-hidden', 'true');
 
-            if (restoreFocus) {
+            if (restoreFocus && isMobile()) {
                 openButton.focus();
+            }
+        }
+
+        function synchroniseLayout() {
+            if (isMobile()) {
+                moveButtonToViewport();
+            } else {
+                closeMenu(false);
+                restoreButtonToAppbar();
             }
         }
 
@@ -87,11 +161,11 @@
             }
         });
 
-        window.addEventListener('resize', function() {
-            if (!isMobile()) {
-                closeMenu(false);
-            }
-        });
+        window.addEventListener('resize', synchroniseLayout);
+        window.addEventListener('orientationchange', synchroniseLayout);
+        window.addEventListener('pageshow', synchroniseLayout);
+
+        synchroniseLayout();
     }
 
     if (document.readyState === 'loading') {

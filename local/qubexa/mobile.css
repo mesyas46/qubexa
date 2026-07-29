@@ -193,3 +193,402 @@
         transition: none;
     }
 }
+
+/* =========================================================
+   Mobilde sabit üst başlık ve hamburger
+   ========================================================= */
+
+@media (max-width: 1000px) {
+    .qubexa-appbar {
+        position: sticky;
+        top: 0;
+        padding: 10px 0 12px;
+        background: rgba(244, 247, 251, 0.94);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 900;
+    }
+
+    .qubexa-mobile-menu {
+        position: relative;
+        z-index: 901;
+    }
+}
+
+@media (max-width: 480px) {
+    .qubexa-appbar {
+        top: 0;
+        padding-top: 8px;
+    }
+}
+
+/* =========================================================
+   Mobil hamburgeri ekrana sabitle
+   ========================================================= */
+
+@media (max-width: 1000px) {
+    /*
+     * Moodle üst kapsayıcılarının overflow davranışından
+     * etkilenmemesi için sticky yerine fixed kullanılır.
+     */
+    .qubexa-appbar {
+        position: relative;
+        top: auto;
+    }
+
+    .qubexa-mobile-menu {
+        position: fixed !important;
+        top: calc(12px + env(safe-area-inset-top, 0px));
+        left: calc(14px + env(safe-area-inset-left, 0px));
+        z-index: 1100;
+        box-shadow:
+            0 8px 24px rgba(16, 24, 40, 0.16),
+            0 0 0 1px rgba(16, 24, 40, 0.04);
+    }
+}
+
+@media (max-width: 480px) {
+    .qubexa-mobile-menu {
+        top: calc(10px + env(safe-area-inset-top, 0px));
+        left: calc(10px + env(safe-area-inset-left, 0px));
+    }
+}
+
+/* =========================================================
+   Viewport'a taşınmış mobil hamburger
+   ========================================================= */
+
+body > .qubexa-mobile-menu--floating {
+    position: fixed !important;
+    top: calc(12px + env(safe-area-inset-top, 0px)) !important;
+    left: calc(14px + env(safe-area-inset-left, 0px)) !important;
+    right: auto !important;
+    bottom: auto !important;
+    display: inline-flex !important;
+    width: 46px;
+    height: 46px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    border: 1px solid var(--qx-line);
+    border-radius: 13px;
+    background: #ffffff;
+    box-shadow:
+        0 10px 30px rgba(16, 24, 40, 0.22),
+        0 0 0 1px rgba(16, 24, 40, 0.04);
+    transform: none !important;
+    z-index: 7000 !important;
+}
+
+body.qubexa-menu-open > .qubexa-mobile-menu--floating {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 480px) {
+    body > .qubexa-mobile-menu--floating {
+        top: calc(10px + env(safe-area-inset-top, 0px)) !important;
+        left: calc(10px + env(safe-area-inset-left, 0px)) !important;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+@media (min-width: 1001px) {
+    body > .qubexa-mobile-menu--floating {
+        display: none !important;
+    }
+}
+
+/* =========================================================
+   Sprint 9.2 mobil başlık ve sabit menü düzeltmesi
+   ========================================================= */
+
+@media (max-width: 1000px) {
+    .qubexa-appbar.has-floating-menu {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: start;
+        gap: 12px;
+        position: relative;
+        padding-top: 64px;
+    }
+
+    .qubexa-appbar.has-floating-menu .qubexa-appbar-title {
+        grid-column: 1;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .qubexa-appbar.has-floating-menu .qubexa-ready {
+        grid-column: 2;
+        align-self: start;
+        margin: 0;
+    }
+
+    .qubexa-appbar.has-floating-menu h1 {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+
+    .qubexa-appbar.has-floating-menu p,
+    .qubexa-appbar.has-floating-menu .qubexa-date {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+
+    body > .qubexa-mobile-menu--floating {
+        position: fixed !important;
+        top: 12px !important;
+        left: 12px !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+        display: inline-flex !important;
+        z-index: 7000 !important;
+    }
+
+    body.qubexa-menu-open > .qubexa-mobile-menu--floating {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+@media (max-width: 650px) {
+    .qubexa-appbar.has-floating-menu {
+        display: block;
+        padding-top: 62px;
+    }
+
+    .qubexa-appbar.has-floating-menu .qubexa-ready {
+        display: inline-flex;
+        margin-top: 14px;
+    }
+
+    .qubexa-appbar.has-floating-menu .qubexa-date {
+        display: block;
+        white-space: normal;
+    }
+
+    .qubexa-appbar.has-floating-menu h1 {
+        margin-top: 5px;
+        font-size: 32px;
+        line-height: 1.1;
+    }
+}
+
+@media (max-width: 480px) {
+    body > .qubexa-mobile-menu--floating {
+        top: 10px !important;
+        left: 10px !important;
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    .qubexa-appbar.has-floating-menu {
+        padding-top: 58px;
+    }
+
+    .qubexa-appbar.has-floating-menu h1 {
+        font-size: 30px;
+    }
+
+    .qubexa-appbar.has-floating-menu p {
+        max-width: 100%;
+        font-size: 14px;
+        line-height: 1.45;
+    }
+}
+
+/* =========================================================
+   Sprint 9.2 mobil üst başlık ve öğrenciler sayfası düzeltmesi
+   ========================================================= */
+
+@media (max-width: 650px) {
+    /*
+     * Hamburger body içine taşındığı için başlık artık
+     * eski grid sütunlarını kullanmamalı.
+     */
+    .qubexa-appbar.has-floating-menu {
+        display: flex !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        padding: 66px 0 0 !important;
+        margin-bottom: 24px !important;
+    }
+
+    .qubexa-appbar.has-floating-menu .qubexa-appbar-title {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        grid-column: auto !important;
+    }
+
+    .qubexa-appbar.has-floating-menu .qubexa-date {
+        display: block !important;
+        width: 100% !important;
+        white-space: nowrap !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+    }
+
+    .qubexa-appbar.has-floating-menu h1 {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 5px 0 7px !important;
+        font-size: 31px !important;
+        line-height: 1.1 !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+    }
+
+    .qubexa-appbar.has-floating-menu p {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+    }
+
+    .qubexa-appbar.has-floating-menu .qubexa-ready {
+        position: static !important;
+        display: inline-flex !important;
+        width: fit-content !important;
+        max-width: 100% !important;
+        align-self: flex-start !important;
+        grid-column: auto !important;
+        margin: 4px 0 0 !important;
+    }
+
+    /*
+     * Sayfanın tamamının sağa taşmasını engeller.
+     */
+    .qubexa-stage,
+    .qubexa-content,
+    .qubexa-students-shell {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    /*
+     * Öğrenci açıklaması ve Yeni Öğrenci butonu
+     * mobilde alt alta görünür.
+     */
+    .qubexa-students-hero {
+        display: flex !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 14px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .qubexa-students-hero > * {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .qubexa-students-hero p {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        font-size: 15px !important;
+        line-height: 1.55 !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+    }
+
+    .qubexa-primary-action {
+        display: flex !important;
+        width: 100% !important;
+        min-height: 48px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    /*
+     * Filtre alanları alt alta ve tam genişlikte.
+     */
+    .qubexa-toolbar {
+        display: flex !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+
+    .qubexa-filter-form {
+        display: grid !important;
+        width: 100% !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        margin: 0 !important;
+    }
+
+    .qubexa-filter-form input,
+    .qubexa-filter-form select,
+    .qubexa-filter-form button {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 48px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .qubexa-student-count {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        white-space: normal !important;
+    }
+
+    /*
+     * Tablo yalnızca kendi kutusu içerisinde yana kayar.
+     * Bütün sayfayı sağa taşımaz.
+     */
+    .qubexa-table-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+    }
+
+    .qubexa-students-table {
+        width: 760px !important;
+        min-width: 760px !important;
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .qubexa-appbar.has-floating-menu h1 {
+        font-size: 28px !important;
+    }
+
+    .qubexa-stage {
+        padding-right: 10px !important;
+        padding-left: 10px !important;
+    }
+}

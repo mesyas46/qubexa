@@ -69,3 +69,4 @@ $string['closemenu'] = 'Close menu';
 $string['workspaceavailable'] = 'Workspace Ready';
 $string['logout'] = 'Log out';
 $string['knowledge'] = 'Knowledge Center';
+$string['launchingqubexa'] = 'Launching Qubexa';

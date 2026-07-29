@@ -94,6 +94,11 @@ final class workspace {
                 'logout',
                 'local_qubexa'
             ),
+
+            'launchinglabel' => get_string(
+                'launchingqubexa',
+                'local_qubexa'
+            ),
         ];
     }
 
