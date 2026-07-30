@@ -1,8 +1,10 @@
 <?php
 $string['pluginname']='Qubexa';
 $string['workspace']='Qubexa Çalışma Alanı';
-$string['dashboard']='Ana Sayfa';
-$string['home']='Ana Sayfa';
+$string['dashboard']='Bugün';
+$string['home']='Bugün';
+$string['classes']='Sınıflarım';
+$string['lessons']='Özel Dersler';
 $string['students']='Öğrencilerim';
 $string['groups']='Ders Gruplarım';
 $string['knowledgecenter']='Bilgi Merkezi';
@@ -23,15 +25,17 @@ $string['brandname']='Marka adı';
 $string['brandnamedesc']='Çalışma alanında gösterilecek marka adı.';
 $string['qubexa:view']='Qubexa çalışma alanını görüntüle';
 
-$string['dashboard'] = 'Ana Sayfa';
-$string['dashboardsubtitle'] = 'Bugünün planı ve hızlı işlemler.';
+$string['dashboard'] = 'Bugün';
+$string['dashboardsubtitle'] = 'Bugünkü dersleriniz, hatırlatmalarınız ve hızlı işlemleriniz.';
+$string['classessubtitle'] = 'Okul sınıflarınızı, öğrencilerinizi ve sınıf içi etkinliklerinizi yönetin.';
+$string['lessonssubtitle'] = 'Özel ders öğrencilerinizi, derslerinizi, ödevlerinizi ve ödemelerinizi yönetin.';
 $string['studentssubtitle'] = 'Öğrenci kayıtlarını, veli bilgilerini ve ders gruplarını yönetin.';
 $string['groupssubtitle'] = 'Ders gruplarınızı oluşturun ve yönetin.';
 $string['knowledgesubtitle'] = 'Belgelerinizi ve öğretim materyallerinizi düzenleyin.';
 $string['calendarsubtitle'] = 'Derslerinizi ve önemli tarihleri planlayın.';
 $string['assessmentsubtitle'] = 'Sınavları ve değerlendirmeleri yönetin.';
-$string['office'] = 'Özel Ders Ofisim';
-$string['officesubtitle'] = 'Gelir, gider, ödeme ve ders takibi.';
+$string['office'] = 'Ofisim';
+$string['officesubtitle'] = 'Yıllık ve günlük planlarınızı, belgelerinizi, kitaplarınızı ve tutanaklarınızı düzenleyin.';
 $string['promotion'] = 'Ders Tanıtımlarım';
 $string['promotionsubtitle'] = 'Ücretsiz ders tanıtım sayfanızı hazırlayın.';
 $string['reportssubtitle'] = 'Çalışma alanınızdaki gelişmeleri analiz edin.';

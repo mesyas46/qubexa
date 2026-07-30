@@ -12,6 +12,16 @@ $page = optional_param(
     PARAM_ALPHA
 );
 
+$legacyaliases = [
+    'students' => 'lessons',
+    'groups' => 'classes',
+    'knowledge' => 'office',
+];
+
+if (isset($legacyaliases[$page])) {
+    $page = $legacyaliases[$page];
+}
+
 if (!in_array($page, \local_qubexa\workspace::allowed_pages(), true)) {
     $page = \local_qubexa\workspace::DEFAULT_PAGE;
 }
@@ -61,7 +71,7 @@ switch ($page) {
         );
         break;
 
-    case 'students':
+    case 'lessons':
         if (!\core_component::get_component_directory('local_qubexa_students')) {
             $content = \local_qubexa\workspace::placeholder($page);
         } else {
@@ -74,22 +84,22 @@ switch ($page) {
         break;
 
     case 'calendar':
-    if (!\core_component::get_component_directory(
-        'local_qubexa_calendar'
-    )) {
-        $content = \local_qubexa\workspace::placeholder(
-            $page
-        );
-    } else {
-        require_once(
-            $CFG->dirroot .
-            '/local/qubexa_calendar/lib.php'
-        );
+        if (!\core_component::get_component_directory(
+            'local_qubexa_calendar'
+        )) {
+            $content = \local_qubexa\workspace::placeholder(
+                $page
+            );
+        } else {
+            require_once(
+                $CFG->dirroot .
+                '/local/qubexa_calendar/lib.php'
+            );
 
-        $content =
-            local_qubexa_calendar_render_workspace_page();
-    }
-    break;
+            $content =
+                local_qubexa_calendar_render_workspace_page();
+        }
+        break;
 
     default:
         $content = \local_qubexa\workspace::placeholder($page);

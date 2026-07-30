@@ -76,8 +76,13 @@
         </nav>
 
         <div class="qubexa-sidebar-footer">
-            <span>{{firstname}} Hocam</span>
-            <a href="{{logouturl}}">{{logoutlabel}}</a>
+            <span>{{firstname}}</span>
+
+            <span class="qubexa-sidebar-footer-actions">
+                <a href="{{settingsurl}}">{{settingslabel}}</a>
+                <span aria-hidden="true">&middot;</span>
+                <a href="{{logouturl}}">{{logoutlabel}}</a>
+            </span>
         </div>
     </aside>
 
@@ -116,3 +121,20 @@
         </section>
     </main>
 </div>
+
+<nav class="qubexa-bottom-nav" aria-label="Qubexa">
+    {{#menuitems}}
+        <a
+            class="qubexa-bottom-nav__item {{#active}}is-active{{/active}}"
+            href="{{url}}"
+            data-key="{{key}}">
+
+            <span
+                class="qubexa-nav-icon icon-{{icon}}"
+                aria-hidden="true">
+            </span>
+
+            <span>{{label}}</span>
+        </a>
+    {{/menuitems}}
+</nav>

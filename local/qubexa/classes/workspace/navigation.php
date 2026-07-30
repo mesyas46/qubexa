@@ -9,20 +9,20 @@ final class navigation {
         $definitions = [
             [
                 'key' => 'dashboard',
-                'label' => get_string('home', 'local_qubexa'),
+                'label' => get_string('dashboard', 'local_qubexa'),
                 'icon' => 'home',
                 'section' => 'main',
             ],
             [
-                'key' => 'students',
-                'label' => get_string('students', 'local_qubexa'),
-                'icon' => 'users',
+                'key' => 'classes',
+                'label' => get_string('classes', 'local_qubexa'),
+                'icon' => 'groups',
                 'section' => 'teaching',
             ],
             [
-                'key' => 'groups',
-                'label' => get_string('groups', 'local_qubexa'),
-                'icon' => 'groups',
+                'key' => 'lessons',
+                'label' => get_string('lessons', 'local_qubexa'),
+                'icon' => 'users',
                 'section' => 'teaching',
             ],
             [
@@ -32,27 +32,9 @@ final class navigation {
                 'section' => 'teaching',
             ],
             [
-                'key' => 'assessment',
-                'label' => get_string('assessment', 'local_qubexa'),
-                'icon' => 'check',
-                'section' => 'teaching',
-            ],
-            [
-                'key' => 'knowledge',
-                'label' => get_string('knowledgecenter', 'local_qubexa'),
-                'icon' => 'folder',
-                'section' => 'content',
-            ],
-            [
                 'key' => 'office',
                 'label' => get_string('office', 'local_qubexa'),
-                'icon' => 'wallet',
-                'section' => 'office',
-            ],
-            [
-                'key' => 'promotion',
-                'label' => get_string('promotion', 'local_qubexa'),
-                'icon' => 'megaphone',
+                'icon' => 'folder',
                 'section' => 'office',
             ],
             [
@@ -60,12 +42,6 @@ final class navigation {
                 'label' => get_string('reports', 'local_qubexa'),
                 'icon' => 'chart',
                 'section' => 'analysis',
-            ],
-            [
-                'key' => 'settings',
-                'label' => get_string('settings', 'local_qubexa'),
-                'icon' => 'settings',
-                'section' => 'system',
             ],
         ];
 

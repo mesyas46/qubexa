@@ -9,15 +9,19 @@ final class workspace {
     public static function allowed_pages(): array {
         return [
             'dashboard',
+            'classes',
+            'lessons',
+            'calendar',
+            'office',
+            'reports',
+            'settings',
+
+            // Legacy page keys kept for backwards-compatible links.
             'students',
             'groups',
             'knowledge',
-            'calendar',
             'assessment',
-            'office',
             'promotion',
-            'reports',
-            'settings',
         ];
     }
 
@@ -69,6 +73,15 @@ final class workspace {
                     ['sesskey' => sesskey()]
                 )
             )->out(false),
+
+            'settingsurl' => self::page_url(
+                'settings'
+            )->out(false),
+
+            'settingslabel' => get_string(
+                'settings',
+                'local_qubexa'
+            ),
 
             'brandtagline' => get_string(
                 'brandtagline',

@@ -5,18 +5,18 @@
             <h2>{{greeting}}</h2>
             <p>{{summary}}</p>
         </div>
-        <a class="qubexa-dashboard-v2__primary" href="{{addstudenturl}}">
-            <span aria-hidden="true">+</span>
-            {{addstudentlabel}}
+        <a class="qubexa-dashboard-v2__primary" href="{{calendarurl}}">
+            <span aria-hidden="true">&rarr;</span>
+            {{calendarlabel}}
         </a>
     </section>
 
     <section class="qubexa-dashboard-v2__metrics" aria-label="{{summary}}">
-        <a class="qubexa-dashboard-v2__metric" href="{{studentsurl}}">
+        <a class="qubexa-dashboard-v2__metric" href="{{lessonsurl}}">
             <span class="qubexa-dashboard-v2__metric-icon">OG</span>
             <span><small>{{totalstudentslabel}}</small><strong>{{totalstudents}}</strong></span>
         </a>
-        <a class="qubexa-dashboard-v2__metric" href="{{studentsurl}}">
+        <a class="qubexa-dashboard-v2__metric" href="{{lessonsurl}}">
             <span class="qubexa-dashboard-v2__metric-icon">AK</span>
             <span><small>{{activestudentslabel}}</small><strong>{{activestudents}}</strong></span>
         </a>
@@ -28,7 +28,7 @@
             <span class="qubexa-dashboard-v2__metric-icon">OD</span>
             <span><small>{{pendingpaymentslabel}}</small><strong>{{pendingpayments}}</strong></span>
         </a>
-        <a class="qubexa-dashboard-v2__metric" href="{{assessmenturl}}">
+        <a class="qubexa-dashboard-v2__metric" href="{{classesurl}}">
             <span class="qubexa-dashboard-v2__metric-icon">SN</span>
             <span><small>{{examaveragelabel}}</small><strong>{{examaverage}}</strong></span>
         </a>
@@ -72,17 +72,17 @@
                 <h3>{{quickactionslabel}}</h3>
             </div>
             <div class="qubexa-dashboard-v2__actions">
-                <a href="{{addstudenturl}}"><span>+</span><strong>{{addstudentlabel}}</strong></a>
-                <a href="{{studentsurl}}"><span>OG</span><strong>{{studentslabel}}</strong></a>
-                <a href="{{assessmenturl}}"><span>SN</span><strong>{{assessmentlabel}}</strong></a>
-                <a href="{{calendarurl}}"><span>TK</span><strong>{{calendarlabel}}</strong></a>
+                <a href="{{classesurl}}"><span>◉</span><strong>{{classeslabel}}</strong></a>
+                <a href="{{lessonsurl}}"><span>♙</span><strong>{{lessonslabel}}</strong></a>
+                <a href="{{calendarurl}}"><span>□</span><strong>{{calendarlabel}}</strong></a>
+                <a href="{{officeurl}}"><span>▣</span><strong>{{officelabel}}</strong></a>
             </div>
         </section>
 
         <section class="qubexa-dashboard-v2__panel qubexa-dashboard-v2__activity">
             <div class="qubexa-dashboard-v2__panel-head">
                 <h3>{{recentactivitylabel}}</h3>
-                <a href="{{studentsurl}}">{{studentslabel}} &rarr;</a>
+                <a href="{{lessonsurl}}">{{lessonslabel}} &rarr;</a>
             </div>
 
             {{#hasrecentactivity}}
