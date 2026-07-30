@@ -1,0 +1,143 @@
+<div class="qubexa-calendar-shell"
+     data-qubexa-calendar>
+
+    <header class="qubexa-calendar-toolbar">
+        <div class="qubexa-calendar-navigation">
+            <a href="{{previousurl}}"
+               class="qubexa-calendar-nav"
+               aria-label="{{#str}}previous, local_qubexa_calendar{{/str}}">
+                ←
+            </a>
+
+            <a href="{{todayurl}}"
+               class="qubexa-calendar-today">
+                {{#str}}today, local_qubexa_calendar{{/str}}
+            </a>
+
+            <a href="{{nexturl}}"
+               class="qubexa-calendar-nav"
+               aria-label="{{#str}}next, local_qubexa_calendar{{/str}}">
+                →
+            </a>
+        </div>
+
+        <h2 class="qubexa-calendar-title">
+            {{monthtitle}}
+        </h2>
+
+        <a href="{{addeventurl}}"
+           class="btn btn-primary qubexa-calendar-add">
+            ＋ {{#str}}addevent, local_qubexa_calendar{{/str}}
+        </a>
+    </header>
+<div class="qubexa-calendar-legend"
+     aria-label="{{#str}}status, local_qubexa_calendar{{/str}}">
+
+    <span>
+        <i class="is-planned"></i>
+        {{#str}}planned, local_qubexa_calendar{{/str}}
+    </span>
+
+    <span>
+        <i class="is-completed"></i>
+        {{#str}}completed, local_qubexa_calendar{{/str}}
+    </span>
+
+    <span>
+        <i class="is-cancelled"></i>
+        {{#str}}cancelled, local_qubexa_calendar{{/str}}
+    </span>
+</div>
+    <div class="qubexa-calendar-weekdays"
+         aria-hidden="true">
+        {{#weekdays}}
+            <span>{{label}}</span>
+        {{/weekdays}}
+    </div>
+
+    <div class="qubexa-calendar-grid">
+        {{#days}}
+            <article class="qubexa-calendar-day
+                {{^iscurrentmonth}}is-outside{{/iscurrentmonth}}
+                {{#istoday}}is-today{{/istoday}}
+                {{#isselected}}is-selected{{/isselected}}"
+                data-calendar-date="{{date}}">
+
+                <header class="qubexa-calendar-day-header">
+                    <a href="{{dayurl}}"
+                       class="qubexa-calendar-day-link">
+                        <time datetime="{{date}}">
+                            {{daynumber}}
+                        </time>
+                    </a>
+
+                    <button type="button"
+                            class="qubexa-calendar-day-add"
+                            data-add-calendar-event
+                            data-date="{{date}}"
+                            aria-label="{{#str}}addevent, local_qubexa_calendar{{/str}}">
+                        ＋
+                    </button>
+                </header>
+
+                <div class="qubexa-calendar-events">
+                    {{#events}}
+                        <a href="{{editurl}}"
+                           class="qubexa-calendar-event {{statusclass}}">
+                            <time>{{time}}</time>
+                            <strong>{{title}}</strong>
+                        </a>
+                    {{/events}}
+                </div>
+            </article>
+        {{/days}}
+    </div>
+
+    <section class="qubexa-calendar-agenda"
+             aria-labelledby="qubexa-calendar-agenda-title">
+
+        <header class="qubexa-calendar-agenda-header">
+            <h3 id="qubexa-calendar-agenda-title">
+                {{selecteddaytitle}}
+            </h3>
+        </header>
+
+        {{#hasselectedevents}}
+            <div class="qubexa-calendar-agenda-list">
+                {{#selectedevents}}
+                    <a href="{{editurl}}"
+                       class="qubexa-calendar-agenda-event
+                              {{statusclass}}">
+
+                        <time class="qubexa-calendar-agenda-time">
+    {{time}}–{{endtime}}
+</time>
+
+                        <div class="qubexa-calendar-agenda-content">
+                            <strong>{{title}}</strong>
+
+                            {{#hasstudent}}
+                                <span class="qubexa-calendar-agenda-student">
+                                    {{studentname}}
+                                </span>
+                            {{/hasstudent}}
+                        </div>
+
+                        {{#isrecurring}}
+                            <span class="qubexa-calendar-repeat"
+                                  aria-hidden="true">
+                                ↻
+                            </span>
+                        {{/isrecurring}}
+                    </a>
+                {{/selectedevents}}
+            </div>
+        {{/hasselectedevents}}
+
+        {{^hasselectedevents}}
+            <p class="qubexa-calendar-agenda-empty">
+                {{#str}}noevents, local_qubexa_calendar{{/str}}
+            </p>
+        {{/hasselectedevents}}
+    </section>
+</div>

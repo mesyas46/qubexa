@@ -1,0 +1,871 @@
+/* Qubexa Smart Calendar */
+
+.qubexa-calendar-shell {
+    width: 100%;
+    min-width: 0;
+}
+
+.qubexa-calendar-toolbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.qubexa-calendar-navigation {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qubexa-calendar-nav,
+.qubexa-calendar-today {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--qx-line, #e4e7ec);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--qx-ink, #101828);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.qubexa-calendar-nav {
+    width: 40px;
+    font-size: 18px;
+}
+
+.qubexa-calendar-today {
+    padding: 0 14px;
+    font-size: 13px;
+}
+
+.qubexa-calendar-nav:hover,
+.qubexa-calendar-today:hover {
+    border-color: var(--qx-accent, #1769c2);
+    color: var(--qx-accent, #1769c2);
+    text-decoration: none;
+}
+
+.qubexa-calendar-title {
+    margin: 0;
+    color: var(--qx-ink, #101828);
+    font-size: 23px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.qubexa-calendar-add {
+    justify-self: end;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.qubexa-calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    margin-bottom: 8px;
+}
+
+.qubexa-calendar-weekdays span {
+    padding: 8px;
+    color: var(--qx-muted, #667085);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.qubexa-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid var(--qx-line, #e4e7ec);
+    border-radius: 16px;
+    background: var(--qx-line, #e4e7ec);
+    gap: 1px;
+}
+
+.qubexa-calendar-day {
+    min-width: 0;
+    min-height: 128px;
+    padding: 10px;
+    background: #fff;
+}
+
+.qubexa-calendar-day.is-outside {
+    background: #f9fafb;
+    color: #98a2b3;
+}
+/* Calendar day content */
+
+.qubexa-calendar-day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 9px;
+}
+
+.qubexa-calendar-day-header > time {
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    color: var(--qx-ink, #101828);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.qubexa-calendar-day.is-outside
+.qubexa-calendar-day-header > time {
+    color: #98a2b3;
+}
+
+.qubexa-calendar-day.is-today {
+    position: relative;
+    z-index: 1;
+    box-shadow:
+        inset 0 0 0 2px var(--qx-accent, #1769c2);
+}
+
+.qubexa-calendar-day.is-today
+.qubexa-calendar-day-header > time {
+    background: var(--qx-accent, #1769c2);
+    color: #fff;
+}
+
+.qubexa-calendar-day-add {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    background: #f2f4f7;
+    color: #475467;
+    opacity: 0;
+    cursor: pointer;
+    transition:
+        opacity 150ms ease,
+        background 150ms ease;
+}
+
+.qubexa-calendar-day:hover
+.qubexa-calendar-day-add,
+.qubexa-calendar-day-add:focus-visible {
+    opacity: 1;
+}
+
+.qubexa-calendar-day-add:hover {
+    background: #e4e7ec;
+}
+
+.qubexa-calendar-events {
+    display: grid;
+    gap: 6px;
+}
+
+.qubexa-calendar-event {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+    padding: 7px 8px;
+    border-left: 3px solid var(--qx-accent, #1769c2);
+    border-radius: 8px;
+    background: #eff8ff;
+    color: #1849a9;
+    text-decoration: none;
+}
+
+.qubexa-calendar-event time {
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.qubexa-calendar-event strong {
+    overflow: hidden;
+    font-size: 11px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qubexa-calendar-event:hover {
+    background: #d1e9ff;
+    color: #175cd3;
+    text-decoration: none;
+}
+
+.qubexa-calendar-event.is-completed {
+    border-left-color: #12b76a;
+    background: #ecfdf3;
+    color: #027a48;
+}
+
+.qubexa-calendar-event.is-cancelled {
+    border-left-color: #f04438;
+    background: #fef3f2;
+    color: #b42318;
+}
+
+@media (hover: none) {
+    .qubexa-calendar-day-add {
+        opacity: 1;
+    }
+}
+/* Sprint 10 — Mobile calendar */
+
+@media (max-width: 650px) {
+    .qubexa-calendar-toolbar {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .qubexa-calendar-navigation {
+        grid-column: 1;
+        gap: 6px;
+    }
+
+    .qubexa-calendar-nav {
+        width: 36px;
+        min-height: 36px;
+    }
+
+    .qubexa-calendar-today {
+        min-height: 36px;
+        padding-inline: 10px;
+    }
+
+    .qubexa-calendar-title {
+        grid-column: 2;
+        font-size: 20px;
+        white-space: nowrap;
+    }
+
+    .qubexa-calendar-add {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-height: 44px;
+        justify-self: stretch;
+    }
+
+    .qubexa-calendar-weekdays span {
+        padding: 6px 1px;
+        font-size: 8px;
+    }
+
+    .qubexa-calendar-grid {
+        border-radius: 12px;
+    }
+
+    .qubexa-calendar-day {
+        position: relative;
+        min-height: 68px;
+        padding: 4px;
+    }
+
+    .qubexa-calendar-day-header {
+        margin-bottom: 3px;
+    }
+
+    .qubexa-calendar-day-header > time {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+    }
+
+    .qubexa-calendar-day-add {
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        width: 22px;
+        height: 22px;
+        opacity: 1;
+        font-size: 12px;
+    }
+
+    .qubexa-calendar-event {
+        gap: 0;
+        padding: 4px;
+        border-left-width: 2px;
+    }
+
+    .qubexa-calendar-event time {
+        display: none;
+    }
+
+    .qubexa-calendar-event strong {
+        font-size: 9px;
+    }
+}
+/* Event form shell — Sprint 10.19A */
+
+.qubexa-calendar-form-shell {
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+}
+
+.qubexa-calendar-form-back {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 12px;
+    color: #1674c5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.qubexa-calendar-form-back:hover {
+    color: #0d5fa9;
+    text-decoration: none;
+}
+
+.qubexa-calendar-form-title {
+    margin: 0 0 22px;
+    color: #111827;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.qubexa-calendar-form-shell .mform {
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 14px 40px rgb(15 23 42 / 8%);
+}
+/* Event form fields — Sprint 10.19B */
+
+.qubexa-calendar-form-shell .mform .fitem {
+    display: block;
+    margin: 0 0 20px;
+}
+
+.qubexa-calendar-form-shell .mform .col-form-label,
+.qubexa-calendar-form-shell .mform .felement {
+    width: 100%;
+    max-width: none;
+    flex: none;
+    padding: 0;
+}
+
+.qubexa-calendar-form-shell .mform .col-form-label {
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.qubexa-calendar-form-shell .form-control,
+.qubexa-calendar-form-shell .form-select {
+    min-height: 44px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: none;
+}
+
+.qubexa-calendar-form-shell input[type="text"],
+.qubexa-calendar-form-shell textarea {
+    width: 100%;
+    max-width: none;
+}
+
+.qubexa-calendar-form-shell .form-control:focus,
+.qubexa-calendar-form-shell .form-select:focus {
+    border-color: #1674c5;
+    box-shadow: 0 0 0 3px rgb(22 116 197 / 14%);
+}
+
+.qubexa-calendar-form-shell .form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.qubexa-calendar-form-shell .form-autocomplete-selection {
+    margin-bottom: 8px;
+}
+
+.qubexa-calendar-form-shell textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+/* Event form shell — Sprint 10.19A */
+
+.qubexa-calendar-form-shell {
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+}
+
+.qubexa-calendar-form-back {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 12px;
+    color: #1674c5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.qubexa-calendar-form-back:hover {
+    color: #0d5fa9;
+    text-decoration: none;
+}
+
+.qubexa-calendar-form-title {
+    margin: 0 0 22px;
+    color: #111827;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.qubexa-calendar-form-shell .mform {
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 14px 40px rgb(15 23 42 / 8%);
+}
+/* Event form fields — Sprint 10.19B */
+
+.qubexa-calendar-form-shell .mform .fitem {
+    display: block;
+    margin: 0 0 20px;
+}
+
+.qubexa-calendar-form-shell .mform .col-form-label,
+.qubexa-calendar-form-shell .mform .felement {
+    width: 100%;
+    max-width: none;
+    flex: none;
+    padding: 0;
+}
+
+.qubexa-calendar-form-shell .mform .col-form-label {
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.qubexa-calendar-form-shell .form-control,
+.qubexa-calendar-form-shell .form-select {
+    min-height: 44px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: none;
+}
+
+.qubexa-calendar-form-shell input[type="text"],
+.qubexa-calendar-form-shell textarea {
+    width: 100%;
+    max-width: none;
+}
+
+.qubexa-calendar-form-shell .form-control:focus,
+.qubexa-calendar-form-shell .form-select:focus {
+    border-color: #1674c5;
+    box-shadow: 0 0 0 3px rgb(22 116 197 / 14%);
+}
+
+.qubexa-calendar-form-shell .form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.qubexa-calendar-form-shell .form-autocomplete-selection {
+    margin-bottom: 8px;
+}
+
+.qubexa-calendar-form-shell textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+/* Event form actions and mobile — Sprint 10.19C */
+
+.qubexa-calendar-form-shell .fitem_actionbuttons {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.qubexa-calendar-form-shell
+.fitem_actionbuttons .felement {
+    display: flex;
+    gap: 10px;
+}
+
+.qubexa-calendar-form-shell
+.fitem_actionbuttons .btn {
+    min-height: 44px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.qubexa-calendar-form-shell
+.fitem_actionbuttons .btn-primary {
+    border-color: #1674c5;
+    background: #1674c5;
+}
+
+@media (max-width: 650px) {
+    .qubexa-calendar-form-shell {
+        padding: 18px 14px 36px;
+    }
+
+    .qubexa-calendar-form-title {
+        margin-bottom: 16px;
+        font-size: 24px;
+    }
+
+    .qubexa-calendar-form-shell .mform {
+        padding: 18px 14px;
+        border-radius: 14px;
+        box-shadow: 0 8px 24px rgb(15 23 42 / 7%);
+    }
+
+    .qubexa-calendar-form-shell .form-inline {
+        gap: 6px;
+    }
+
+    .qubexa-calendar-form-shell
+    .form-inline .form-control,
+    .qubexa-calendar-form-shell
+    .form-inline .form-select {
+        width: auto;
+        min-width: 0;
+        flex: 1 1 70px;
+    }
+
+    .qubexa-calendar-form-shell
+    .fitem_actionbuttons .felement {
+        flex-direction: column;
+    }
+
+    .qubexa-calendar-form-shell
+    .fitem_actionbuttons .btn {
+        width: 100%;
+    }
+}
+/* Compact mobile event indicator — Sprint 10.21A */
+
+@media (max-width: 650px) {
+    .qubexa-calendar-day {
+        position: relative;
+    }
+
+    .qubexa-calendar-events {
+        position: absolute;
+        left: 7px;
+        bottom: 9px;
+        z-index: 2;
+        display: flex;
+        gap: 3px;
+    }
+
+    .qubexa-calendar-event {
+        display: block;
+        width: 13px;
+        height: 13px;
+        min-height: 13px;
+        padding: 0;
+        overflow: hidden;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        box-shadow: 0 1px 4px rgb(15 23 42 / 18%);
+        font-size: 0;
+    }
+
+    .qubexa-calendar-event time,
+    .qubexa-calendar-event strong {
+        display: none;
+    }
+
+    .qubexa-calendar-day-add {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+    }
+}
+/* Mobile event status colours — Sprint 10.21B */
+
+@media (max-width: 650px) {
+    .qubexa-calendar-event.is-planned {
+        background: #1674c5;
+    }
+
+    .qubexa-calendar-event.is-completed {
+        background: #16a36a;
+    }
+
+    .qubexa-calendar-event.is-cancelled {
+        background: #dc3545;
+    }
+
+    .qubexa-calendar-event {
+        position: relative;
+    }
+
+    .qubexa-calendar-event::after {
+        content: "";
+        position: absolute;
+        inset: -5px;
+    }
+}
+/* Delete event interface — Sprint 10.22E */
+
+.qubexa-calendar-delete-trigger {
+    margin-top: 14px;
+}
+
+.qubexa-calendar-delete-card {
+    padding: 28px;
+    border: 1px solid #fecaca;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 14px 40px rgb(15 23 42 / 8%);
+}
+
+.qubexa-calendar-delete-message {
+    margin: 0 0 14px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.qubexa-calendar-delete-title {
+    display: block;
+    margin-bottom: 24px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #fff1f2;
+    color: #9f1239;
+}
+
+.qubexa-calendar-delete-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.qubexa-calendar-delete-actions .btn {
+    min-height: 44px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+@media (max-width: 650px) {
+    .qubexa-calendar-delete-card {
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+
+    .qubexa-calendar-delete-trigger {
+        width: 100%;
+    }
+
+    .qubexa-calendar-delete-actions {
+        flex-direction: column;
+    }
+
+    .qubexa-calendar-delete-actions .btn {
+        width: 100%;
+    }
+}
+/* Selected day and daily agenda — Sprint 10.24E */
+
+.qubexa-calendar-day-link {
+    display: inline-flex;
+    color: inherit;
+    text-decoration: none;
+}
+
+.qubexa-calendar-day-link:hover {
+    color: #1674c5;
+    text-decoration: none;
+}
+
+.qubexa-calendar-day.is-selected {
+    box-shadow: inset 0 0 0 2px #1674c5;
+}
+
+.qubexa-calendar-agenda {
+    margin-top: 20px;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgb(15 23 42 / 7%);
+}
+
+.qubexa-calendar-agenda-header h3 {
+    margin: 0 0 16px;
+    color: #111827;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.qubexa-calendar-agenda-list {
+    display: grid;
+    gap: 10px;
+}
+
+.qubexa-calendar-agenda-event {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    padding: 10px 14px;
+    border-left: 4px solid #1674c5;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #1e293b;
+    text-decoration: none;
+}
+
+.qubexa-calendar-agenda-event:hover {
+    background: #f1f5f9;
+    color: #1674c5;
+    text-decoration: none;
+}
+
+.qubexa-calendar-agenda-event.is-completed {
+    border-left-color: #16a36a;
+}
+
+.qubexa-calendar-agenda-event.is-cancelled {
+    border-left-color: #dc3545;
+}
+
+.qubexa-calendar-agenda-event time {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.qubexa-calendar-agenda-event strong {
+    flex: 1;
+}
+
+.qubexa-calendar-repeat {
+    color: #1674c5;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.qubexa-calendar-agenda-empty {
+    margin: 0;
+    color: #64748b;
+}
+
+@media (max-width: 650px) {
+    .qubexa-calendar-agenda {
+        margin-top: 14px;
+        padding: 16px 14px;
+        border-radius: 14px;
+    }
+
+    .qubexa-calendar-agenda-header h3 {
+        font-size: 16px;
+    }
+}
+/* Agenda student information — Sprint 10.25D */
+
+.qubexa-calendar-agenda-content {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.qubexa-calendar-agenda-content strong {
+    flex: none;
+    overflow: hidden;
+    color: #1e293b;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qubexa-calendar-agenda-student {
+    overflow: hidden;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* Agenda time range — Sprint 10.26C */
+
+.qubexa-calendar-agenda-time {
+    flex: 0 0 88px;
+    white-space: nowrap;
+}
+
+@media (max-width: 650px) {
+    .qubexa-calendar-agenda-time {
+        flex-basis: 78px;
+        font-size: 11px;
+    }
+}
+/* Calendar status legend — Sprint 10.27B */
+
+.qubexa-calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin: 14px 0;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.qubexa-calendar-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.qubexa-calendar-legend i {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.qubexa-calendar-legend i.is-planned {
+    background: #1674c5;
+}
+
+.qubexa-calendar-legend i.is-completed {
+    background: #16a36a;
+}
+
+.qubexa-calendar-legend i.is-cancelled {
+    background: #dc3545;
+}
+
+@media (max-width: 650px) {
+    .qubexa-calendar-legend {
+        justify-content: center;
+        margin: 12px 0;
+        font-size: 10px;
+    }
+}
