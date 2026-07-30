@@ -106,8 +106,43 @@
                                     {{studentnumber}}
                                 </span>
                             {{/hasnumber}}
+                            <div class="qubexa-point-alltime">
+                                <span class="qubexa-point-alltime__label">
+                                    {{#str}}
+                                        alltimepoints,
+                                        local_qubexa_classes
+                                    {{/str}}
+                                </span>
+
+                                <span data-role="total-minus-count">
+                                    −{{totalminuscount}}
+                                </span>
+
+                                <span
+                                    class="qubexa-point-alltime__net
+                                        {{#totalispositive}}is-positive{{/totalispositive}}
+                                        {{#totalisnegative}}is-negative{{/totalisnegative}}"
+                                    data-role="total-net">
+                                    {{#str}}
+                                        netresult,
+                                        local_qubexa_classes
+                                    {{/str}}
+                                    {{#totalispositive}}+{{/totalispositive}}{{totalpointtotal}}
+                                </span>
+
+                                <span data-role="total-plus-count">
+                                    +{{totalpluscount}}
+                                </span>
+                            </div>
                         </div>
-                                                <div class="qubexa-class-student__points">
+
+                        <div class="qubexa-class-student__points">
+                            <span class="qubexa-point-period">
+                                {{#str}}
+                                    todaypoints,
+                                    local_qubexa_classes
+                                {{/str}}
+                            </span>
                             <a
                                 class="qubexa-point-counter is-minus"
                                 href="{{minusurl}}"
@@ -123,7 +158,7 @@
                                 <strong data-role="minus-count">{{minuscount}}</strong>
                             </a>
 
-                                                        <div
+                            <div
                                 class="qubexa-point-net
                                     {{#ispositive}}is-positive{{/ispositive}}
                                     {{#isnegative}}is-negative{{/isnegative}}">
@@ -136,6 +171,7 @@
                                 </span>
 
                                 <strong data-role="net-total">
+                                    {{#ispositive}}+{{/ispositive}}{{pointtotal}}
                                 </strong>
                             </div>
 
@@ -153,7 +189,27 @@
                                 <span>+</span>
                                 <strong data-role="plus-count">{{pluscount}}</strong>
                             </a>
+
+                            <button
+                                type="button"
+                                class="qubexa-point-undo
+                                    {{^hastodaypoints}}is-disabled{{/hastodaypoints}}"
+                                data-action="qubexa-point"
+                                data-role="undo-point"
+                                data-classid="{{classid}}"
+                                data-studentid="{{id}}"
+                                data-pointvalue="0"
+                                {{^hastodaypoints}}disabled{{/hastodaypoints}}>
+
+                                <span aria-hidden="true">↶</span>
+
+                                {{#str}}
+                                    undolastpoint,
+                                    local_qubexa_classes
+                                {{/str}}
+                            </button>
                         </div>
+
                         <span class="qubexa-class-student__status">
                             {{statuslabel}}
                         </span>

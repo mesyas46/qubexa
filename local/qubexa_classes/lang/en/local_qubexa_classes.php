@@ -54,3 +54,6 @@ $string['pointtotal'] = 'Points';
 $string['plusadded'] = 'A plus was given to the student.';
 $string['minusadded'] = 'A minus was given to the student.';
 $string['netresult'] = 'Net';
+$string['todaypoints'] = 'Today';
+$string['alltimepoints'] = 'All-time total';
+$string['undolastpoint'] = 'Undo last action';

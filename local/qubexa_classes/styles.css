@@ -639,3 +639,111 @@
 .qubexa-class-student__points {
     transition: opacity 0.18s ease;
 }
+.qubexa-point-period {
+    width: 100%;
+    color: #68778f;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.qubexa-class-student__points {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.qubexa-point-alltime {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+    font-size: 11px;
+}
+
+.qubexa-point-alltime__label {
+    color: #68778f;
+    font-weight: 700;
+}
+
+.qubexa-point-alltime
+[data-role="total-minus-count"] {
+    color: #c92a3e;
+    font-weight: 800;
+}
+
+.qubexa-point-alltime
+[data-role="total-plus-count"] {
+    color: #087a4b;
+    font-weight: 800;
+}
+
+.qubexa-point-alltime__net {
+    padding: 2px 6px;
+    color: #56677f;
+    background: #fff;
+    border: 1px solid #dbe3ed;
+    border-radius: 7px;
+    font-weight: 800;
+}
+
+.qubexa-point-alltime__net.is-positive {
+    color: #087a4b;
+    border-color: #a7e5c6;
+}
+
+.qubexa-point-alltime__net.is-negative {
+    color: #c92a3e;
+    border-color: #f4b7c0;
+}
+
+.qubexa-point-undo {
+    display: inline-flex;
+    flex: 1 0 100%;
+    min-height: 34px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 12px;
+    color: #1769c2;
+    background: #edf6ff;
+    border: 1px solid #d6e9fb;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        opacity 0.18s ease;
+}
+
+.qubexa-point-undo:hover:not(:disabled) {
+    background: #dceeff;
+    border-color: #b9daf7;
+}
+
+.qubexa-point-undo:focus-visible {
+    outline: 3px solid rgba(23, 105, 194, 0.2);
+    outline-offset: 2px;
+}
+
+.qubexa-point-undo.is-disabled,
+.qubexa-point-undo:disabled {
+    color: #8794a8;
+    background: #f1f4f8;
+    border-color: #e2e8f0;
+    opacity: 0.58;
+    cursor: not-allowed;
+}
+
+@media (max-width: 650px) {
+    .qubexa-point-undo {
+        width: 100%;
+        min-height: 38px;
+        margin-top: 2px;
+    }
+}

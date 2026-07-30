@@ -54,3 +54,6 @@ $string['pointtotal'] = 'Puan';
 $string['plusadded'] = 'Öğrenciye artı verildi.';
 $string['minusadded'] = 'Öğrenciye eksi verildi.';
 $string['netresult'] = 'Net';
+$string['todaypoints'] = 'Bugün';
+$string['alltimepoints'] = 'Genel toplam';
+$string['undolastpoint'] = 'Son işlemi geri al';

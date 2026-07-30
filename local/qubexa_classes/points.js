@@ -75,6 +75,20 @@
                             card.querySelector(
                                 '.qubexa-point-net'
                             );
+                        const totalMinusCount =
+                            card.querySelector(
+                                '[data-role="total-minus-count"]'
+                            );
+
+                        const totalPlusCount =
+                            card.querySelector(
+                                '[data-role="total-plus-count"]'
+                            );
+
+                        const totalNet =
+                            card.querySelector(
+                                '[data-role="total-net"]'
+                            );
 
                         minusCount.textContent =
                             result.minuscount;
@@ -94,6 +108,38 @@
                             'is-positive',
                             total > 0
                         );
+                        if (totalMinusCount &&
+                                totalPlusCount &&
+                                totalNet) {
+
+                            totalMinusCount.textContent =
+                                '−' + result.totalminuscount;
+
+                            totalPlusCount.textContent =
+                                '+' + result.totalpluscount;
+
+                            const allTotal = Number(
+                                result.totalpointtotal
+                            );
+
+                            totalNet.textContent =
+                                'Net ' +
+                                (
+                                    allTotal > 0
+                                        ? '+' + allTotal
+                                        : String(allTotal)
+                                );
+
+                            totalNet.classList.toggle(
+                                'is-positive',
+                                allTotal > 0
+                            );
+
+                            totalNet.classList.toggle(
+                                'is-negative',
+                                allTotal < 0
+                            );
+                        }
 
                         netBox.classList.toggle(
                             'is-negative',

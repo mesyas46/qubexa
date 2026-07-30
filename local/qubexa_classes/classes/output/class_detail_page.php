@@ -60,6 +60,18 @@ final class class_detail_page implements
             ],
             'status DESC, lastname ASC, firstname ASC'
         );
+        $timezone =
+            \core_date::get_user_timezone_object();
+
+        $today = new \DateTimeImmutable(
+            'today',
+            $timezone
+        );
+
+        $tomorrow = $today->modify('+1 day');
+
+        $daystart = $today->getTimestamp();
+        $dayend = $tomorrow->getTimestamp();
                 $pointstats = $DB->get_records_sql(
             "SELECT studentid,
                     SUM(
@@ -84,22 +96,65 @@ final class class_detail_page implements
                 'pointclassid' => $this->classid,
             ]
         );
+        $todaypointstats = $DB->get_records_sql(
+            "SELECT studentid,
+                    SUM(
+                        CASE
+                            WHEN pointvalue = 1 THEN 1
+                            ELSE 0
+                        END
+                    ) AS pluscount,
+                    SUM(
+                        CASE
+                            WHEN pointvalue = -1 THEN 1
+                            ELSE 0
+                        END
+                    ) AS minuscount,
+                    SUM(pointvalue) AS pointtotal
+               FROM {local_qubexa_class_points}
+              WHERE userid = :todayuserid
+                AND classid = :todayclassid
+                AND timecreated >= :daystart
+                AND timecreated < :dayend
+           GROUP BY studentid",
+            [
+                'todayuserid' => $this->userid,
+                'todayclassid' => $this->classid,
+                'daystart' => $daystart,
+                'dayend' => $dayend,
+            ]
+        );
         $students = [];
 
         foreach ($studentrecords as $student) {
-                        $pointstat =
+                                    $totalstat =
                 $pointstats[$student->id] ?? null;
 
-            $pluscount = $pointstat
-                ? (int) $pointstat->pluscount
+            $totalpluscount = $totalstat
+                ? (int) $totalstat->pluscount
                 : 0;
 
-            $minuscount = $pointstat
-                ? (int) $pointstat->minuscount
+            $totalminuscount = $totalstat
+                ? (int) $totalstat->minuscount
                 : 0;
 
-            $pointtotal = $pointstat
-                ? (int) $pointstat->pointtotal
+            $totalpointtotal = $totalstat
+                ? (int) $totalstat->pointtotal
+                : 0;
+
+            $todaystat =
+                $todaypointstats[$student->id] ?? null;
+
+            $pluscount = $todaystat
+                ? (int) $todaystat->pluscount
+                : 0;
+
+            $minuscount = $todaystat
+                ? (int) $todaystat->minuscount
+                : 0;
+
+            $pointtotal = $todaystat
+                ? (int) $todaystat->pointtotal
                 : 0;
             $fullname = trim(
                 $student->firstname . ' ' .
@@ -131,9 +186,20 @@ final class class_detail_page implements
                         : 'inactive',
                     'local_qubexa_classes'
                 ),
+                'totalpluscount' => $totalpluscount,
+                'totalminuscount' => $totalminuscount,
+                'totalpointtotal' => $totalpointtotal,
+
+                'totalispositive' =>
+                    $totalpointtotal > 0,
+
+                'totalisnegative' =>
+                    $totalpointtotal < 0,
                 'pluscount' => $pluscount,
                 'minuscount' => $minuscount,
                 'pointtotal' => $pointtotal,
+				                'hastodaypoints' =>
+                    ($pluscount + $minuscount) > 0,
                 'ispositive' => $pointtotal > 0,
                 'isnegative' => $pointtotal < 0,
 
