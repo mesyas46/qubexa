@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB
+    PATH="local/qubexa_classes/db"
+    VERSION="20260730"
+    COMMENT="Database structure for Qubexa Classes"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+
+    <TABLES>
+        <TABLE
+            NAME="local_qubexa_classes"
+            COMMENT="Teacher-owned school classes">
+
+            <FIELDS>
+                <FIELD
+                    NAME="id"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="true"/>
+
+                <FIELD
+                    NAME="userid"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="schoolname"
+                    TYPE="char"
+                    LENGTH="255"
+                    NOTNULL="false"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="classname"
+                    TYPE="char"
+                    LENGTH="100"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="sectionname"
+                    TYPE="char"
+                    LENGTH="100"
+                    NOTNULL="false"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="coursename"
+                    TYPE="char"
+                    LENGTH="255"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="academicyear"
+                    TYPE="char"
+                    LENGTH="20"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="color"
+                    TYPE="char"
+                    LENGTH="20"
+                    NOTNULL="false"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="status"
+                    TYPE="int"
+                    LENGTH="1"
+                    NOTNULL="true"
+                    DEFAULT="1"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="timecreated"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="timemodified"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+            </FIELDS>
+
+            <KEYS>
+                <KEY
+                    NAME="primary"
+                    TYPE="primary"
+                    FIELDS="id"/>
+
+                <KEY
+                    NAME="userid_fk"
+                    TYPE="foreign"
+                    FIELDS="userid"
+                    REFTABLE="user"
+                    REFFIELDS="id"/>
+            </KEYS>
+
+            <INDEXES>
+                <INDEX
+                    NAME="userid_status_idx"
+                    UNIQUE="false"
+                    FIELDS="userid, status"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE
+            NAME="local_qubexa_class_students"
+            COMMENT="Students belonging to teacher-owned school classes">
+
+            <FIELDS>
+                <FIELD
+                    NAME="id"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="true"/>
+
+                <FIELD
+                    NAME="userid"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="classid"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="firstname"
+                    TYPE="char"
+                    LENGTH="100"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="lastname"
+                    TYPE="char"
+                    LENGTH="100"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="studentnumber"
+                    TYPE="char"
+                    LENGTH="50"
+                    NOTNULL="false"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="status"
+                    TYPE="int"
+                    LENGTH="1"
+                    NOTNULL="true"
+                    DEFAULT="1"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="timecreated"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="timemodified"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+            </FIELDS>
+
+            <KEYS>
+                <KEY
+                    NAME="primary"
+                    TYPE="primary"
+                    FIELDS="id"/>
+
+                <KEY
+                    NAME="userid_fk"
+                    TYPE="foreign"
+                    FIELDS="userid"
+                    REFTABLE="user"
+                    REFFIELDS="id"/>
+
+                <KEY
+                    NAME="classid_fk"
+                    TYPE="foreign"
+                    FIELDS="classid"
+                    REFTABLE="local_qubexa_classes"
+                    REFFIELDS="id"/>
+            </KEYS>
+
+            <INDEXES>
+                <INDEX
+                    NAME="class_status_idx"
+                    UNIQUE="false"
+                    FIELDS="classid, status"/>
+
+                <INDEX
+                    NAME="student_name_idx"
+                    UNIQUE="false"
+                    FIELDS="classid, lastname, firstname"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE
+            NAME="local_qubexa_class_points"
+            COMMENT="Plus and minus point history for class students">
+
+            <FIELDS>
+                <FIELD
+                    NAME="id"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="true"/>
+
+                <FIELD
+                    NAME="userid"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="classid"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="studentid"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="pointvalue"
+                    TYPE="int"
+                    LENGTH="2"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+
+                <FIELD
+                    NAME="timecreated"
+                    TYPE="int"
+                    LENGTH="10"
+                    NOTNULL="true"
+                    SEQUENCE="false"/>
+            </FIELDS>
+
+            <KEYS>
+                <KEY
+                    NAME="primary"
+                    TYPE="primary"
+                    FIELDS="id"/>
+
+                <KEY
+                    NAME="userid_fk"
+                    TYPE="foreign"
+                    FIELDS="userid"
+                    REFTABLE="user"
+                    REFFIELDS="id"/>
+
+                <KEY
+                    NAME="classid_fk"
+                    TYPE="foreign"
+                    FIELDS="classid"
+                    REFTABLE="local_qubexa_classes"
+                    REFFIELDS="id"/>
+
+                <KEY
+                    NAME="studentid_fk"
+                    TYPE="foreign"
+                    FIELDS="studentid"
+                    REFTABLE="local_qubexa_class_students"
+                    REFFIELDS="id"/>
+            </KEYS>
+
+            <INDEXES>
+                <INDEX
+                    NAME="student_time_idx"
+                    UNIQUE="false"
+                    FIELDS="studentid, timecreated"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>

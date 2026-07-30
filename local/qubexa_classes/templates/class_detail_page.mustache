@@ -1,0 +1,174 @@
+<div
+    class="qubexa-class-detail"
+    style="--qx-class-colour: {{colour}};">
+
+    <a
+        class="qubexa-class-detail__back"
+        href="{{backurl}}">
+        ← {{#str}}
+            backtoclasses,
+            local_qubexa_classes
+        {{/str}}
+    </a>
+
+    <section class="qubexa-class-detail__hero">
+        <div>
+            <span class="qubexa-class-detail__status">
+                {{statuslabel}}
+            </span>
+
+            <h2>{{displayname}}</h2>
+
+            {{#hasschool}}
+                <p>{{schoolname}}</p>
+            {{/hasschool}}
+        </div>
+
+        <a
+            class="qubexa-class-detail__edit"
+            href="{{editurl}}">
+            {{#str}}
+                editclass,
+                local_qubexa_classes
+            {{/str}}
+        </a>
+
+        <div class="qubexa-class-detail__meta">
+            <strong>{{coursename}}</strong>
+            <span>{{academicyear}}</span>
+        </div>
+    </section>
+    <section class="qubexa-class-detail__panel">
+        <div class="qubexa-class-detail__panel-head">
+            <div>
+                <span>
+                    {{#str}}
+                        classoverview,
+                        local_qubexa_classes
+                    {{/str}}
+                </span>
+
+                <h2>
+                    {{#str}}
+                        classstudents,
+                        local_qubexa_classes
+                    {{/str}}
+                </h2>
+            </div>
+
+            <a
+                class="qubexa-classes-add"
+                href="{{addstudenturl}}">
+                <span aria-hidden="true">+</span>
+
+                {{#str}}
+                    addstudent,
+                    local_qubexa_classes
+                {{/str}}
+            </a>
+        </div>
+        {{^hasstudents}}
+        <div class="qubexa-class-detail__empty">
+            <span aria-hidden="true">◎</span>
+
+            <h3>
+                {{#str}}
+                    nostudents,
+                    local_qubexa_classes
+                {{/str}}
+            </h3>
+
+            <p>
+                {{#str}}
+                    nostudentsdesc,
+                    local_qubexa_classes
+                {{/str}}
+            </p>
+        </div>
+        {{/hasstudents}}
+        {{#hasstudents}}
+            <div class="qubexa-class-students">
+                {{#students}}
+                    <article class="qubexa-class-student">
+                        <span class="qubexa-class-student__avatar">
+                            {{initial}}
+                        </span>
+
+                        <div class="qubexa-class-student__identity">
+                            <strong>{{fullname}}</strong>
+
+                            {{#hasnumber}}
+                                <span>
+                                    {{#str}}
+                                        studentnumber,
+                                        local_qubexa_classes
+                                    {{/str}}:
+                                    {{studentnumber}}
+                                </span>
+                            {{/hasnumber}}
+                        </div>
+                                                <div class="qubexa-class-student__points">
+                            <a
+                                class="qubexa-point-counter is-minus"
+                                href="{{minusurl}}"
+                                data-action="qubexa-point"
+                                data-classid="{{classid}}"
+                                data-studentid="{{id}}"
+                                data-pointvalue="-1"
+                                aria-label="{{#str}}
+                                    giveminus,
+                                    local_qubexa_classes
+                                {{/str}}">
+                                <span>−</span>
+                                <strong data-role="minus-count">{{minuscount}}</strong>
+                            </a>
+
+                                                        <div
+                                class="qubexa-point-net
+                                    {{#ispositive}}is-positive{{/ispositive}}
+                                    {{#isnegative}}is-negative{{/isnegative}}">
+
+                                <span>
+                                    {{#str}}
+                                        netresult,
+                                        local_qubexa_classes
+                                    {{/str}}
+                                </span>
+
+                                <strong data-role="net-total">
+                                </strong>
+                            </div>
+
+                            <a
+                                class="qubexa-point-counter is-plus"
+                                href="{{plusurl}}"
+                                data-action="qubexa-point"
+                                data-classid="{{classid}}"
+                                data-studentid="{{id}}"
+                                data-pointvalue="1"
+                                aria-label="{{#str}}
+                                    giveplus,
+                                    local_qubexa_classes
+                                {{/str}}">
+                                <span>+</span>
+                                <strong data-role="plus-count">{{pluscount}}</strong>
+                            </a>
+                        </div>
+                        <span class="qubexa-class-student__status">
+                            {{statuslabel}}
+                        </span>
+
+                        <a
+                            class="qubexa-class-student__edit"
+                            href="{{editurl}}">
+                            {{#str}}
+                                editstudent,
+                                local_qubexa_classes
+                            {{/str}}
+                        </a>
+                    </article>
+                {{/students}}
+            </div>
+        {{/hasstudents}}
+    </section>
+</div>

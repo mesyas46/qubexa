@@ -70,7 +70,15 @@ switch ($page) {
             $dashboard->export_for_template($OUTPUT)
         );
         break;
+case 'classes':
+    require_once(
+        $CFG->dirroot .
+        '/local/qubexa_classes/lib.php'
+    );
 
+    $content =
+        local_qubexa_classes_render_workspace_page();
+    break;
     case 'lessons':
         if (!\core_component::get_component_directory('local_qubexa_students')) {
             $content = \local_qubexa\workspace::placeholder($page);

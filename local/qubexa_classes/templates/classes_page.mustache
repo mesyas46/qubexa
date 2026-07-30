@@ -1,0 +1,72 @@
+<div class="qubexa-classes-shell">
+    <div class="qubexa-classes-toolbar">
+        <a
+            class="qubexa-classes-add"
+            href="{{addclassurl}}">
+            <span aria-hidden="true">+</span>
+            {{addclasslabel}}
+        </a>
+    </div>
+
+    {{#hasclasses}}
+        <div class="qubexa-classes-grid">
+            {{#classes}}
+                <article
+                    class="qubexa-class-card"
+                    style="--qx-class-colour: {{colour}};">
+
+                    <div class="qubexa-class-card__head">
+                        <span class="qubexa-class-card__mark">
+                            {{displayname}}
+                        </span>
+
+                        <span class="qubexa-class-card__status">
+                            {{statuslabel}}
+                        </span>
+                    </div>
+
+                    <h2>
+    <a
+        class="qubexa-class-card__title"
+        href="{{viewurl}}">
+        {{displayname}}
+    </a>
+</h2>
+
+                    {{#hasschool}}
+                        <p>{{schoolname}}</p>
+                    {{/hasschool}}
+
+                    <div class="qubexa-class-card__details">
+                        <strong>{{coursename}}</strong>
+                        <span>{{academicyear}}</span>
+                        <span>
+                            {{studentcount}} {{studentcountlabel}}
+                        </span>
+                    </div>
+
+                    <a
+                        class="qubexa-class-card__edit"
+                        href="{{editurl}}">
+                        {{editclasslabel}}
+                    </a>
+                </article>
+            {{/classes}}
+        </div>
+    {{/hasclasses}}
+
+    {{^hasclasses}}
+        <section class="qubexa-classes-empty">
+            <span aria-hidden="true">◎</span>
+            <h2>{{noclasseslabel}}</h2>
+            <p>{{noclassesdesc}}</p>
+
+            <a
+                class="qubexa-classes-add"
+                href="{{addclassurl}}">
+                <span aria-hidden="true">+</span>
+                {{addclasslabel}}
+            </a>
+        </section>
+    {{/hasclasses}}
+</div>

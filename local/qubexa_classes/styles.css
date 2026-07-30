@@ -1,0 +1,641 @@
+.qubexa-classes-shell {
+    width: 100%;
+    min-width: 0;
+}
+
+.qubexa-classes-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.qubexa-classes-add {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 17px;
+    border-radius: 11px;
+    background: #1769c2;
+    color: #ffffff !important;
+    font-weight: 750;
+    text-decoration: none !important;
+    box-shadow: 0 8px 20px rgba(23, 105, 194, 0.18);
+}
+
+.qubexa-classes-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
+    gap: 16px;
+}
+
+.qubexa-class-card {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    padding: 22px;
+    border: 1px solid var(--qx-line);
+    border-top: 4px solid var(--qx-class-colour);
+    border-radius: 17px;
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgba(16, 24, 40, 0.05);
+}
+
+.qubexa-class-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.qubexa-class-card__mark {
+    width: 12px;
+    height: 12px;
+    flex: 0 0 12px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--qx-class-colour);
+    color: transparent;
+    font-size: 0;
+}
+
+.qubexa-class-card__status {
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #ecfdf3;
+    color: #027a48;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.qubexa-class-card h2 {
+    margin: 16px 0 4px;
+    font-size: 23px;
+    line-height: 1.2;
+}
+
+.qubexa-class-card > p {
+    margin: 0;
+    color: var(--qx-muted);
+    font-size: 13px;
+}
+
+.qubexa-class-card__details {
+    display: grid;
+    gap: 7px;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.qubexa-class-card__details strong {
+    color: var(--qx-ink);
+}
+
+.qubexa-class-card__details span {
+    color: var(--qx-muted);
+    font-size: 13px;
+}
+
+.qubexa-class-card__edit {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    color: #1769c2 !important;
+    font-weight: 750;
+    text-decoration: none !important;
+}
+
+.qubexa-classes-empty {
+    padding: 70px 24px;
+    border: 1px solid var(--qx-line);
+    border-radius: 18px;
+    background: #ffffff;
+    text-align: center;
+    box-shadow: 0 10px 28px rgba(16, 24, 40, 0.05);
+}
+
+.qubexa-classes-empty > span {
+    display: grid;
+    width: 54px;
+    height: 54px;
+    place-items: center;
+    margin: 0 auto 17px;
+    border-radius: 16px;
+    background: #eef6ff;
+    color: #1769c2;
+    font-size: 27px;
+}
+
+.qubexa-classes-empty h2 {
+    margin: 0 0 8px;
+}
+
+.qubexa-classes-empty p {
+    max-width: 520px;
+    margin: 0 auto 22px;
+    color: var(--qx-muted);
+}
+
+@media (max-width: 650px) {
+    .qubexa-classes-toolbar {
+        display: block;
+    }
+
+    .qubexa-classes-add {
+        width: 100%;
+    }
+
+    .qubexa-classes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .qubexa-class-card {
+        padding: 19px;
+    }
+
+    .qubexa-classes-empty {
+        padding: 48px 18px;
+    }
+}
+/* Class create/edit form. */
+.qubexa-class-form-page {
+    width: min(100% - 32px, 720px);
+    margin: 32px auto;
+    padding: 28px;
+    background: #fff;
+    border: 1px solid #dce3ec;
+    border-radius: 18px;
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.07);
+}
+
+.qubexa-class-form-page h2 {
+    margin: 18px 0 26px;
+    color: #0f172a;
+    font-size: 30px;
+}
+
+.qubexa-class-form-back {
+    color: #0969c7;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.qubexa-class-form-back:hover {
+    text-decoration: underline;
+}
+.qubexa-class-form-page .mform .fitem.row {
+    display: block;
+    margin: 0 0 20px;
+}
+
+.qubexa-class-form-page .mform .col-form-label {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 0 8px;
+    text-align: left;
+    font-weight: 700;
+    color: #172033;
+}
+
+.qubexa-class-form-page .mform .felement {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+.qubexa-class-form-page .mform input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    min-height: 46px;
+    padding: 10px 13px;
+    border: 1px solid #b8c3d1;
+    border-radius: 10px;
+}
+
+.qubexa-class-form-page .mform select {
+    min-width: 170px;
+    min-height: 44px;
+    padding: 8px 36px 8px 12px;
+    border-radius: 10px;
+}
+
+.qubexa-class-form-page .mform .btn {
+    min-height: 44px;
+    padding: 10px 18px;
+    border-radius: 10px;
+}
+
+.qubexa-class-form-page .mform input:focus,
+.qubexa-class-form-page .mform select:focus {
+    border-color: #1769c2;
+    box-shadow: 0 0 0 3px rgba(23, 105, 194, 0.15);
+}
+
+@media (max-width: 650px) {
+    .qubexa-class-form-page {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+
+    .qubexa-class-form-page h2 {
+        font-size: 25px;
+    }
+}
+.qubexa-class-card__title {
+    color: inherit;
+    text-decoration: none;
+}
+
+.qubexa-class-card__title:hover {
+    color: var(--qx-class-colour);
+    text-decoration: none;
+}
+
+.qubexa-class-detail {
+    display: grid;
+    gap: 20px;
+}
+
+.qubexa-class-detail__back {
+    width: fit-content;
+    color: #1769c2;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.qubexa-class-detail__hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 22px;
+    padding: 28px;
+    background: #fff;
+    border: 1px solid #dce3ec;
+    border-top: 4px solid var(--qx-class-colour);
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+}
+
+.qubexa-class-detail__hero h2 {
+    margin: 10px 0 6px;
+    color: #0f172a;
+    font-size: 30px;
+}
+
+.qubexa-class-detail__hero p {
+    margin: 0;
+    color: #64748b;
+}
+
+.qubexa-class-detail__status {
+    display: inline-flex;
+    padding: 5px 10px;
+    color: #087a4b;
+    background: #e9fbf2;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.qubexa-class-detail__edit {
+    align-self: start;
+    padding: 10px 15px;
+    color: #1769c2;
+    background: #edf6ff;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.qubexa-class-detail__meta {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 18px;
+    padding: 16px;
+    background: #f6f8fb;
+    border-radius: 12px;
+    color: #58677f;
+}
+
+.qubexa-class-detail__meta strong {
+    color: #111827;
+}
+.qubexa-class-detail__panel {
+    padding: 26px;
+    background: #fff;
+    border: 1px solid #dce3ec;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
+}
+
+.qubexa-class-detail__panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.qubexa-class-detail__panel-head span {
+    color: #68778f;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.qubexa-class-detail__panel-head h2 {
+    margin: 5px 0 0;
+    color: #0f172a;
+    font-size: 22px;
+}
+
+.qubexa-class-detail__empty {
+    margin-top: 24px;
+    padding: 45px 20px;
+    text-align: center;
+    background: #f7f9fc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+}
+
+.qubexa-class-detail__empty > span {
+    display: inline-grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    color: var(--qx-class-colour);
+    background: #fff;
+    border-radius: 14px;
+    font-size: 25px;
+}
+
+.qubexa-class-detail__empty h3 {
+    margin: 14px 0 6px;
+    color: #172033;
+}
+
+.qubexa-class-detail__empty p {
+    margin: 0;
+    color: #68778f;
+}
+
+@media (max-width: 650px) {
+    .qubexa-class-detail__hero {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .qubexa-class-detail__edit {
+        width: 100%;
+        text-align: center;
+    }
+
+    .qubexa-class-detail__meta {
+        grid-column: auto;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .qubexa-class-detail__panel {
+        padding: 18px;
+    }
+
+    .qubexa-class-detail__panel-head {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+.qubexa-class-students {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.qubexa-class-student {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    background: #f7f9fc;
+    border: 1px solid #e1e7ef;
+    border-radius: 13px;
+}
+
+.qubexa-class-student__avatar {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    color: var(--qx-class-colour);
+    background: #fff;
+    border-radius: 12px;
+    font-weight: 900;
+}
+
+.qubexa-class-student__identity {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+.qubexa-class-student__identity strong {
+    overflow: hidden;
+    color: #172033;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qubexa-class-student__identity span {
+    color: #68778f;
+    font-size: 12px;
+}
+
+.qubexa-class-student__status {
+    padding: 5px 9px;
+    color: #087a4b;
+    background: #e9fbf2;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.qubexa-class-student__edit {
+    padding: 8px 11px;
+    color: #1769c2;
+    background: #eaf4ff;
+    border-radius: 9px;
+    font-weight: 700;
+    text-decoration: none;
+}
+@media (max-width: 650px) {
+    .qubexa-class-student {
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 10px 12px;
+    }
+
+    .qubexa-class-student__status {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+    .qubexa-class-student__edit {
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+}
+.qubexa-class-student {
+    grid-template-columns:
+        48px minmax(0, 1fr) auto auto auto;
+}
+
+.qubexa-class-student__points {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.qubexa-point-button {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.qubexa-point-button.is-plus {
+    color: #087a4b;
+    background: #dff8eb;
+}
+
+.qubexa-point-button.is-minus {
+    color: #c92a3e;
+    background: #ffe7eb;
+}
+
+.qubexa-point-button:hover {
+    filter: brightness(0.96);
+    text-decoration: none;
+}
+
+.qubexa-point-total {
+    display: grid;
+    min-width: 38px;
+    height: 34px;
+    place-items: center;
+    color: #56677f;
+    background: #fff;
+    border: 1px solid #dbe3ed;
+    border-radius: 10px;
+}
+
+.qubexa-point-total.is-positive {
+    color: #087a4b;
+}
+
+.qubexa-point-total.is-negative {
+    color: #c92a3e;
+}
+
+@media (max-width: 650px) {
+    .qubexa-class-student {
+        grid-template-columns: 44px minmax(0, 1fr);
+    }
+
+    .qubexa-class-student__points {
+        grid-column: 1 / -1;
+        justify-content: center;
+        padding-top: 10px;
+        border-top: 1px solid #e1e7ef;
+    }
+}
+.qubexa-point-counter {
+    display: inline-flex;
+    min-width: 56px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.qubexa-point-counter span {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.qubexa-point-counter strong {
+    font-size: 13px;
+}
+
+.qubexa-point-counter.is-minus {
+    color: #c92a3e;
+    background: #ffe7eb;
+}
+
+.qubexa-point-counter.is-plus {
+    color: #087a4b;
+    background: #dff8eb;
+}
+
+.qubexa-point-counter:hover {
+    filter: brightness(0.96);
+    text-decoration: none;
+}
+
+.qubexa-point-net {
+    display: inline-flex;
+    min-width: 76px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 10px;
+    color: #56677f;
+    background: #fff;
+    border: 1px solid #dbe3ed;
+    border-radius: 10px;
+}
+
+.qubexa-point-net span {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.qubexa-point-net strong {
+    font-size: 15px;
+}
+
+.qubexa-point-net.is-positive {
+    color: #087a4b;
+    border-color: #a7e5c6;
+}
+
+.qubexa-point-net.is-negative {
+    color: #c92a3e;
+    border-color: #f4b7c0;
+}
+.qubexa-class-student.is-updating
+.qubexa-class-student__points {
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.qubexa-class-student__points {
+    transition: opacity 0.18s ease;
+}
