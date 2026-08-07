@@ -82,7 +82,8 @@
 
 .qubexa-reports__panel-header {
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
+    flex-direction: column;
     justify-content: space-between;
     gap: 20px;
     padding: 20px;
@@ -99,17 +100,36 @@
 
 .qubexa-reports__panel-actions {
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
+    flex-direction: column;
     gap: 12px;
 }
 
-.qubexa-reports__filter-row {
+.qubexa-reports__filter {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 10px;
+}
+
+.qubexa-reports__filter-fields {
+    display: grid;
+    grid-template-columns:
+        minmax(160px, 1.1fr)
+        minmax(210px, 1.4fr)
+        minmax(145px, 0.8fr)
+        minmax(145px, 0.8fr);
+    gap: 10px;
+}
+
+.qubexa-reports__filter-actions {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .qubexa-reports__filter select,
+.qubexa-reports__filter input,
 .qubexa-reports__filter button,
 .qubexa-reports__filter a {
     min-height: 38px;
@@ -143,8 +163,16 @@
 }
 
 .qubexa-reports__filter select {
-    min-width: 190px;
+    width: 100%;
     padding: 7px 34px 7px 10px;
+    background: #fff;
+    border: 1px solid #d0d5dd;
+    color: #101828;
+}
+
+.qubexa-reports__filter input {
+    width: 100%;
+    padding: 7px 10px;
     background: #fff;
     border: 1px solid #d0d5dd;
     color: #101828;
@@ -165,6 +193,10 @@
     padding: 7px 10px;
     color: #475467;
     text-decoration: none;
+}
+
+.qubexa-reports__export {
+    align-self: flex-end;
 }
 
 .qubexa-reports__table-wrap {
@@ -279,6 +311,14 @@
         align-items: stretch;
         flex-direction: column;
     }
+
+    .qubexa-reports__filter {
+        grid-template-columns: 1fr;
+    }
+
+    .qubexa-reports__filter-fields {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 650px) {
@@ -292,12 +332,15 @@
         padding: 14px;
     }
 
-    .qubexa-reports__filter-row {
+    .qubexa-reports__filter-fields,
+    .qubexa-reports__filter-actions {
         align-items: stretch;
         flex-direction: column;
+        grid-template-columns: 1fr;
     }
 
     .qubexa-reports__filter select,
+    .qubexa-reports__filter input,
     .qubexa-reports__filter button,
     .qubexa-reports__filter a,
     .qubexa-reports__export {

@@ -6,10 +6,35 @@ defined('MOODLE_INTERNAL') || die();
 final class reports_page implements \renderable, \templatable {
     private int $userid;
     private int $classid;
+    private string $studentquery;
+    private string $datefrom;
+    private string $dateto;
 
-    public function __construct(int $userid, int $classid = 0) {
+    public function __construct(
+        int $userid,
+        int $classid = 0,
+        string $studentquery = '',
+        string $datefrom = '',
+        string $dateto = ''
+    ) {
         $this->userid = $userid;
         $this->classid = $classid;
+        $this->studentquery = $this->normalise_student_query(
+            $studentquery
+        );
+        $this->datefrom = $this->normalise_date($datefrom);
+        $this->dateto = $this->normalise_date($dateto);
+
+        if (
+            $this->datefrom !== '' &&
+            $this->dateto !== '' &&
+            $this->datefrom > $this->dateto
+        ) {
+            [$this->datefrom, $this->dateto] = [
+                $this->dateto,
+                $this->datefrom,
+            ];
+        }
     }
 
     public function export_for_template($output): array {
@@ -28,6 +53,26 @@ final class reports_page implements \renderable, \templatable {
                     (int) $classrecord->id === $this->classid,
             ];
         }
+
+        $exportparams = [];
+
+        if ($this->classid > 0) {
+            $exportparams['reportclassid'] = $this->classid;
+        }
+
+        if ($this->studentquery !== '') {
+            $exportparams['reportstudent'] = $this->studentquery;
+        }
+
+        if ($this->datefrom !== '') {
+            $exportparams['reportdatefrom'] = $this->datefrom;
+        }
+
+        if ($this->dateto !== '') {
+            $exportparams['reportdateto'] = $this->dateto;
+        }
+
+        $hasfilter = !empty($exportparams);
 
         return [
             'overviewtitle' => get_string(
@@ -103,15 +148,18 @@ final class reports_page implements \renderable, \templatable {
             )->out(false),
             'exporturl' => (new \moodle_url(
                 '/local/qubexa_reports/export.php',
-                ['reportclassid' => $this->classid]
+                $exportparams
             ))->out(false),
             'exportcsvlabel' => get_string(
                 'exportcsv',
                 'local_qubexa_reports'
             ),
-            'hasfilter' => $this->classid > 0,
+            'hasfilter' => $hasfilter,
             'classoptions' => $classoptions,
             'hasclassoptions' => !empty($classoptions),
+            'studentquery' => $this->studentquery,
+            'datefrom' => $this->datefrom,
+            'dateto' => $this->dateto,
             'rows' => $rows,
             'hasrows' => !empty($rows),
             'allclasseslabel' => get_string(
@@ -120,6 +168,22 @@ final class reports_page implements \renderable, \templatable {
             ),
             'classfilterlabel' => get_string(
                 'filterclass',
+                'local_qubexa_reports'
+            ),
+            'studentfilterlabel' => get_string(
+                'filterstudent',
+                'local_qubexa_reports'
+            ),
+            'studentplaceholder' => get_string(
+                'studentplaceholder',
+                'local_qubexa_reports'
+            ),
+            'datefromlabel' => get_string(
+                'datefrom',
+                'local_qubexa_reports'
+            ),
+            'datetolabel' => get_string(
+                'dateto',
                 'local_qubexa_reports'
             ),
             'applyfilterlabel' => get_string(
@@ -155,11 +219,13 @@ final class reports_page implements \renderable, \templatable {
                 'local_qubexa_reports'
             ),
             'emptytitle' => get_string(
-                'noreportdata',
+                $hasfilter ? 'nofilterresults' : 'noreportdata',
                 'local_qubexa_reports'
             ),
             'emptydesc' => get_string(
-                'noreportdatadesc',
+                $hasfilter
+                    ? 'nofilterresultsdesc'
+                    : 'noreportdatadesc',
                 'local_qubexa_reports'
             ),
         ];
@@ -347,19 +413,39 @@ final class reports_page implements \renderable, \templatable {
                0 AS minuscount,
                0 AS pointtotal";
 
-        $pointjoin = $this->table_exists(
+        $haspointtable = $this->table_exists(
             'local_qubexa_class_points'
-        )
+        );
+        $pointdatesql = '';
+        $pointdateparams = [];
+
+        if ($haspointtable && $this->datefrom !== '') {
+            $pointdatesql .=
+                ' AND p.timecreated >= :pointdatefrom';
+            $pointdateparams['pointdatefrom'] =
+                $this->date_timestamp($this->datefrom);
+        }
+
+        if ($haspointtable && $this->dateto !== '') {
+            $pointdatesql .=
+                ' AND p.timecreated < :pointdateto';
+            $pointdateparams['pointdateto'] =
+                $this->date_timestamp($this->dateto, true);
+        }
+
+        $pointjoin = $haspointtable
             ? "LEFT JOIN {local_qubexa_class_points} p
                      ON p.studentid = s.id
                     AND p.classid = c.id
-                    AND p.userid = :pointuserid"
+                    AND p.userid = :pointuserid
+                    {$pointdatesql}"
             : '';
 
         $params = ['reportuserid' => $this->userid];
 
         if ($pointjoin !== '') {
             $params['pointuserid'] = $this->userid;
+            $params = array_merge($params, $pointdateparams);
         }
 
         $classsql = '';
@@ -367,6 +453,24 @@ final class reports_page implements \renderable, \templatable {
         if ($this->classid > 0) {
             $classsql = ' AND c.id = :filterclassid';
             $params['filterclassid'] = $this->classid;
+        }
+
+        $studentsearchsql = '';
+
+        if ($this->studentquery !== '') {
+            $fullnamefield = $DB->sql_concat(
+                's.firstname',
+                "' '",
+                's.lastname'
+            );
+            $studentsearchsql = ' AND ' . $DB->sql_like(
+                $fullnamefield,
+                ':studentquery',
+                false,
+                false
+            );
+            $params['studentquery'] = '%' .
+                $DB->sql_like_escape($this->studentquery) . '%';
         }
 
         $records = $DB->get_records_sql(
@@ -387,6 +491,7 @@ final class reports_page implements \renderable, \templatable {
                 AND s.status = 1
                 AND c.status = 1
                 {$classsql}
+                {$studentsearchsql}
            GROUP BY s.id,
                     s.firstname,
                     s.lastname,
@@ -456,6 +561,57 @@ final class reports_page implements \renderable, \templatable {
         ) {
             $this->classid = 0;
         }
+    }
+
+    private function normalise_student_query(string $query): string {
+        $query = trim(clean_param($query, PARAM_TEXT));
+
+        return \core_text::substr($query, 0, 100);
+    }
+
+    private function normalise_date(string $date): string {
+        $date = trim($date);
+
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/D', $date)) {
+            return '';
+        }
+
+        $value = \DateTimeImmutable::createFromFormat(
+            '!Y-m-d',
+            $date,
+            \core_date::get_user_timezone_object()
+        );
+        $errors = \DateTimeImmutable::getLastErrors();
+
+        if (
+            $value === false ||
+            (is_array($errors) && (
+                $errors['warning_count'] > 0 ||
+                $errors['error_count'] > 0
+            )) ||
+            $value->format('Y-m-d') !== $date
+        ) {
+            return '';
+        }
+
+        return $date;
+    }
+
+    private function date_timestamp(
+        string $date,
+        bool $nextday = false
+    ): int {
+        $value = \DateTimeImmutable::createFromFormat(
+            '!Y-m-d',
+            $date,
+            \core_date::get_user_timezone_object()
+        );
+
+        if ($nextday) {
+            $value = $value->modify('+1 day');
+        }
+
+        return $value->getTimestamp();
     }
 
     private function spreadsheet_text(string $value): string {

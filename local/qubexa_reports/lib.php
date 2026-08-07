@@ -26,10 +26,28 @@ function local_qubexa_reports_render_workspace_page(): string {
         0,
         PARAM_INT
     );
+    $studentquery = optional_param(
+        'reportstudent',
+        '',
+        PARAM_TEXT
+    );
+    $datefrom = optional_param(
+        'reportdatefrom',
+        '',
+        PARAM_RAW_TRIMMED
+    );
+    $dateto = optional_param(
+        'reportdateto',
+        '',
+        PARAM_RAW_TRIMMED
+    );
 
     $page = new \local_qubexa_reports\output\reports_page(
         (int) $USER->id,
-        $classid
+        $classid,
+        $studentquery,
+        $datefrom,
+        $dateto
     );
 
     return $OUTPUT->render_from_template(

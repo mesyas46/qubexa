@@ -28,18 +28,53 @@
                     <form class="qubexa-reports__filter" action="{{filterurl}}" method="get">
                         <input type="hidden" name="page" value="reports">
 
-                        <label for="qubexa-report-class">{{classfilterlabel}}</label>
+                        <div class="qubexa-reports__filter-fields">
+                            <div class="qubexa-reports__filter-field">
+                                <label for="qubexa-report-class">{{classfilterlabel}}</label>
+                                <select id="qubexa-report-class" name="reportclassid">
+                                    <option value="0">{{allclasseslabel}}</option>
+                                    {{#classoptions}}
+                                        <option value="{{id}}" {{#selected}}selected{{/selected}}>
+                                            {{label}}
+                                        </option>
+                                    {{/classoptions}}
+                                </select>
+                            </div>
 
-                        <div class="qubexa-reports__filter-row">
-                            <select id="qubexa-report-class" name="reportclassid">
-                                <option value="0">{{allclasseslabel}}</option>
-                                {{#classoptions}}
-                                    <option value="{{id}}" {{#selected}}selected{{/selected}}>
-                                        {{label}}
-                                    </option>
-                                {{/classoptions}}
-                            </select>
+                            <div class="qubexa-reports__filter-field is-search">
+                                <label for="qubexa-report-student">{{studentfilterlabel}}</label>
+                                <input
+                                    id="qubexa-report-student"
+                                    name="reportstudent"
+                                    type="search"
+                                    value="{{studentquery}}"
+                                    maxlength="100"
+                                    placeholder="{{studentplaceholder}}"
+                                >
+                            </div>
 
+                            <div class="qubexa-reports__filter-field">
+                                <label for="qubexa-report-date-from">{{datefromlabel}}</label>
+                                <input
+                                    id="qubexa-report-date-from"
+                                    name="reportdatefrom"
+                                    type="date"
+                                    value="{{datefrom}}"
+                                >
+                            </div>
+
+                            <div class="qubexa-reports__filter-field">
+                                <label for="qubexa-report-date-to">{{datetolabel}}</label>
+                                <input
+                                    id="qubexa-report-date-to"
+                                    name="reportdateto"
+                                    type="date"
+                                    value="{{dateto}}"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="qubexa-reports__filter-actions">
                             <button type="submit">{{applyfilterlabel}}</button>
 
                             {{#hasfilter}}
