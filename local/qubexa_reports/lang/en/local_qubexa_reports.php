@@ -1,0 +1,27 @@
+<?php
+$string['pluginname'] = 'Hocadex Reports';
+$string['qubexa_reports:view'] = 'View Hocadex reports';
+$string['overviewtitle'] = 'Overview';
+$string['overviewdesc'] = 'A current summary of your class, student, lesson, exam, payment and participation data.';
+$string['activeclasses'] = 'Active classes';
+$string['classstudents'] = 'Class students';
+$string['privatestudents'] = 'Private students';
+$string['monthlylessons'] = 'Lessons this month';
+$string['attendance'] = 'Attendance';
+$string['examaverage'] = 'Average exam net';
+$string['monthlycollection'] = 'Collected this month';
+$string['participationnet'] = 'Participation net';
+$string['participationtitle'] = 'Class participation report';
+$string['participationdesc'] = 'Review all-time plus, minus and net scores by class.';
+$string['allclasses'] = 'All active classes';
+$string['filterclass'] = 'Select class';
+$string['applyfilter'] = 'Apply';
+$string['clearfilter'] = 'Clear filter';
+$string['student'] = 'Student';
+$string['studentnumber'] = 'School number';
+$string['class'] = 'Class';
+$string['plus'] = 'Plus';
+$string['minus'] = 'Minus';
+$string['net'] = 'Net';
+$string['noreportdata'] = 'There are no class students to report.';
+$string['noreportdatadesc'] = 'Create a class and add students first.';

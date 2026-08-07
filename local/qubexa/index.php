@@ -109,6 +109,24 @@ case 'classes':
         }
         break;
 
+    case 'reports':
+        if (!\core_component::get_component_directory(
+            'local_qubexa_reports'
+        )) {
+            $content = \local_qubexa\workspace::placeholder(
+                $page
+            );
+        } else {
+            require_once(
+                $CFG->dirroot .
+                '/local/qubexa_reports/lib.php'
+            );
+
+            $content =
+                local_qubexa_reports_render_workspace_page();
+        }
+        break;
+
     default:
         $content = \local_qubexa\workspace::placeholder($page);
 }

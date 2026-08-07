@@ -1,0 +1,310 @@
+.qubexa-reports {
+    display: grid;
+    gap: 22px;
+}
+
+.qubexa-reports__header h2,
+.qubexa-reports__panel-header h3 {
+    margin: 4px 0 5px;
+    color: #101828;
+}
+
+.qubexa-reports__header p,
+.qubexa-reports__panel-header p {
+    margin: 0;
+    color: #667085;
+}
+
+.qubexa-reports__eyebrow {
+    color: #1769c2;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+}
+
+.qubexa-reports__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.qubexa-reports__metric {
+    position: relative;
+    overflow: hidden;
+    min-height: 108px;
+    padding: 17px;
+    background: #fff;
+    border: 1px solid #e4e9f1;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.04);
+}
+
+.qubexa-reports__metric::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: #1769c2;
+    content: "";
+}
+
+.qubexa-reports__metric span {
+    display: block;
+    color: #667085;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.qubexa-reports__metric strong {
+    display: block;
+    margin-top: 13px;
+    color: #101828;
+    font-size: clamp(23px, 3vw, 31px);
+    line-height: 1;
+}
+
+.qubexa-reports__metric.is-violet::before { background: #7f56d9; }
+.qubexa-reports__metric.is-cyan::before { background: #0891b2; }
+.qubexa-reports__metric.is-orange::before { background: #f79009; }
+.qubexa-reports__metric.is-green::before,
+.qubexa-reports__metric.is-positive::before { background: #12b76a; }
+.qubexa-reports__metric.is-indigo::before { background: #6172f3; }
+.qubexa-reports__metric.is-emerald::before { background: #039855; }
+.qubexa-reports__metric.is-negative::before { background: #f04438; }
+.qubexa-reports__metric.is-neutral::before { background: #98a2b3; }
+
+.qubexa-reports__panel {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e4e9f1;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.05);
+}
+
+.qubexa-reports__panel-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.qubexa-reports__filter label {
+    display: block;
+    margin-bottom: 6px;
+    color: #344054;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.qubexa-reports__filter-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qubexa-reports__filter select,
+.qubexa-reports__filter button,
+.qubexa-reports__filter a {
+    min-height: 38px;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 13px;
+}
+
+.qubexa-reports__filter select {
+    min-width: 190px;
+    padding: 7px 34px 7px 10px;
+    background: #fff;
+    border: 1px solid #d0d5dd;
+    color: #101828;
+}
+
+.qubexa-reports__filter button {
+    padding: 7px 14px;
+    background: #1769c2;
+    border: 1px solid #1769c2;
+    color: #fff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.qubexa-reports__filter a {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 10px;
+    color: #475467;
+    text-decoration: none;
+}
+
+.qubexa-reports__table-wrap {
+    overflow-x: auto;
+}
+
+.qubexa-reports__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.qubexa-reports__table th,
+.qubexa-reports__table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f0f2f5;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.qubexa-reports__table th {
+    color: #667085;
+    background: #f9fafb;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.qubexa-reports__table td {
+    color: #344054;
+    font-size: 13px;
+}
+
+.qubexa-reports__table td strong,
+.qubexa-reports__table td small {
+    display: block;
+}
+
+.qubexa-reports__table td small {
+    margin-top: 3px;
+    color: #98a2b3;
+}
+
+.qubexa-reports__table td.is-plus {
+    color: #087a4b;
+    font-weight: 900;
+}
+
+.qubexa-reports__table td.is-minus {
+    color: #c92a3e;
+    font-weight: 900;
+}
+
+.qubexa-reports__net {
+    display: inline-flex;
+    min-width: 45px;
+    justify-content: center;
+    padding: 5px 9px;
+    background: #f2f4f7;
+    border-radius: 8px;
+    color: #475467;
+    font-weight: 900;
+}
+
+.qubexa-reports__net.is-positive {
+    background: #ecfdf3;
+    color: #027a48;
+}
+
+.qubexa-reports__net.is-negative {
+    background: #fef3f2;
+    color: #b42318;
+}
+
+.qubexa-reports__empty {
+    padding: 48px 20px;
+    color: #667085;
+    text-align: center;
+}
+
+.qubexa-reports__empty span {
+    display: inline-grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    background: #eff6ff;
+    border-radius: 14px;
+    color: #1769c2;
+    font-size: 22px;
+}
+
+.qubexa-reports__empty h3 {
+    margin: 12px 0 5px;
+    color: #101828;
+}
+
+.qubexa-reports__empty p {
+    margin: 0;
+}
+
+@media (max-width: 1000px) {
+    .qubexa-reports__metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .qubexa-reports__panel-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 650px) {
+    .qubexa-reports__metrics {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .qubexa-reports__metric {
+        min-height: 94px;
+        padding: 14px;
+    }
+
+    .qubexa-reports__filter-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .qubexa-reports__filter select,
+    .qubexa-reports__filter button,
+    .qubexa-reports__filter a {
+        width: 100%;
+    }
+
+    .qubexa-reports__filter a {
+        justify-content: center;
+    }
+
+    .qubexa-reports__table thead {
+        display: none;
+    }
+
+    .qubexa-reports__table,
+    .qubexa-reports__table tbody,
+    .qubexa-reports__table tr,
+    .qubexa-reports__table td {
+        display: block;
+        width: 100%;
+    }
+
+    .qubexa-reports__table tr {
+        padding: 10px 14px;
+        border-bottom: 1px solid #eaecf0;
+    }
+
+    .qubexa-reports__table td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 8px 0;
+        border: 0;
+        text-align: right;
+    }
+
+    .qubexa-reports__table td::before {
+        color: #667085;
+        content: attr(data-label);
+        font-size: 11px;
+        font-weight: 900;
+        text-align: left;
+        text-transform: uppercase;
+    }
+}

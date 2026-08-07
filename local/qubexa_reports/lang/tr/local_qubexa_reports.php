@@ -1,0 +1,27 @@
+<?php
+$string['pluginname'] = 'Hocadex Raporlar';
+$string['qubexa_reports:view'] = 'Hocadex raporlarını görüntüle';
+$string['overviewtitle'] = 'Genel görünüm';
+$string['overviewdesc'] = 'Sınıf, öğrenci, ders, sınav, ödeme ve katılım verilerinizin güncel özeti.';
+$string['activeclasses'] = 'Aktif sınıf';
+$string['classstudents'] = 'Sınıf öğrencisi';
+$string['privatestudents'] = 'Özel ders öğrencisi';
+$string['monthlylessons'] = 'Bu ay ders';
+$string['attendance'] = 'Derse katılım';
+$string['examaverage'] = 'Sınav net ort.';
+$string['monthlycollection'] = 'Bu ay tahsilat';
+$string['participationnet'] = 'Katılım neti';
+$string['participationtitle'] = 'Sınıf içi katılım raporu';
+$string['participationdesc'] = 'Öğrencilerin genel artı, eksi ve net puanlarını sınıf bazında inceleyin.';
+$string['allclasses'] = 'Tüm aktif sınıflar';
+$string['filterclass'] = 'Sınıf seçin';
+$string['applyfilter'] = 'Uygula';
+$string['clearfilter'] = 'Filtreyi temizle';
+$string['student'] = 'Öğrenci';
+$string['studentnumber'] = 'Okul numarası';
+$string['class'] = 'Sınıf';
+$string['plus'] = 'Artı';
+$string['minus'] = 'Eksi';
+$string['net'] = 'Net';
+$string['noreportdata'] = 'Raporlanacak sınıf öğrencisi bulunmuyor.';
+$string['noreportdatadesc'] = 'Önce bir sınıf oluşturup sınıfa öğrenci ekleyin.';

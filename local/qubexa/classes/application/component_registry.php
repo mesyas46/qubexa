@@ -96,7 +96,7 @@ final class component_registry {
             'page' => 'reports',
             'icon' => '▥',
             'order' => 90,
-            'status' => 'planned',
+            'status' => 'active',
             'visible' => true,
         ],
         'settings' => [
