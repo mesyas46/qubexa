@@ -145,6 +145,25 @@
                             'is-negative',
                             total < 0
                         );
+
+                        const undoButton =
+                            card.querySelector(
+                                '[data-role="undo-point"]'
+                            );
+
+                        if (undoButton) {
+                            const hasTodayPoints =
+                                Number(result.pluscount) +
+                                Number(result.minuscount) > 0;
+
+                            undoButton.disabled =
+                                !hasTodayPoints;
+
+                            undoButton.classList.toggle(
+                                'is-disabled',
+                                !hasTodayPoints
+                            );
+                        }
                     }, function(error) {
                         Notification.exception(error);
                     }).then(function() {
