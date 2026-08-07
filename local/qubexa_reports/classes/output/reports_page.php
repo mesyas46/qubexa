@@ -14,13 +14,7 @@ final class reports_page implements \renderable, \templatable {
 
     public function export_for_template($output): array {
         $classrecords = $this->get_classes();
-
-        if (
-            $this->classid > 0 &&
-            !isset($classrecords[$this->classid])
-        ) {
-            $this->classid = 0;
-        }
+        $this->normalise_classid($classrecords);
 
         $summary = $this->get_summary();
         $rows = $this->get_participation_rows();
@@ -107,6 +101,14 @@ final class reports_page implements \renderable, \templatable {
             'reseturl' => \local_qubexa\workspace::page_url(
                 'reports'
             )->out(false),
+            'exporturl' => (new \moodle_url(
+                '/local/qubexa_reports/export.php',
+                ['reportclassid' => $this->classid]
+            ))->out(false),
+            'exportcsvlabel' => get_string(
+                'exportcsv',
+                'local_qubexa_reports'
+            ),
             'hasfilter' => $this->classid > 0,
             'classoptions' => $classoptions,
             'hasclassoptions' => !empty($classoptions),
@@ -161,6 +163,31 @@ final class reports_page implements \renderable, \templatable {
                 'local_qubexa_reports'
             ),
         ];
+    }
+
+    public function export_for_csv(): array {
+        $classrecords = $this->get_classes();
+        $this->normalise_classid($classrecords);
+        $exportrows = [];
+
+        foreach ($this->get_participation_rows() as $row) {
+            $exportrows[] = [
+                $this->spreadsheet_text(
+                    $row['exportfullname']
+                ),
+                $this->spreadsheet_text(
+                    $row['exportstudentnumber']
+                ),
+                $this->spreadsheet_text(
+                    $row['exportclassname']
+                ),
+                $row['pluscount'],
+                $row['minuscount'],
+                $row['netvalue'],
+            ];
+        }
+
+        return $exportrows;
     }
 
     private function get_classes(): array {
@@ -379,18 +406,23 @@ final class reports_page implements \renderable, \templatable {
         foreach ($records as $record) {
             $net = (int) $record->pointtotal;
             $classname = format_string($record->classname);
+            $exportclassname = trim((string) $record->classname);
 
             if (!empty($record->sectionname)) {
                 $classname .= ' / ' .
                     format_string($record->sectionname);
+                $exportclassname .= ' / ' .
+                    trim((string) $record->sectionname);
             }
+
+            $exportfullname = trim(
+                $record->firstname . ' ' .
+                $record->lastname
+            );
 
             $rows[] = [
                 'fullname' => format_string(
-                    trim(
-                        $record->firstname . ' ' .
-                        $record->lastname
-                    )
+                    $exportfullname
                 ),
                 'studentnumber' => s(
                     (string) $record->studentnumber
@@ -401,7 +433,12 @@ final class reports_page implements \renderable, \templatable {
                 'pluscount' => (int) $record->pluscount,
                 'minuscount' => (int) $record->minuscount,
                 'net' => $this->signed_number($net),
+                'netvalue' => $net,
                 'netclass' => $this->net_tone($net),
+                'exportfullname' => $exportfullname,
+                'exportstudentnumber' =>
+                    (string) $record->studentnumber,
+                'exportclassname' => $exportclassname,
                 'classurl' => \local_qubexa\workspace::page_url(
                     'classes',
                     ['classid' => (int) $record->classid]
@@ -410,6 +447,25 @@ final class reports_page implements \renderable, \templatable {
         }
 
         return $rows;
+    }
+
+    private function normalise_classid(array $classrecords): void {
+        if (
+            $this->classid > 0 &&
+            !isset($classrecords[$this->classid])
+        ) {
+            $this->classid = 0;
+        }
+    }
+
+    private function spreadsheet_text(string $value): string {
+        $value = trim(clean_param($value, PARAM_TEXT));
+
+        if (preg_match('/^[=+\-@]/u', $value)) {
+            return "'" . $value;
+        }
+
+        return $value;
     }
 
     private function metric(

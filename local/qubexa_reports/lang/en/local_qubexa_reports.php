@@ -17,6 +17,7 @@ $string['allclasses'] = 'All active classes';
 $string['filterclass'] = 'Select class';
 $string['applyfilter'] = 'Apply';
 $string['clearfilter'] = 'Clear filter';
+$string['exportcsv'] = 'Download CSV for Excel';
 $string['student'] = 'Student';
 $string['studentnumber'] = 'School number';
 $string['class'] = 'Class';

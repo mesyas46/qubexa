@@ -23,30 +23,39 @@
                 <p>{{participationdesc}}</p>
             </div>
 
-            {{#hasclassoptions}}
-                <form class="qubexa-reports__filter" action="{{filterurl}}" method="get">
-                    <input type="hidden" name="page" value="reports">
+            <div class="qubexa-reports__panel-actions">
+                {{#hasclassoptions}}
+                    <form class="qubexa-reports__filter" action="{{filterurl}}" method="get">
+                        <input type="hidden" name="page" value="reports">
 
-                    <label for="qubexa-report-class">{{classfilterlabel}}</label>
+                        <label for="qubexa-report-class">{{classfilterlabel}}</label>
 
-                    <div class="qubexa-reports__filter-row">
-                        <select id="qubexa-report-class" name="reportclassid">
-                            <option value="0">{{allclasseslabel}}</option>
-                            {{#classoptions}}
-                                <option value="{{id}}" {{#selected}}selected{{/selected}}>
-                                    {{label}}
-                                </option>
-                            {{/classoptions}}
-                        </select>
+                        <div class="qubexa-reports__filter-row">
+                            <select id="qubexa-report-class" name="reportclassid">
+                                <option value="0">{{allclasseslabel}}</option>
+                                {{#classoptions}}
+                                    <option value="{{id}}" {{#selected}}selected{{/selected}}>
+                                        {{label}}
+                                    </option>
+                                {{/classoptions}}
+                            </select>
 
-                        <button type="submit">{{applyfilterlabel}}</button>
+                            <button type="submit">{{applyfilterlabel}}</button>
 
-                        {{#hasfilter}}
-                            <a href="{{reseturl}}">{{clearfilterlabel}}</a>
-                        {{/hasfilter}}
-                    </div>
-                </form>
-            {{/hasclassoptions}}
+                            {{#hasfilter}}
+                                <a href="{{reseturl}}">{{clearfilterlabel}}</a>
+                            {{/hasfilter}}
+                        </div>
+                    </form>
+                {{/hasclassoptions}}
+
+                {{#hasrows}}
+                    <a class="qubexa-reports__export" href="{{exporturl}}">
+                        <span aria-hidden="true">↓</span>
+                        {{exportcsvlabel}}
+                    </a>
+                {{/hasrows}}
+            </div>
         </header>
 
         {{#hasrows}}

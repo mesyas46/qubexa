@@ -17,6 +17,7 @@ $string['allclasses'] = 'Tüm aktif sınıflar';
 $string['filterclass'] = 'Sınıf seçin';
 $string['applyfilter'] = 'Uygula';
 $string['clearfilter'] = 'Filtreyi temizle';
+$string['exportcsv'] = 'Excel için CSV indir';
 $string['student'] = 'Öğrenci';
 $string['studentnumber'] = 'Okul numarası';
 $string['class'] = 'Sınıf';
