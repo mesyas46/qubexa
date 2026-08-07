@@ -1,0 +1,332 @@
+/* =========================================================
+   Qubexa Launcher Experience
+   ========================================================= */
+
+.qubexa-launcher {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    visibility: visible;
+    background:
+        radial-gradient(
+            circle at 50% 38%,
+            rgba(51, 102, 204, 0.16),
+            transparent 34%
+        ),
+        #101828;
+    opacity: 1;
+    transition:
+        opacity 320ms ease,
+        visibility 320ms ease;
+    z-index: 5000;
+}
+
+.qubexa-launcher.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.qubexa-launcher__content {
+    display: flex;
+    width: min(88vw, 420px);
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+}
+
+.qubexa-launcher__mark {
+    display: grid;
+    width: 82px;
+    height: 82px;
+    place-items: center;
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow:
+        0 22px 55px rgba(0, 0, 0, 0.24),
+        0 0 0 9px rgba(255, 255, 255, 0.06);
+    color: #101828;
+    font-size: 38px;
+    font-weight: 900;
+    animation: qubexaLauncherMark 700ms ease both;
+}
+
+.qubexa-launcher__brand {
+    margin-top: 25px;
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+}
+
+.qubexa-launcher__tagline {
+    margin-top: 8px;
+    color: #b9c2d0;
+    font-size: 13px;
+}
+
+.qubexa-launcher__progress {
+    position: relative;
+    width: 150px;
+    height: 3px;
+    margin-top: 30px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.13);
+}
+
+.qubexa-launcher__progress::after {
+    position: absolute;
+    inset: 0;
+    width: 45%;
+    border-radius: inherit;
+    background: #ffffff;
+    content: "";
+    animation: qubexaLauncherProgress 900ms ease-in-out infinite;
+}
+
+.qubexa-stage {
+    animation: qubexaStageEnter 360ms ease both;
+}
+
+.qubexa-content {
+    animation: qubexaContentEnter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.qubexa-nav-item {
+    position: relative;
+    transition:
+        background-color 160ms ease,
+        color 160ms ease,
+        transform 160ms ease;
+}
+
+.qubexa-nav-item:hover {
+    transform: none;
+}
+
+.qubexa-nav-item.is-active::before {
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    width: 3px;
+    height: 22px;
+    border-radius: 999px;
+    background: currentColor;
+    content: "";
+    transform: translateY(-50%);
+}
+
+.qubexa-frame.is-page-leaving .qubexa-content {
+    opacity: 0;
+    transform: translateY(9px) scale(0.995);
+    transition:
+        opacity 180ms ease,
+        transform 180ms ease;
+}
+
+@keyframes qubexaLauncherMark {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes qubexaLauncherProgress {
+    from {
+        transform: translateX(-120%);
+    }
+
+    to {
+        transform: translateX(340%);
+    }
+}
+
+@keyframes qubexaStageEnter {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes qubexaContentEnter {
+    from {
+        opacity: 0;
+        transform: translateY(13px) scale(0.995);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 650px) {
+    .qubexa-launcher__mark {
+        width: 72px;
+        height: 72px;
+        border-radius: 21px;
+        font-size: 34px;
+    }
+
+    .qubexa-launcher__brand {
+        font-size: 21px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .qubexa-launcher,
+    .qubexa-launcher__mark,
+    .qubexa-launcher__progress::after,
+    .qubexa-stage,
+    .qubexa-content,
+    .qubexa-nav-item {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Sidebar kaydırılabilir kalır, kaba kaydırma çubukları gizlenir. */
+.qubexa-sidebar {
+    overflow-x: hidden;
+}
+
+.qubexa-nav {
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior: contain;
+}
+
+.qubexa-nav::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.qubexa-nav-item {
+    max-width: 100%;
+}
+
+/* =========================================================
+   Belirgin sayfa geçiş perdesi
+   ========================================================= */
+
+.qubexa-page-transition {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    visibility: hidden;
+    background: rgba(16, 24, 40, 0.96);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 220ms ease,
+        visibility 220ms ease;
+    z-index: 6000;
+}
+
+.qubexa-page-transition.is-visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.qubexa-page-transition__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(9px) scale(0.97);
+    opacity: 0;
+    transition:
+        transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 260ms ease;
+}
+
+.qubexa-page-transition.is-visible
+.qubexa-page-transition__inner {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.qubexa-page-transition__mark {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border-radius: 17px;
+    background: #ffffff;
+    color: #101828;
+    font-size: 27px;
+    font-weight: 900;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.qubexa-page-transition__text {
+    margin-top: 17px;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+}
+
+.qubexa-page-transition__line {
+    position: relative;
+    width: 105px;
+    height: 3px;
+    margin-top: 18px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.qubexa-page-transition__line::after {
+    position: absolute;
+    inset: 0;
+    width: 46%;
+    border-radius: inherit;
+    background: #ffffff;
+    content: "";
+    animation: qubexaPageTransitionLine 700ms ease-in-out infinite;
+}
+
+@keyframes qubexaPageTransitionLine {
+    from {
+        transform: translateX(-125%);
+    }
+
+    to {
+        transform: translateX(335%);
+    }
+}
+
+.qubexa-frame.is-page-leaving .qubexa-stage {
+    opacity: 0.72;
+    transform: scale(0.995);
+    transition:
+        opacity 260ms ease,
+        transform 260ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .qubexa-page-transition,
+    .qubexa-page-transition__inner,
+    .qubexa-page-transition__line::after,
+    .qubexa-frame.is-page-leaving .qubexa-stage {
+        animation: none !important;
+        transition: none !important;
+    }
+}
