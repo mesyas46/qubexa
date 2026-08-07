@@ -115,6 +115,7 @@
                             <th scope="col">{{pluslabel}}</th>
                             <th scope="col">{{minuslabel}}</th>
                             <th scope="col">{{netlabel}}</th>
+                            <th scope="col">{{actionslabel}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,6 +137,14 @@
                                 </td>
                                 <td data-label="{{netlabel}}">
                                     <span class="qubexa-reports__net {{netclass}}">{{net}}</span>
+                                </td>
+                                <td data-label="{{actionslabel}}">
+                                    <a
+                                        class="qubexa-reports__detail-link"
+                                        href="{{detailurl}}"
+                                    >
+                                        {{viewprogresslabel}}
+                                    </a>
                                 </td>
                             </tr>
                         {{/rows}}

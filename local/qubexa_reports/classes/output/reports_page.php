@@ -210,6 +210,14 @@ final class reports_page implements \renderable, \templatable {
                 'net',
                 'local_qubexa_reports'
             ),
+            'actionslabel' => get_string(
+                'actions',
+                'local_qubexa_reports'
+            ),
+            'viewprogresslabel' => get_string(
+                'viewprogress',
+                'local_qubexa_reports'
+            ),
             'emptytitle' => get_string(
                 $hasfilter ? 'nofilterresults' : 'noreportdata',
                 'local_qubexa_reports'
@@ -633,6 +641,13 @@ final class reports_page implements \renderable, \templatable {
                 'classurl' => \local_qubexa\workspace::page_url(
                     'classes',
                     ['classid' => (int) $record->classid]
+                )->out(false),
+                'detailurl' => \local_qubexa\workspace::page_url(
+                    'reports',
+                    array_merge(
+                        $this->filter_params(),
+                        ['reportstudentid' => (int) $record->id]
+                    )
                 )->out(false),
             ];
         }

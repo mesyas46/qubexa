@@ -288,6 +288,258 @@
     color: #b42318;
 }
 
+.qubexa-reports__detail-link {
+    display: inline-flex;
+    min-height: 34px;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 11px;
+    background: #eff6ff;
+    border: 1px solid #b2ddff;
+    border-radius: 8px;
+    color: #175cd3;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.qubexa-reports__detail-link:hover,
+.qubexa-reports__detail-link:focus {
+    background: #dbeafe;
+    color: #1849a9;
+    text-decoration: none;
+}
+
+.qubexa-student-report {
+    display: grid;
+    gap: 18px;
+}
+
+.qubexa-student-report__header,
+.qubexa-student-report__summary,
+.qubexa-student-report__daily {
+    background: #fff;
+    border: 1px solid #e4e9f1;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.05);
+}
+
+.qubexa-student-report__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 22px;
+}
+
+.qubexa-student-report__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    color: #475467;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.qubexa-student-report__back:hover,
+.qubexa-student-report__back:focus {
+    color: #175cd3;
+    text-decoration: none;
+}
+
+.qubexa-student-report__header h2 {
+    margin: 5px 0 4px;
+    color: #101828;
+}
+
+.qubexa-student-report__header p,
+.qubexa-student-report__header small {
+    display: block;
+    margin: 0;
+    color: #667085;
+}
+
+.qubexa-student-report__header p a {
+    color: #175cd3;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.qubexa-student-report__header small {
+    margin-top: 6px;
+}
+
+.qubexa-student-report__filter {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.qubexa-student-report__filter label {
+    display: block;
+    margin-bottom: 6px;
+    color: #344054;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.qubexa-student-report__filter input,
+.qubexa-student-report__filter button,
+.qubexa-student-report__filter a {
+    min-height: 38px;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 13px;
+}
+
+.qubexa-student-report__filter input {
+    padding: 7px 10px;
+    background: #fff;
+    border: 1px solid #d0d5dd;
+    color: #101828;
+}
+
+.qubexa-student-report__filter button {
+    padding: 7px 14px;
+    background: #1769c2;
+    border: 1px solid #1769c2;
+    color: #fff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.qubexa-student-report__filter a {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 10px;
+    color: #475467;
+    text-decoration: none;
+}
+
+.qubexa-student-report__summary,
+.qubexa-student-report__daily {
+    overflow: hidden;
+}
+
+.qubexa-student-report__summary > header,
+.qubexa-student-report__daily > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.qubexa-student-report__summary h3,
+.qubexa-student-report__daily h3 {
+    margin: 0;
+    color: #101828;
+}
+
+.qubexa-student-report__summary header span,
+.qubexa-student-report__daily header p {
+    margin: 0;
+    color: #667085;
+    font-size: 13px;
+}
+
+.qubexa-student-report__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    padding: 18px 20px 20px;
+}
+
+.qubexa-student-report__metric {
+    position: relative;
+    overflow: hidden;
+    min-height: 92px;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px solid #eaecf0;
+    border-radius: 13px;
+}
+
+.qubexa-student-report__metric::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: #1769c2;
+    content: "";
+}
+
+.qubexa-student-report__metric.is-positive::before {
+    background: #12b76a;
+}
+
+.qubexa-student-report__metric.is-negative::before {
+    background: #f04438;
+}
+
+.qubexa-student-report__metric.is-neutral::before {
+    background: #98a2b3;
+}
+
+.qubexa-student-report__metric span {
+    color: #667085;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.qubexa-student-report__metric strong {
+    display: block;
+    margin-top: 10px;
+    color: #101828;
+    font-size: 25px;
+    line-height: 1;
+}
+
+.qubexa-student-report__table-wrap {
+    overflow-x: auto;
+}
+
+.qubexa-student-report__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.qubexa-student-report__table th,
+.qubexa-student-report__table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #f0f2f5;
+    text-align: left;
+}
+
+.qubexa-student-report__table th {
+    background: #f9fafb;
+    color: #667085;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.qubexa-student-report__table td {
+    color: #344054;
+    font-size: 13px;
+}
+
+.qubexa-student-report__table td.is-plus {
+    color: #087a4b;
+    font-weight: 900;
+}
+
+.qubexa-student-report__table td.is-minus {
+    color: #c92a3e;
+    font-weight: 900;
+}
+
 .qubexa-reports__empty {
     padding: 48px 20px;
     color: #667085;
@@ -335,6 +587,15 @@
 
     .qubexa-reports__filter-fields {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .qubexa-student-report__header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .qubexa-student-report__filter {
+        justify-content: flex-start;
     }
 }
 
@@ -398,6 +659,69 @@
     }
 
     .qubexa-reports__table td::before {
+        color: #667085;
+        content: attr(data-label);
+        font-size: 11px;
+        font-weight: 900;
+        text-align: left;
+        text-transform: uppercase;
+    }
+
+    .qubexa-student-report__filter,
+    .qubexa-student-report__filter > div {
+        width: 100%;
+    }
+
+    .qubexa-student-report__filter input,
+    .qubexa-student-report__filter button,
+    .qubexa-student-report__filter a {
+        width: 100%;
+    }
+
+    .qubexa-student-report__filter a {
+        justify-content: center;
+    }
+
+    .qubexa-student-report__summary > header,
+    .qubexa-student-report__daily > header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .qubexa-student-report__metrics {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 14px;
+    }
+
+    .qubexa-student-report__table thead {
+        display: none;
+    }
+
+    .qubexa-student-report__table,
+    .qubexa-student-report__table tbody,
+    .qubexa-student-report__table tr,
+    .qubexa-student-report__table td {
+        display: block;
+        width: 100%;
+    }
+
+    .qubexa-student-report__table tr {
+        padding: 10px 14px;
+        border-bottom: 1px solid #eaecf0;
+    }
+
+    .qubexa-student-report__table td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 8px 0;
+        border: 0;
+        text-align: right;
+    }
+
+    .qubexa-student-report__table td::before {
         color: #667085;
         content: attr(data-label);
         font-size: 11px;

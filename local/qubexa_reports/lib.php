@@ -42,6 +42,28 @@ function local_qubexa_reports_render_workspace_page(): string {
         PARAM_RAW_TRIMMED
     );
 
+    $studentid = optional_param(
+        'reportstudentid',
+        0,
+        PARAM_INT
+    );
+
+    if ($studentid > 0) {
+        $studentpage = new \local_qubexa_reports\output\student_report_page(
+            (int) $USER->id,
+            $studentid,
+            $classid,
+            $studentquery,
+            $datefrom,
+            $dateto
+        );
+
+        return $OUTPUT->render_from_template(
+            'local_qubexa_reports/student_report',
+            $studentpage->export_for_template($OUTPUT)
+        );
+    }
+
     $page = new \local_qubexa_reports\output\reports_page(
         (int) $USER->id,
         $classid,

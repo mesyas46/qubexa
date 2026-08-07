@@ -1,0 +1,118 @@
+<section class="qubexa-student-report" aria-labelledby="qubexa-student-report-title">
+    <header class="qubexa-student-report__header">
+        <div>
+            <a class="qubexa-student-report__back" href="{{backurl}}">
+                <span aria-hidden="true">←</span>
+                {{backlabel}}
+            </a>
+            <span class="qubexa-reports__eyebrow">{{title}}</span>
+            <h2 id="qubexa-student-report-title">{{fullname}}</h2>
+            <p>
+                <a href="{{classurl}}">{{classname}}</a>
+                {{#hasstudentnumber}}
+                    <span aria-hidden="true"> · </span>
+                    {{studentnumberlabel}}: {{studentnumber}}
+                {{/hasstudentnumber}}
+            </p>
+            <small>{{description}}</small>
+        </div>
+
+        <form class="qubexa-student-report__filter" action="{{filterurl}}" method="get">
+            <input type="hidden" name="page" value="reports">
+            <input type="hidden" name="reportstudentid" value="{{studentid}}">
+            {{#hasreturnclassid}}
+                <input type="hidden" name="reportclassid" value="{{returnclassid}}">
+            {{/hasreturnclassid}}
+            {{#hasreturnstudentquery}}
+                <input type="hidden" name="reportstudent" value="{{returnstudentquery}}">
+            {{/hasreturnstudentquery}}
+
+            <div>
+                <label for="qubexa-progress-date-from">{{datefromlabel}}</label>
+                <input
+                    id="qubexa-progress-date-from"
+                    name="reportdatefrom"
+                    type="date"
+                    value="{{datefrom}}"
+                >
+            </div>
+
+            <div>
+                <label for="qubexa-progress-date-to">{{datetolabel}}</label>
+                <input
+                    id="qubexa-progress-date-to"
+                    name="reportdateto"
+                    type="date"
+                    value="{{dateto}}"
+                >
+            </div>
+
+            <button type="submit">{{applyfilterlabel}}</button>
+
+            {{#hasdatefilter}}
+                <a href="{{reseturl}}">{{clearfilterlabel}}</a>
+            {{/hasdatefilter}}
+        </form>
+    </header>
+
+    <section class="qubexa-student-report__summary" aria-labelledby="qubexa-period-summary">
+        <header>
+            <h3 id="qubexa-period-summary">{{periodsummarylabel}}</h3>
+            <span>{{daterange}}</span>
+        </header>
+
+        <div class="qubexa-student-report__metrics">
+            {{#metrics}}
+                <article class="qubexa-student-report__metric {{tone}}">
+                    <span>{{label}}</span>
+                    <strong>{{value}}</strong>
+                </article>
+            {{/metrics}}
+        </div>
+    </section>
+
+    <section class="qubexa-student-report__daily" aria-labelledby="qubexa-daily-progress">
+        <header>
+            <h3 id="qubexa-daily-progress">{{dailytitle}}</h3>
+            <p>{{dailydesc}}</p>
+        </header>
+
+        {{#hasrows}}
+            <div class="qubexa-student-report__table-wrap">
+                <table class="qubexa-student-report__table">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{datelabel}}</th>
+                            <th scope="col">{{pluslabel}}</th>
+                            <th scope="col">{{minuslabel}}</th>
+                            <th scope="col">{{netlabel}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#rows}}
+                            <tr>
+                                <td data-label="{{datelabel}}"><strong>{{date}}</strong></td>
+                                <td data-label="{{pluslabel}}" class="is-plus">+{{pluscount}}</td>
+                                <td data-label="{{minuslabel}}" class="is-minus">
+                                    {{#minuscount}}−{{minuscount}}{{/minuscount}}
+                                    {{^minuscount}}0{{/minuscount}}
+                                </td>
+                                <td data-label="{{netlabel}}">
+                                    <span class="qubexa-reports__net {{netclass}}">{{net}}</span>
+                                </td>
+                            </tr>
+                        {{/rows}}
+                    </tbody>
+                </table>
+            </div>
+        {{/hasrows}}
+
+        {{^hasrows}}
+            <div class="qubexa-reports__empty">
+                <span aria-hidden="true">▥</span>
+                <h3>{{emptytitle}}</h3>
+                <p>{{emptydesc}}</p>
+            </div>
+        {{/hasrows}}
+    </section>
+</section>
