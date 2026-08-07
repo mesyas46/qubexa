@@ -138,7 +138,15 @@
     font-size: 13px;
 }
 
-.qubexa-reports__export {
+.qubexa-reports__exports {
+    display: flex;
+    align-self: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.qubexa-reports__export,
+.qubexa-reports__print {
     display: inline-flex;
     min-height: 38px;
     align-items: center;
@@ -153,6 +161,19 @@
     font-weight: 800;
     text-decoration: none;
     white-space: nowrap;
+}
+
+.qubexa-reports__print {
+    background: #eff6ff;
+    border-color: #b2ddff;
+    color: #175cd3;
+}
+
+.qubexa-reports__print:hover,
+.qubexa-reports__print:focus {
+    background: #dbeafe;
+    color: #1849a9;
+    text-decoration: none;
 }
 
 .qubexa-reports__export:hover,
@@ -193,10 +214,6 @@
     padding: 7px 10px;
     color: #475467;
     text-decoration: none;
-}
-
-.qubexa-reports__export {
-    align-self: flex-end;
 }
 
 .qubexa-reports__table-wrap {
@@ -343,7 +360,9 @@
     .qubexa-reports__filter input,
     .qubexa-reports__filter button,
     .qubexa-reports__filter a,
-    .qubexa-reports__export {
+    .qubexa-reports__exports,
+    .qubexa-reports__export,
+    .qubexa-reports__print {
         width: 100%;
     }
 

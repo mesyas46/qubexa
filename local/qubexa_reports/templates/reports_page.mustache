@@ -85,10 +85,22 @@
                 {{/hasclassoptions}}
 
                 {{#hasrows}}
-                    <a class="qubexa-reports__export" href="{{exporturl}}">
-                        <span aria-hidden="true">↓</span>
-                        {{exportcsvlabel}}
-                    </a>
+                    <div class="qubexa-reports__exports">
+                        <a
+                            class="qubexa-reports__print"
+                            href="{{printurl}}"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <span aria-hidden="true">⎙</span>
+                            {{printreportlabel}}
+                        </a>
+
+                        <a class="qubexa-reports__export" href="{{exporturl}}">
+                            <span aria-hidden="true">↓</span>
+                            {{exportcsvlabel}}
+                        </a>
+                    </div>
                 {{/hasrows}}
             </div>
         </header>
@@ -118,7 +130,10 @@
                                     <a href="{{classurl}}">{{classname}}</a>
                                 </td>
                                 <td data-label="{{pluslabel}}" class="is-plus">+{{pluscount}}</td>
-                                <td data-label="{{minuslabel}}" class="is-minus">−{{minuscount}}</td>
+                                <td data-label="{{minuslabel}}" class="is-minus">
+                                    {{#minuscount}}−{{minuscount}}{{/minuscount}}
+                                    {{^minuscount}}0{{/minuscount}}
+                                </td>
                                 <td data-label="{{netlabel}}">
                                     <span class="qubexa-reports__net {{netclass}}">{{net}}</span>
                                 </td>

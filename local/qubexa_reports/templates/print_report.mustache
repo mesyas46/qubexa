@@ -1,0 +1,67 @@
+<main class="qubexa-print-report" aria-labelledby="qubexa-print-report-title">
+    <div class="qubexa-print-report__actions">
+        <a href="{{backurl}}">← {{backlabel}}</a>
+        <button type="button" data-action="print-report">{{printlabel}}</button>
+    </div>
+
+    <header class="qubexa-print-report__header">
+        <div>
+            <span class="qubexa-print-report__eyebrow">Hocadex</span>
+            <h1 id="qubexa-print-report-title">{{reporttitle}}</h1>
+            <p>{{reportdesc}}</p>
+        </div>
+
+        <p class="qubexa-print-report__generated">
+            {{generatedlabel}}
+            <strong>{{generatedat}}</strong>
+        </p>
+    </header>
+
+    <dl class="qubexa-print-report__filters">
+        {{#filters}}
+            <div class="qubexa-print-report__filter">
+                <dt>{{label}}</dt>
+                <dd>{{value}}</dd>
+            </div>
+        {{/filters}}
+    </dl>
+
+    {{#hasrows}}
+        <div class="qubexa-print-report__table-wrap">
+            <table class="qubexa-print-report__table">
+                <thead>
+                    <tr>
+                        <th scope="col">{{studentlabel}}</th>
+                        <th scope="col">{{studentnumberlabel}}</th>
+                        <th scope="col">{{classlabel}}</th>
+                        <th scope="col" class="is-number">{{pluslabel}}</th>
+                        <th scope="col" class="is-number">{{minuslabel}}</th>
+                        <th scope="col" class="is-number">{{netlabel}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#rows}}
+                        <tr>
+                            <td>{{fullname}}</td>
+                            <td>{{studentnumber}}</td>
+                            <td>{{classname}}</td>
+                            <td class="is-number">+{{pluscount}}</td>
+                            <td class="is-number">
+                                {{#minuscount}}−{{minuscount}}{{/minuscount}}
+                                {{^minuscount}}0{{/minuscount}}
+                            </td>
+                            <td class="is-number"><strong>{{net}}</strong></td>
+                        </tr>
+                    {{/rows}}
+                </tbody>
+            </table>
+        </div>
+    {{/hasrows}}
+
+    {{^hasrows}}
+        <section class="qubexa-print-report__empty">
+            <h2>{{emptytitle}}</h2>
+            <p>{{emptydesc}}</p>
+        </section>
+    {{/hasrows}}
+</main>

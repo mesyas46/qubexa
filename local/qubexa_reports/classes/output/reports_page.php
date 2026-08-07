@@ -54,23 +54,7 @@ final class reports_page implements \renderable, \templatable {
             ];
         }
 
-        $exportparams = [];
-
-        if ($this->classid > 0) {
-            $exportparams['reportclassid'] = $this->classid;
-        }
-
-        if ($this->studentquery !== '') {
-            $exportparams['reportstudent'] = $this->studentquery;
-        }
-
-        if ($this->datefrom !== '') {
-            $exportparams['reportdatefrom'] = $this->datefrom;
-        }
-
-        if ($this->dateto !== '') {
-            $exportparams['reportdateto'] = $this->dateto;
-        }
+        $exportparams = $this->filter_params();
 
         $hasfilter = !empty($exportparams);
 
@@ -150,8 +134,16 @@ final class reports_page implements \renderable, \templatable {
                 '/local/qubexa_reports/export.php',
                 $exportparams
             ))->out(false),
+            'printurl' => (new \moodle_url(
+                '/local/qubexa_reports/print.php',
+                $exportparams
+            ))->out(false),
             'exportcsvlabel' => get_string(
                 'exportcsv',
+                'local_qubexa_reports'
+            ),
+            'printreportlabel' => get_string(
+                'printreport',
                 'local_qubexa_reports'
             ),
             'hasfilter' => $hasfilter,
@@ -254,6 +246,100 @@ final class reports_page implements \renderable, \templatable {
         }
 
         return $exportrows;
+    }
+
+    public function export_for_print(): array {
+        $classrecords = $this->get_classes();
+        $this->normalise_classid($classrecords);
+        $rows = $this->get_participation_rows();
+
+        $classname = get_string(
+            'allclasses',
+            'local_qubexa_reports'
+        );
+
+        if (
+            $this->classid > 0 &&
+            isset($classrecords[$this->classid])
+        ) {
+            $classname = $this->class_name(
+                $classrecords[$this->classid]
+            );
+        }
+
+        $filterparams = $this->filter_params();
+        $hasfilter = !empty($filterparams);
+
+        return [
+            'reporttitle' => get_string(
+                'printtitle',
+                'local_qubexa_reports'
+            ),
+            'reportdesc' => get_string(
+                'printdesc',
+                'local_qubexa_reports'
+            ),
+            'generatedlabel' => get_string(
+                'generatedat',
+                'local_qubexa_reports'
+            ),
+            'generatedat' => userdate(
+                time(),
+                get_string(
+                    'strftimedatetimeshort',
+                    'langconfig'
+                )
+            ),
+            'filters' => $this->print_filters($classname),
+            'backurl' => \local_qubexa\workspace::page_url(
+                'reports',
+                $filterparams
+            )->out(false),
+            'backlabel' => get_string(
+                'backtoreports',
+                'local_qubexa_reports'
+            ),
+            'printlabel' => get_string(
+                'printnow',
+                'local_qubexa_reports'
+            ),
+            'rows' => $rows,
+            'hasrows' => !empty($rows),
+            'studentlabel' => get_string(
+                'student',
+                'local_qubexa_reports'
+            ),
+            'studentnumberlabel' => get_string(
+                'studentnumber',
+                'local_qubexa_reports'
+            ),
+            'classlabel' => get_string(
+                'class',
+                'local_qubexa_reports'
+            ),
+            'pluslabel' => get_string(
+                'plus',
+                'local_qubexa_reports'
+            ),
+            'minuslabel' => get_string(
+                'minus',
+                'local_qubexa_reports'
+            ),
+            'netlabel' => get_string(
+                'net',
+                'local_qubexa_reports'
+            ),
+            'emptytitle' => get_string(
+                $hasfilter ? 'nofilterresults' : 'noreportdata',
+                'local_qubexa_reports'
+            ),
+            'emptydesc' => get_string(
+                $hasfilter
+                    ? 'nofilterresultsdesc'
+                    : 'noreportdatadesc',
+                'local_qubexa_reports'
+            ),
+        ];
     }
 
     private function get_classes(): array {
@@ -561,6 +647,101 @@ final class reports_page implements \renderable, \templatable {
         ) {
             $this->classid = 0;
         }
+    }
+
+    private function filter_params(): array {
+        $params = [];
+
+        if ($this->classid > 0) {
+            $params['reportclassid'] = $this->classid;
+        }
+
+        if ($this->studentquery !== '') {
+            $params['reportstudent'] = $this->studentquery;
+        }
+
+        if ($this->datefrom !== '') {
+            $params['reportdatefrom'] = $this->datefrom;
+        }
+
+        if ($this->dateto !== '') {
+            $params['reportdateto'] = $this->dateto;
+        }
+
+        return $params;
+    }
+
+    private function print_filters(string $classname): array {
+        $filters = [
+            [
+                'label' => get_string(
+                    'filterclass',
+                    'local_qubexa_reports'
+                ),
+                'value' => $classname,
+            ],
+        ];
+
+        if ($this->studentquery !== '') {
+            $filters[] = [
+                'label' => get_string(
+                    'filterstudent',
+                    'local_qubexa_reports'
+                ),
+                'value' => $this->studentquery,
+            ];
+        }
+
+        $filters[] = [
+            'label' => get_string(
+                'daterange',
+                'local_qubexa_reports'
+            ),
+            'value' => $this->print_date_range(),
+        ];
+
+        return $filters;
+    }
+
+    private function print_date_range(): string {
+        if ($this->datefrom === '' && $this->dateto === '') {
+            return get_string(
+                'alldates',
+                'local_qubexa_reports'
+            );
+        }
+
+        if ($this->datefrom !== '' && $this->dateto !== '') {
+            return get_string(
+                'daterangeboth',
+                'local_qubexa_reports',
+                (object) [
+                    'from' => $this->display_date($this->datefrom),
+                    'to' => $this->display_date($this->dateto),
+                ]
+            );
+        }
+
+        if ($this->datefrom !== '') {
+            return get_string(
+                'daterangefrom',
+                'local_qubexa_reports',
+                $this->display_date($this->datefrom)
+            );
+        }
+
+        return get_string(
+            'daterangeto',
+            'local_qubexa_reports',
+            $this->display_date($this->dateto)
+        );
+    }
+
+    private function display_date(string $date): string {
+        return userdate(
+            $this->date_timestamp($date),
+            get_string('strftimedate', 'langconfig')
+        );
     }
 
     private function normalise_student_query(string $query): string {
