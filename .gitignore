@@ -14,6 +14,12 @@
 /local/*
 !/local/qubexa/
 !/local/qubexa/**
+!/local/qubexa_calendar/
+!/local/qubexa_calendar/**
+!/local/qubexa_classes/
+!/local/qubexa_classes/**
+!/local/qubexa_reports/
+!/local/qubexa_reports/**
 !/local/qubexa_students/
 !/local/qubexa_students/**
 !/local/qubexa_groups/
