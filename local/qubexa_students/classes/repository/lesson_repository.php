@@ -36,30 +36,27 @@ final class lesson_repository {
 
     public function delete_owned(
         int $lessonid,
+        int $studentid,
         int $userid
     ): bool {
         global $DB;
 
-        $lesson = $DB->get_record(
-            'local_qubexa_student_lessons',
-            [
-                'id' => $lessonid,
-                'userid' => $userid,
-            ],
-            'id',
-            IGNORE_MISSING
-        );
+        $conditions = [
+            'id' => $lessonid,
+            'studentid' => $studentid,
+            'userid' => $userid,
+        ];
 
-        if (!$lesson) {
+        if (!$DB->record_exists(
+            'local_qubexa_student_lessons',
+            $conditions
+        )) {
             return false;
         }
 
         return $DB->delete_records(
             'local_qubexa_student_lessons',
-            [
-                'id' => $lessonid,
-                'userid' => $userid,
-            ]
+            $conditions
         );
     }
 }

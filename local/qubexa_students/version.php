@@ -2,8 +2,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_qubexa_students';
-$plugin->version   = 2026080901;
+$plugin->version   = 2026080902;
 $plugin->requires  = 2024100700;
 $plugin->dependencies = ['local_qubexa' => 2026072302];
 $plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = '0.9.0-exam-performance';
+$plugin->release   = '1.0.0-lesson-history';

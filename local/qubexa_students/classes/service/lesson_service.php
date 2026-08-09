@@ -239,6 +239,10 @@ final class lesson_service {
         $teachernote = trim($teachernote);
         $nextlesson = trim($nextlesson);
 
+        if (!$homeworkgiven) {
+            $homeworknote = '';
+        }
+
         if ($topic === '') {
             throw new \invalid_parameter_exception(
                 'Ders konusu boş bırakılamaz.'
@@ -249,6 +253,20 @@ final class lesson_service {
             throw new \invalid_parameter_exception(
                 'Ders konusu en fazla 255 karakter olabilir.'
             );
+        }
+
+        foreach (
+            [
+                'Ödev açıklaması' => $homeworknote,
+                'Öğretmen notu' => $teachernote,
+                'Bir sonraki ders' => $nextlesson,
+            ] as $label => $value
+        ) {
+            if (\core_text::strlen($value) > 2000) {
+                throw new \invalid_parameter_exception(
+                    $label . ' en fazla 2000 karakter olabilir.'
+                );
+            }
         }
 
         if (
@@ -293,11 +311,15 @@ final class lesson_service {
 
     public function delete_lesson(
         int $lessonid,
+        int $studentid,
         int $userid
     ): void {
+        $this->require_owned_student($studentid, $userid);
+
         if (
             !$this->lessons->delete_owned(
                 $lessonid,
+                $studentid,
                 $userid
             )
         ) {

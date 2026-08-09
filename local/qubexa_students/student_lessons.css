@@ -139,6 +139,9 @@
 }
 
 .qubexa-lesson-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
     color: #667085;
     font-size: 12px;
 }
@@ -199,16 +202,46 @@
     color: #667085;
     font-size: 13px;
     line-height: 1.55;
+    overflow-wrap: anywhere;
     white-space: pre-wrap;
 }
 
+@media (max-width: 760px) {
+    .qubexa-lesson-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .qubexa-lesson-summary-card.is-wide {
+        grid-column: span 2;
+    }
+}
+
 @media (max-width: 560px) {
-    .qubexa-lesson-summary-grid,
     .qubexa-lesson-form-grid {
         grid-template-columns: 1fr;
     }
 
-    .qubexa-lesson-summary-card.is-wide {
-        grid-column: auto;
+    .qubexa-lesson-form {
+        padding: 14px;
+    }
+
+    .qubexa-lesson-form .qubexa-module-form-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .qubexa-lesson-form .qubexa-module-form-actions .btn {
+        width: 100%;
+    }
+
+    .qubexa-lesson-item-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .qubexa-lesson-actions {
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
     }
 }

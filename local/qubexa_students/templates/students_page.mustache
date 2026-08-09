@@ -245,7 +245,7 @@
                         <span>📅</span>
                         <div>
                             <strong>Ders Geçmişi</strong>
-                            <small>Yakında</small>
+                            <small>Aktif</small>
                         </div>
                     </button>
 
@@ -481,6 +481,7 @@
                 </div>
 
                 <form class="qubexa-lesson-form"
+                      aria-describedby="qubexa-student-lesson-status"
                       data-student-lesson-form>
                     <div class="qubexa-lesson-form-grid">
                         <label>
@@ -548,6 +549,7 @@
                         <span>Ödev açıklaması</span>
                         <textarea name="homeworknote"
                                   rows="2"
+                                  maxlength="2000"
                                   placeholder="Verilen ödevi yazın..."></textarea>
                     </label>
 
@@ -555,6 +557,7 @@
                         <span>Öğretmen notu</span>
                         <textarea name="teachernote"
                                   rows="3"
+                                  maxlength="2000"
                                   placeholder="Dersle ilgili kısa değerlendirme..."></textarea>
                     </label>
 
@@ -562,11 +565,15 @@
                         <span>Bir sonraki ders</span>
                         <textarea name="nextlesson"
                                   rows="2"
+                                  maxlength="2000"
                                   placeholder="Bir sonraki derste yapılacaklar..."></textarea>
                     </label>
 
                     <div class="qubexa-module-form-actions">
-                        <span data-student-lesson-status></span>
+                        <span id="qubexa-student-lesson-status"
+                              role="status"
+                              aria-live="polite"
+                              data-student-lesson-status></span>
 
                         <button type="submit"
                                 class="btn btn-primary">
@@ -577,6 +584,7 @@
 
                 <div class="qubexa-module-loading"
                      data-student-lessons-loading
+                     role="status"
                      hidden>
                     Ders geçmişi yükleniyor...
                 </div>
@@ -588,6 +596,7 @@
                 </div>
 
                 <div class="qubexa-lessons-list"
+                     aria-live="polite"
                      data-student-lessons-list></div>
             </div>
         </section>

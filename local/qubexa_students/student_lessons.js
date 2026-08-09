@@ -59,6 +59,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
+    let requestVersion = 0;
+
     const setStatus = function (message, error) {
         status.textContent = message || '';
         status.classList.toggle(
@@ -196,6 +198,11 @@ document.addEventListener('DOMContentLoaded', function () {
             remove.dataset.deleteStudentLesson =
                 String(lesson.id);
             remove.textContent = 'Sil';
+            remove.setAttribute(
+                'aria-label',
+                (lesson.topic || 'Ders') +
+                    ' ders kaydını sil'
+            );
 
             actions.appendChild(badge);
             actions.appendChild(remove);
@@ -248,6 +255,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
+    const isCurrentRequest = function (version, studentId) {
+        return version === requestVersion &&
+            studentId === api.getStudentId();
+    };
+
     const request = async function (action, values) {
         const params = new URLSearchParams();
         params.set('action', action);
@@ -260,25 +272,42 @@ document.addEventListener('DOMContentLoaded', function () {
             credentials: 'same-origin'
         };
 
+        let response;
+
         if (action === 'list') {
-            const response = await fetch(
+            response = await fetch(
                 endpoint + '?' + params.toString(),
                 options
             );
+        } else {
+            params.set('sesskey', sesskey);
+            options.method = 'POST';
+            options.headers = {
+                'Content-Type':
+                    'application/x-www-form-urlencoded;charset=UTF-8'
+            };
+            options.body = params.toString();
 
-            return response.json();
+            response = await fetch(endpoint, options);
         }
 
-        params.set('sesskey', sesskey);
-        options.method = 'POST';
-        options.headers = {
-            'Content-Type':
-                'application/x-www-form-urlencoded;charset=UTF-8'
-        };
-        options.body = params.toString();
+        let result;
 
-        const response = await fetch(endpoint, options);
-        return response.json();
+        try {
+            result = await response.json();
+        } catch (error) {
+            throw new Error(
+                'Sunucudan geçerli bir yanıt alınamadı.'
+            );
+        }
+
+        if (!response.ok) {
+            throw new Error(
+                result.message || 'İşlem tamamlanamadı.'
+            );
+        }
+
+        return result;
     };
 
     const load = async function () {
@@ -288,13 +317,24 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        const version = ++requestVersion;
+
         loading.hidden = false;
+        empty.hidden = true;
+        list.innerHTML = '';
+        list.setAttribute('aria-busy', 'true');
+        render({});
+        empty.hidden = true;
         setStatus('', false);
 
         try {
             const result = await request('list', {
                 studentid: studentId
             });
+
+            if (!isCurrentRequest(version, studentId)) {
+                return;
+            }
 
             if (!result.success) {
                 throw new Error(
@@ -305,9 +345,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             render(result.data || {});
         } catch (error) {
-            setStatus(error.message, true);
+            if (isCurrentRequest(version, studentId)) {
+                setStatus(error.message, true);
+            }
         } finally {
-            loading.hidden = true;
+            if (isCurrentRequest(version, studentId)) {
+                loading.hidden = true;
+                list.setAttribute('aria-busy', 'false');
+            }
         }
     };
 
@@ -327,6 +372,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        const version = ++requestVersion;
         const values = new FormData(form);
         const button = form.querySelector(
             'button[type="submit"]'
@@ -334,6 +380,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (button) {
             button.disabled = true;
+            button.dataset.lessonRequestVersion =
+                String(version);
         }
 
         setStatus('Kaydediliyor...', false);
@@ -356,6 +404,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     values.get('nextlesson') || ''
             });
 
+            if (!isCurrentRequest(version, studentId)) {
+                return;
+            }
+
             if (!result.success) {
                 throw new Error(
                     result.message ||
@@ -368,10 +420,17 @@ document.addEventListener('DOMContentLoaded', function () {
             render(result.data || {});
             setStatus('Ders kaydedildi.', false);
         } catch (error) {
-            setStatus(error.message, true);
+            if (isCurrentRequest(version, studentId)) {
+                setStatus(error.message, true);
+            }
         } finally {
-            if (button) {
+            if (
+                button &&
+                button.dataset.lessonRequestVersion ===
+                    String(version)
+            ) {
                 button.disabled = false;
+                delete button.dataset.lessonRequestVersion;
             }
         }
     });
@@ -389,14 +448,26 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        const studentId = api.getStudentId();
+
+        if (!studentId) {
+            return;
+        }
+
+        const version = ++requestVersion;
+
         button.disabled = true;
         setStatus('Siliniyor...', false);
 
         try {
             const result = await request('delete', {
-                studentid: api.getStudentId(),
+                studentid: studentId,
                 lessonid: button.dataset.deleteStudentLesson
             });
+
+            if (!isCurrentRequest(version, studentId)) {
+                return;
+            }
 
             if (!result.success) {
                 throw new Error(
@@ -409,7 +480,10 @@ document.addEventListener('DOMContentLoaded', function () {
             setStatus('Ders kaydı silindi.', false);
         } catch (error) {
             button.disabled = false;
-            setStatus(error.message, true);
+
+            if (isCurrentRequest(version, studentId)) {
+                setStatus(error.message, true);
+            }
         }
     });
 
@@ -425,8 +499,23 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener(
         'qubexa:student-panel-closed',
         function () {
+            requestVersion += 1;
             form.reset();
+
+            const submit = form.querySelector(
+                'button[type="submit"]'
+            );
+
+            if (submit) {
+                submit.disabled = false;
+                delete submit.dataset.lessonRequestVersion;
+            }
+
             updateHomeworkVisibility();
+            render({});
+            list.setAttribute('aria-busy', 'false');
+            empty.hidden = true;
+            loading.hidden = true;
             setStatus('', false);
         }
     );
