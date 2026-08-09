@@ -20,6 +20,7 @@ final class student_panel_registry {
             ['key' => 'notes', 'label' => 'Notlar'],
             ['key' => 'exams', 'label' => 'Sınavlar'],
             ['key' => 'lessons', 'label' => 'Dersler'],
+            ['key' => 'homeworks', 'label' => 'Ödevler'],
             ['key' => 'payments', 'label' => 'Ödemeler'],
             ['key' => 'progress', 'label' => 'İlerleme'],
             ['key' => 'timeline', 'label' => 'Timeline'],

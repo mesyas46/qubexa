@@ -45,6 +45,11 @@ function local_qubexa_students_render_workspace_page(): string {
         )
     );
     $PAGE->requires->css(new moodle_url('/local/qubexa_students/student_payments.css'));
+    $PAGE->requires->css(
+        new moodle_url(
+            '/local/qubexa_students/student_homeworks.css'
+        )
+    );
 
     // Load modules in dependency order.
     $PAGE->requires->js(
@@ -83,6 +88,11 @@ function local_qubexa_students_render_workspace_page(): string {
         )
     );
     $PAGE->requires->js(new moodle_url('/local/qubexa_students/student_payments.js'));
+    $PAGE->requires->js(
+        new moodle_url(
+            '/local/qubexa_students/student_homeworks.js'
+        )
+    );
 
     $search = optional_param('search', '', PARAM_TEXT);
     $status = optional_param('status', '', PARAM_ALPHA);

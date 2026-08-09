@@ -140,6 +140,7 @@
        data-lessons-endpoint="{{lessonsendpoint}}"
        data-timeline-endpoint="{{timelineendpoint}}"
        data-payments-endpoint="{{paymentsendpoint}}"
+       data-homeworks-endpoint="{{homeworksendpoint}}"
        data-sesskey="{{sesskey}}"
        aria-hidden="true"
        aria-label="Öğrenci profili">
@@ -251,11 +252,21 @@
 
                     <button type="button"
                             class="qubexa-panel-feature"
+                            data-open-student-tab="homeworks">
+                        <span>✅</span>
+                        <div>
+                            <strong>Ödev Takibi</strong>
+                            <small>Aktif</small>
+                        </div>
+                    </button>
+
+                    <button type="button"
+                            class="qubexa-panel-feature"
                             data-open-student-tab="payments">
                         <span>₺</span>
                         <div>
                             <strong>Ödeme Durumu</strong>
-                            <small>Yakında</small>
+                            <small>Aktif</small>
                         </div>
                     </button>
                 </div>
@@ -598,6 +609,96 @@
                 <div class="qubexa-lessons-list"
                      aria-live="polite"
                      data-student-lessons-list></div>
+            </div>
+        </section>
+
+        <section class="qubexa-panel-tab-content"
+                 id="qubexa-student-panel-homeworks"
+                 data-student-tab-content="homeworks"
+                 role="tabpanel"
+                 aria-labelledby="qubexa-student-tab-homeworks"
+                 hidden>
+            <div class="qubexa-homeworks-section">
+                <div class="qubexa-module-heading">
+                    <span>ÖĞRENCİ DOSYASI</span>
+                    <h3>Ödev Takibi</h3>
+                </div>
+
+                <div class="qubexa-homework-summary-grid">
+                    <div class="qubexa-homework-summary-card">
+                        <span>Toplam Ödev</span>
+                        <strong data-homework-total>0</strong>
+                    </div>
+                    <div class="qubexa-homework-summary-card">
+                        <span>Bekleyen</span>
+                        <strong data-homework-pending>0</strong>
+                    </div>
+                    <div class="qubexa-homework-summary-card">
+                        <span>Tamamlanan</span>
+                        <strong data-homework-completed>0</strong>
+                    </div>
+                    <div class="qubexa-homework-summary-card">
+                        <span>Gecikmiş</span>
+                        <strong data-homework-overdue>0</strong>
+                    </div>
+                </div>
+
+                <form class="qubexa-homework-form"
+                      data-student-homework-form>
+                    <div class="qubexa-homework-form-grid">
+                        <label>
+                            <span>Ödev başlığı</span>
+                            <input type="text"
+                                   name="title"
+                                   maxlength="255"
+                                   placeholder="Örn. Üslü ifadeler testi"
+                                   required>
+                        </label>
+
+                        <label>
+                            <span>Son tarih</span>
+                            <input type="date"
+                                   name="duedate"
+                                   required>
+                        </label>
+                    </div>
+
+                    <label>
+                        <span>Açıklama</span>
+                        <textarea name="description"
+                                  rows="3"
+                                  maxlength="2000"
+                                  aria-describedby="qubexa-student-homework-status"
+                                  placeholder="Ödevle ilgili kısa açıklama..."></textarea>
+                    </label>
+
+                    <div class="qubexa-module-form-actions">
+                        <span id="qubexa-student-homework-status"
+                              role="status"
+                              aria-live="polite"
+                              data-student-homework-status></span>
+                        <button type="submit" class="btn btn-primary">
+                            Ödevi Kaydet
+                        </button>
+                    </div>
+                </form>
+
+                <div class="qubexa-module-loading"
+                     data-student-homeworks-loading
+                     role="status"
+                     hidden>
+                    Ödevler yükleniyor...
+                </div>
+
+                <div class="qubexa-module-empty"
+                     data-student-homeworks-empty
+                     hidden>
+                    Bu öğrenci için henüz ödev eklenmemiş.
+                </div>
+
+                <div class="qubexa-homeworks-list"
+                     aria-live="polite"
+                     data-student-homeworks-list></div>
             </div>
         </section>
 

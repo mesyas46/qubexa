@@ -138,6 +138,11 @@ final class students_page implements \renderable, \templatable {
                     '/local/qubexa_students/ajax/payments.php'
                 )
             )->out(false),
+            'homeworksendpoint' => (
+                new \moodle_url(
+                    '/local/qubexa_students/ajax/homeworks.php'
+                )
+            )->out(false),
             'paneltabs' => student_panel_registry::tabs(),
             'paneltabcount' => count(student_panel_registry::tabs()),
             'sesskey' => sesskey(),

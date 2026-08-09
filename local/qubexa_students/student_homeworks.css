@@ -1,0 +1,197 @@
+.qubexa-homeworks-section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.qubexa-homework-summary-grid,
+.qubexa-homework-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.qubexa-homework-summary-card {
+    display: flex;
+    min-height: 88px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    padding: 15px;
+    border: 1px solid #eaecf0;
+    border-radius: 14px;
+    background: #f9fafb;
+}
+
+.qubexa-homework-summary-card span {
+    color: #667085;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.qubexa-homework-summary-card strong {
+    color: #101828;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.qubexa-homework-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid #eaecf0;
+    border-radius: 14px;
+    background: #f9fafb;
+}
+
+.qubexa-homework-form label {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.qubexa-homework-form label > span {
+    color: #344054;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.qubexa-homework-form input,
+.qubexa-homework-form textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    background: #fff;
+    color: #101828;
+    font: inherit;
+}
+
+.qubexa-homeworks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.qubexa-homework-item {
+    min-width: 0;
+    padding: 15px;
+    border: 1px solid #eaecf0;
+    border-left: 4px solid #f79009;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.qubexa-homework-item.is-completed {
+    border-left-color: #12b76a;
+}
+
+.qubexa-homework-item.is-overdue {
+    border-left-color: #f04438;
+}
+
+.qubexa-homework-item-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.qubexa-homework-item h4 {
+    margin: 0 0 5px;
+    color: #101828;
+    font-size: 16px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.qubexa-homework-item time {
+    color: #667085;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.qubexa-homework-actions {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.qubexa-homework-status {
+    padding: 5px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.qubexa-homework-status.is-pending {
+    background: #fffaeb;
+    color: #b54708;
+}
+
+.qubexa-homework-status.is-completed {
+    background: #ecfdf3;
+    color: #027a48;
+}
+
+.qubexa-homework-status.is-overdue {
+    background: #fef3f2;
+    color: #b42318;
+}
+
+.qubexa-homework-toggle-status {
+    padding: 5px 8px;
+    border: 1px solid #b2ddff;
+    border-radius: 8px;
+    background: #eff8ff;
+    color: #175cd3;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.qubexa-homework-item p {
+    margin: 12px 0 0;
+    color: #667085;
+    font-size: 13px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+    .qubexa-homework-summary-grid,
+    .qubexa-homework-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .qubexa-homework-form {
+        padding: 14px;
+    }
+
+    .qubexa-homework-form .qubexa-module-form-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .qubexa-homework-form .qubexa-module-form-actions .btn {
+        min-height: 44px;
+        width: 100%;
+    }
+
+    .qubexa-homework-item-header {
+        flex-direction: column;
+    }
+
+    .qubexa-homework-actions {
+        width: 100%;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
