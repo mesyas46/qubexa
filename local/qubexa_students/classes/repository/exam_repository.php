@@ -31,29 +31,29 @@ final class exam_repository {
         );
     }
 
-    public function delete_owned(int $examid, int $userid): bool {
+    public function delete_owned(
+        int $examid,
+        int $studentid,
+        int $userid
+    ): bool {
         global $DB;
 
-        $exam = $DB->get_record(
-            'local_qubexa_student_exams',
-            [
-                'id' => $examid,
-                'userid' => $userid,
-            ],
-            'id',
-            IGNORE_MISSING
-        );
+        $conditions = [
+            'id' => $examid,
+            'studentid' => $studentid,
+            'userid' => $userid,
+        ];
 
-        if (!$exam) {
+        if (!$DB->record_exists(
+            'local_qubexa_student_exams',
+            $conditions
+        )) {
             return false;
         }
 
         return $DB->delete_records(
             'local_qubexa_student_exams',
-            [
-                'id' => $examid,
-                'userid' => $userid,
-            ]
+            $conditions
         );
     }
 }

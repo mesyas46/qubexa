@@ -1,4 +1,6 @@
 <?php
+define('NO_DEBUG_DISPLAY', true);
+
 define('AJAX_SCRIPT', true);
 require_once(__DIR__ . '/../../../config.php');
 
@@ -28,6 +30,14 @@ try {
             ),
         ]);
         exit;
+    }
+
+    require_capability('local/qubexa_students:manage', $context);
+
+    if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+        throw new invalid_parameter_exception(
+            'Bu işlem yalnızca POST isteğiyle yapılabilir.'
+        );
     }
 
     require_sesskey();
@@ -72,6 +82,7 @@ try {
 
         $service->delete_exam(
             $examid,
+            $studentid,
             (int) $USER->id
         );
 

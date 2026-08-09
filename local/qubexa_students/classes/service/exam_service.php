@@ -138,6 +138,12 @@ final class exam_service {
             );
         }
 
+        if (\core_text::strlen($description) > 2000) {
+            throw new \invalid_parameter_exception(
+                'Açıklama en fazla 2000 karakter olabilir.'
+            );
+        }
+
         foreach ([$correct, $wrong, $blank] as $value) {
             if ($value < 0) {
                 throw new \invalid_parameter_exception(
@@ -164,8 +170,18 @@ final class exam_service {
         ]);
     }
 
-    public function delete_exam(int $examid, int $userid): void {
-        if (!$this->exams->delete_owned($examid, $userid)) {
+    public function delete_exam(
+        int $examid,
+        int $studentid,
+        int $userid
+    ): void {
+        $this->require_owned_student($studentid, $userid);
+
+        if (!$this->exams->delete_owned(
+            $examid,
+            $studentid,
+            $userid
+        )) {
             throw new \moodle_exception('invalidrecord', 'error');
         }
     }

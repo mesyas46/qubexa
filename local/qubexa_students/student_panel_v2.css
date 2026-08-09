@@ -438,7 +438,7 @@ body.qubexa-panel-open {
 
 .qubexa-exam-summary-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 10px;
 }
 
@@ -513,6 +513,37 @@ body.qubexa-panel-open {
     font-size: 13px;
     line-height: 1.6;
     white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+    .qubexa-exam-summary-grid,
+    .qubexa-exam-result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .qubexa-exam-form {
+        padding: 14px;
+    }
+
+    .qubexa-exam-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .qubexa-exam-form .qubexa-module-form-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .qubexa-exam-form .qubexa-module-form-actions .btn {
+        width: 100%;
+    }
+
+    .qubexa-exam-item-header {
+        align-items: center;
+    }
 }
 
 .qubexa-panel-empty-section {
@@ -578,8 +609,7 @@ body.qubexa-panel-open {
     }
 
     .qubexa-panel-information-grid,
-    .qubexa-exam-form-grid,
-    .qubexa-exam-summary-grid {
+    .qubexa-exam-form-grid {
         grid-template-columns: 1fr;
     }
 }

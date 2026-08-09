@@ -335,6 +335,11 @@
 
                 <div class="qubexa-exam-summary-grid">
                     <div class="qubexa-exam-summary-card">
+                        <span>Sınav Sayısı</span>
+                        <strong data-exam-count>0</strong>
+                    </div>
+
+                    <div class="qubexa-exam-summary-card">
                         <span>Ortalama Net</span>
                         <strong data-exam-average>0,00</strong>
                     </div>
@@ -400,11 +405,15 @@
                         <span>Açıklama</span>
                         <textarea name="description"
                                   rows="3"
+                                  maxlength="2000"
                                   placeholder="İsteğe bağlı açıklama..."></textarea>
                     </label>
 
                     <div class="qubexa-module-form-actions">
-                        <span data-student-exam-status></span>
+                        <span id="qubexa-student-exam-status"
+                              role="status"
+                              aria-live="polite"
+                              data-student-exam-status></span>
 
                         <button type="submit"
                                 class="btn btn-primary">
@@ -415,6 +424,7 @@
 
                 <div class="qubexa-module-loading"
                      data-student-exams-loading
+                     role="status"
                      hidden>
                     Sınav sonuçları yükleniyor...
                 </div>
@@ -426,6 +436,7 @@
                 </div>
 
                 <div class="qubexa-exams-list"
+                     aria-live="polite"
                      data-student-exams-list></div>
             </div>
         </section>
