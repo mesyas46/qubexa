@@ -71,6 +71,51 @@
         </div>
     </section>
 
+        {{#haschart}}
+            <section
+                class="qubexa-student-report__chart-section"
+                aria-labelledby="qubexa-net-change-chart"
+            >
+                <header>
+                    <div>
+                        <h3 id="qubexa-net-change-chart">{{charttitle}}</h3>
+                        <p>{{chartdesc}}</p>
+                    </div>
+                </header>
+
+                <div
+                    class="qubexa-student-report__chart-scroll"
+                    role="group"
+                    aria-label="{{charttitle}}"
+                    tabindex="0"
+                >
+                    <div class="qubexa-student-report__chart">
+                        {{#chartrows}}
+                            <article
+                                class="qubexa-student-report__chart-item"
+                                aria-label="{{date}}: {{netlabel}} {{net}}"
+                            >
+                                <div
+                                    class="qubexa-student-report__chart-column {{netclass}}"
+                                    style="--qubexa-bar-height: {{barheight}}px;"
+                                >
+                                    <strong class="qubexa-student-report__chart-value">
+                                        {{net}}
+                                    </strong>
+                                    <span
+                                        class="qubexa-student-report__chart-bar"
+                                        aria-hidden="true"
+                                    ></span>
+                                </div>
+                                <time class="qubexa-student-report__chart-date">
+                                    {{date}}
+                                </time>
+                            </article>
+                        {{/chartrows}}
+                    </div>
+                </div>
+            </section>
+        {{/haschart}}
     <section class="qubexa-student-report__daily" aria-labelledby="qubexa-daily-progress">
         <header>
             <h3 id="qubexa-daily-progress">{{dailytitle}}</h3>

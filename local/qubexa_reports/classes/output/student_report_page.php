@@ -177,6 +177,16 @@ final class student_report_page implements \renderable, \templatable {
                 'net',
                 'local_qubexa_reports'
             ),
+            'charttitle' => get_string(
+                'netchangechart',
+                'local_qubexa_reports'
+            ),
+            'chartdesc' => get_string(
+                'netchangechartdesc',
+                'local_qubexa_reports'
+            ),
+            'chartrows' => $progress['chartrows'],
+            'haschart' => !empty($progress['chartrows']),
             'rows' => $progress['rows'],
             'hasrows' => !empty($progress['rows']),
             'emptytitle' => get_string(
@@ -245,6 +255,7 @@ final class student_report_page implements \renderable, \templatable {
             'net' => 0,
             'recordeddays' => 0,
             'rows' => [],
+            'chartrows' => [],
         ];
 
         if (!$this->table_exists('local_qubexa_class_points')) {
@@ -325,6 +336,29 @@ final class student_report_page implements \renderable, \templatable {
         $result['net'] =
             $result['pluscount'] - $result['minuscount'];
         $result['recordeddays'] = count($result['rows']);
+
+        $maxabsnet = 1;
+        foreach ($days as $day) {
+            $daynet = $day['pluscount'] - $day['minuscount'];
+            $maxabsnet = max($maxabsnet, abs($daynet));
+        }
+
+        foreach (array_reverse($days) as $day) {
+            $daynet = $day['pluscount'] - $day['minuscount'];
+            $barheight = $daynet === 0
+                ? 4
+                : max(
+                    12,
+                    (int) round(abs($daynet) / $maxabsnet * 72)
+                );
+
+            $result['chartrows'][] = [
+                'date' => $day['date'],
+                'net' => $this->signed_number($daynet),
+                'netclass' => $this->net_tone($daynet),
+                'barheight' => $barheight,
+            ];
+        }
 
         return $result;
     }

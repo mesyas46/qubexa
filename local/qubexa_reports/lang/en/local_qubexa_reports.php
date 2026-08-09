@@ -56,3 +56,5 @@ $string['noreportdata'] = 'There are no class students to report.';
 $string['noreportdatadesc'] = 'Create a class and add students first.';
 $string['nofilterresults'] = 'No students match the filters.';
 $string['nofilterresultsdesc'] = 'Change the search, class or date range and try again.';
+$string['netchangechart'] = 'Net change chart';
+$string['netchangechartdesc'] = 'Daily net points are shown in chronological order.';

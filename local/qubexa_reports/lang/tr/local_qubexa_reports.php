@@ -56,3 +56,5 @@ $string['noreportdata'] = 'Raporlanacak sınıf öğrencisi bulunmuyor.';
 $string['noreportdatadesc'] = 'Önce bir sınıf oluşturup sınıfa öğrenci ekleyin.';
 $string['nofilterresults'] = 'Filtrelere uygun öğrenci bulunamadı.';
 $string['nofilterresultsdesc'] = 'Arama metnini, sınıfı veya tarih aralığını değiştirip yeniden deneyin.';
+$string['netchangechart'] = 'Net değişim grafiği';
+$string['netchangechartdesc'] = 'Günlük net puanlar tarih sırasına göre gösterilir.';
