@@ -622,12 +622,27 @@
                         <label><span>Durum</span><select name="status"><option value="paid">Ödendi</option><option value="pending">Bekliyor</option><option value="overdue">Gecikmiş</option><option value="cancelled">İptal</option></select></label>
                         <label><span>Ödeme yöntemi</span><select name="method"><option value="cash">Nakit</option><option value="bank">Banka</option><option value="card">Kart</option><option value="other">Diğer</option></select></label>
                     </div>
-                    <label><span>Açıklama</span><textarea name="description" rows="3" placeholder="İsteğe bağlı açıklama..."></textarea></label>
-                    <div class="qubexa-module-form-actions"><span data-student-payment-status></span><button type="submit" class="btn btn-primary">Ödemeyi Kaydet</button></div>
+                    <label><span>Açıklama</span><textarea name="description"
+                                                        rows="3"
+                                                        maxlength="2000"
+                                                        aria-describedby="qubexa-student-payment-status"
+                                                        placeholder="İsteğe bağlı açıklama..."></textarea></label>
+                    <div class="qubexa-module-form-actions">
+                        <span id="qubexa-student-payment-status"
+                              role="status"
+                              aria-live="polite"
+                              data-student-payment-status></span>
+                        <button type="submit" class="btn btn-primary">Ödemeyi Kaydet</button>
+                    </div>
                 </form>
-                <div class="qubexa-module-loading" data-student-payments-loading hidden>Ödemeler yükleniyor...</div>
+                <div class="qubexa-module-loading"
+                     data-student-payments-loading
+                     role="status"
+                     hidden>Ödemeler yükleniyor...</div>
                 <div class="qubexa-module-empty" data-student-payments-empty hidden>Bu öğrenci için henüz ödeme kaydı yok.</div>
-                <div class="qubexa-payments-list" data-student-payments-list></div>
+                <div class="qubexa-payments-list"
+                     aria-live="polite"
+                     data-student-payments-list></div>
             </div>
         </section>
 
