@@ -82,8 +82,18 @@ final class note_service {
         return $this->notes->create($studentid, $userid, $note);
     }
 
-    public function delete_note(int $noteid, int $userid): void {
-        if (!$this->notes->delete_owned($noteid, $userid)) {
+    public function delete_note(
+        int $noteid,
+        int $studentid,
+        int $userid
+    ): void {
+        $this->require_owned_student($studentid, $userid);
+
+        if (!$this->notes->delete_owned(
+            $noteid,
+            $studentid,
+            $userid
+        )) {
             throw new \moodle_exception('invalidrecord', 'error');
         }
     }

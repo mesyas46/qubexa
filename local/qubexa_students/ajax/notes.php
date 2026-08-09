@@ -1,4 +1,6 @@
 <?php
+define('NO_DEBUG_DISPLAY', true);
+
 require_once(__DIR__ . '/../../../config.php');
 
 require_login();
@@ -24,6 +26,14 @@ try {
             ),
         ]);
         exit;
+    }
+
+    require_capability('local/qubexa_students:manage', $context);
+
+    if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+        throw new invalid_parameter_exception(
+            'Bu işlem yalnızca POST isteğiyle yapılabilir.'
+        );
     }
 
     require_sesskey();
@@ -52,7 +62,11 @@ try {
         $noteid = required_param('noteid', PARAM_INT);
         $studentid = required_param('studentid', PARAM_INT);
 
-        $service->delete_note($noteid, (int) $USER->id);
+        $service->delete_note(
+            $noteid,
+            $studentid,
+            (int) $USER->id
+        );
 
         echo json_encode([
             'success' => true,

@@ -34,29 +34,29 @@ final class note_repository {
         );
     }
 
-    public function delete_owned(int $noteid, int $userid): bool {
+    public function delete_owned(
+        int $noteid,
+        int $studentid,
+        int $userid
+    ): bool {
         global $DB;
 
-        $note = $DB->get_record(
-            'local_qubexa_student_notes',
-            [
-                'id' => $noteid,
-                'userid' => $userid,
-            ],
-            'id',
-            IGNORE_MISSING
-        );
+        $conditions = [
+            'id' => $noteid,
+            'studentid' => $studentid,
+            'userid' => $userid,
+        ];
 
-        if (!$note) {
+        if (!$DB->record_exists(
+            'local_qubexa_student_notes',
+            $conditions
+        )) {
             return false;
         }
 
         return $DB->delete_records(
             'local_qubexa_student_notes',
-            [
-                'id' => $noteid,
-                'userid' => $userid,
-            ]
+            $conditions
         );
     }
 }

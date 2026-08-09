@@ -284,12 +284,16 @@
                               name="note"
                               rows="4"
                               maxlength="5000"
+                              aria-describedby="qubexa-student-note-status"
                               placeholder="Öğrenciyle ilgili bir gözlem veya görüşme notu yazın..."
                               data-student-note-input
                               required></textarea>
 
                     <div class="qubexa-module-form-actions">
-                        <span data-student-note-status></span>
+                        <span id="qubexa-student-note-status"
+                              role="status"
+                              aria-live="polite"
+                              data-student-note-status></span>
 
                         <button type="submit"
                                 class="btn btn-primary">
@@ -300,6 +304,7 @@
 
                 <div class="qubexa-module-loading"
                      data-student-notes-loading
+                     role="status"
                      hidden>
                     Notlar yükleniyor...
                 </div>
@@ -311,6 +316,7 @@
                 </div>
 
                 <div class="qubexa-notes-list"
+                     aria-live="polite"
                      data-student-notes-list></div>
             </div>
         </section>

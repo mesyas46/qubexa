@@ -399,6 +399,30 @@ body.qubexa-panel-open {
     font-size: 14px;
     line-height: 1.6;
     white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+    .qubexa-note-form {
+        padding: 14px;
+    }
+
+    .qubexa-note-form textarea {
+        min-height: 120px;
+    }
+
+    .qubexa-note-form .qubexa-module-form-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .qubexa-note-form .qubexa-module-form-actions .btn {
+        width: 100%;
+    }
+
+    .qubexa-note-meta {
+        align-items: center;
+    }
 }
 
 .qubexa-module-delete {
